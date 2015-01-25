@@ -37,6 +37,7 @@ public:
    
   }
   MetaInfo m_info;
+  uint8_t* m_peerid;
   std::string getPort() const
   {  
     return m_currPort;
