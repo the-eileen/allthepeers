@@ -35,6 +35,10 @@ main(int argc, char** argv)
 
     // Initialise the client.
     sbt::Client client(argv[1], argv[2]);
+    // Josh: tests to see if decoded properly
+    std::cerr << "Name:  " << client.m_MetaInfo->getName() << endl;
+    std::cout << "Torrent file length: " << client.m_MetaInfo->getLength() << endl;
+    std::cout << "Announce: " << client.m_MetaInfo->getAnnounce() << endl;
   }
   catch (std::exception& e)
   {

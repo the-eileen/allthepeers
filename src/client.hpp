@@ -23,6 +23,7 @@
 #define SBT_CLIENT_HPP
 
 #include "common.hpp"
+#include "meta-info.hpp"
 
 namespace sbt {
 
@@ -30,8 +31,15 @@ class Client
 {
 public:
   Client(const std::string& port, const std::string& torrent)
-  {
+  { 
+    m_currPort = &port;
+    m_MetaInfo.wireDecode(&torrent);  // Josh: decode bencoded torrent file
+   
   }
+private:
+  std::string m_currPort;
+  MetaInfo m_MetaInfo; 
+ 
 };
 
 } // namespace sbt
