@@ -69,15 +69,48 @@ void makeGetRequest(Client client){
 
  
     //return buf;
-    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    /*int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    struct sockaddr_in serverAddr;
+  serverAddr.sin_family = AF_INET;
+  serverAddr.sin_port = htons(client.m_trackPort);     // short, network byte order
+  serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+  memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
+*/
+  // connect to the server
+  /*if (connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) == -1) {
+    perror("connect");
+    //return 2;
+  }
+
+  struct sockaddr_in clientAddr;
+  socklen_t clientAddrLen = sizeof(clientAddr);
+  if (getsockname(sockfd, (struct sockaddr *)&clientAddr, &clientAddrLen) == -1) {
+    perror("getsockname");
+    //return 3;
+  }
+
+  char ipstr[INET_ADDRSTRLEN] = {'\0'};
+  inet_ntop(clientAddr.sin_family, &clientAddr.sin_addr, ipstr, sizeof(ipstr));
+  std::cout << "Set up a connection from: " << ipstr << ":" <<
+    ntohs(clientAddr.sin_port) << std::endl;*/
+
+    bool isEnd = false;
+  //std::string input;
+  char rbuf[20] = {0};
+  std::stringstream ss;
+ fprintf(stderr,"before while");
+  while (!isEnd) {
+   fprintf(stderr,"inside while");
+
+   int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     struct sockaddr_in serverAddr;
   serverAddr.sin_family = AF_INET;
   serverAddr.sin_port = htons(client.m_trackPort);     // short, network byte order
   serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
   memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
 
-  // connect to the server
-  if (connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) == -1) {
+
+   if (connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) == -1) {
     perror("connect");
     //return 2;
   }
@@ -93,14 +126,6 @@ void makeGetRequest(Client client){
   inet_ntop(clientAddr.sin_family, &clientAddr.sin_addr, ipstr, sizeof(ipstr));
   std::cout << "Set up a connection from: " << ipstr << ":" <<
     ntohs(clientAddr.sin_port) << std::endl;
-
-    bool isEnd = false;
-  //std::string input;
-  char rbuf[20] = {0};
-  std::stringstream ss;
- fprintf(stderr,"before while");
-  while (!isEnd) {
-   fprintf(stderr,"inside while");
 
     if (send(sockfd, formatted.c_str(), formatted.size(), 0) == -1) {
       fprintf(stderr, "SEND FAILED");
@@ -124,10 +149,10 @@ void makeGetRequest(Client client){
       break;
 
     ss.str("");
+    close(sockfd);
   }
 
-  cerr << "out of while";
-  close(sockfd);
+ // close(sockfd);
 }
 
 int
