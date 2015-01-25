@@ -16,11 +16,13 @@ here for now */
 
 #include "meta-info.hpp"
 #include "http/http-request.hpp"
+#include "http/url-encoding.hpp"
+#include "client.hpp"
 #include <string>
 #include <cstring>
 	using namespace std;
 
-void makeGetRequest(Client client){
+void makeGetRequest(sbt::Client client){
 	MetaInfo metainfo = CLient.m_info;
 	HttpRequest req;
     req.setHost(client.m_url);
@@ -40,7 +42,7 @@ void makeGetRequest(Client client){
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     bool isEnd = false;
   //std::string input;
-  //char buf[20] = {0};
+  char rbuf[20] = {0};
   std::stringstream ss;
 
   while (!isEnd) {
@@ -49,13 +51,13 @@ void makeGetRequest(Client client){
     //std::cin >> input;
     if (send(sockfd, buf, sizeof(buf), 0) == -1) {
       perror("send");
-      return 4;
+      //return 4;
     }
 
 
     if (recv(sockfd, rbuf, sizeof(rbuf), 0) == -1) {
       perror("recv");
-      return 5;
+      //return 5;
     }
     ss << buf << std::endl;
 
