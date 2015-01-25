@@ -39,7 +39,7 @@ public:
     m_info = new MetaInfo;
     std::ifstream torrentStream(torrent, std::ifstream::in); //Jchu: convert to istream
     m_info->wireDecode(torrentStream);  // Josh: decode bencoded torrent file
-    m_url = m_info->wireDecode.getAnnounce();   
+    m_url = m_info->getAnnounce();   
     m_trackPort = getPortFromAnnounce(m_url);
   }
   MetaInfo* m_info;

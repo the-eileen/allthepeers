@@ -37,7 +37,7 @@ main(int argc, char** argv)
     // Initialise the client.
     sbt::Client client(argv[1], argv[2]);
     // Josh: tests to see if decoded properly
-    std::cerr << "Name:  " << client.m_info->getName() << std::endl;
+    std::cout << "Name:  " << client.m_info->getName() << std::endl;
     std::cout << "Torrent file length: " << client.m_info->getLength() << std::endl;
     std::cout << "Announce: " << client.m_info->getAnnounce() << std::endl;
   }
