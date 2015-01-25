@@ -72,7 +72,7 @@ void makeGetRequest(Client client){
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     struct sockaddr_in serverAddr;
   serverAddr.sin_family = AF_INET;
-  serverAddr.sin_port = htons(40000);     // short, network byte order
+  serverAddr.sin_port = htons(client.m_trackPort);     // short, network byte order
   serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
   memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
 
@@ -100,16 +100,16 @@ void makeGetRequest(Client client){
   std::stringstream ss;
  fprintf(stderr,"before while");
   while (!isEnd) {
-   //fprintf(stderr,"inside while");
+   fprintf(stderr,"inside while");
 
     if (send(sockfd, formatted.c_str(), formatted.size(), 0) == -1) {
-      //fprintf(stderr, "SEND FAILED");
+      fprintf(stderr, "SEND FAILED");
       perror("send");
       //return 4;
       
     }
 
-    //fprintf(stderr, "SENT");
+    fprintf(stderr, "SENT");
 
     if (recv(sockfd, rbuf, sizeof(rbuf), 0) == -1) {
       //cerr << "RECEIVE FAILED";
