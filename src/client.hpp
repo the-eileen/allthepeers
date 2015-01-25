@@ -45,7 +45,7 @@ public:
   MetaInfo* m_info;
   uint8_t* m_peerid;
   std::string m_url;
-  std::m_trackPort;
+  std::string m_trackPort;
   std::string getPort() const
   {  
     return m_currPort;
