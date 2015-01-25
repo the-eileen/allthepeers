@@ -33,10 +33,11 @@ public:
   Client(const std::string& port, const std::string& torrent)
   { 
     m_currPort = port;
-    m_info.wireDecode(torrent);  // Josh: decode bencoded torrent file
+    m_info = new MetaInfo;
+    m_info->wireDecode(torrent);  // Josh: decode bencoded torrent file
    
   }
-  MetaInfo m_info;
+  MetaInfo* m_info;
   uint8_t* m_peerid;
   std::string getPort() const
   {  

@@ -1,6 +1,18 @@
 /* might end up putting these functions 
 somewhere else but I'll put my part 
 here for now */
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <string.h>
+#include <stdio.h>
+#include <errno.h>
+#include <unistd.h>
+
+#include <iostream>
+#include <sstream>
+
 
 #include "meta-info.hpp"
 #include "http-request.hpp"
@@ -8,7 +20,7 @@ here for now */
 #include <cstring>
 	using namespace std;
 
-string makeGetRequest(Client client){
+void makeGetRequest(Client client){
 	MetaInfo metainfo = CLient.m_info;
 	HttpRequest req;
     req.setHost(client.m_url);
@@ -24,6 +36,34 @@ string makeGetRequest(Client client){
     char *buf = new char [reqLen];
     req.formatRequest(buf);
 
+    //return buf;
+    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    bool isEnd = false;
+  //std::string input;
+  //char buf[20] = {0};
+  std::stringstream ss;
+
+  while (!isEnd) {
+    //memset(buf, '\0', sizeof(buf));
+
+    //std::cin >> input;
+    if (send(sockfd, buf, sizeof(buf), 0) == -1) {
+      perror("send");
+      return 4;
+    }
 
 
+    if (recv(sockfd, rbuf, sizeof(rbuf), 0) == -1) {
+      perror("recv");
+      return 5;
+    }
+    ss << buf << std::endl;
+
+    if (ss.str() == "close\n")
+      break;
+
+    ss.str("");
+  }
+
+  close(sockfd);
 }
