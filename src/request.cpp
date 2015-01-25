@@ -1,7 +1,7 @@
 /* might end up putting these functions 
 somewhere else but I'll put my part 
 here for now */
-#include <sys/types.h>
+/*#include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -39,6 +39,9 @@ void makeGetRequest(Client client){
     char *buf = new char [reqLen];
     req.formatRequest(buf);
 
+    cout << "request is:" << buf;
+
+ 
     //return buf;
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     bool isEnd = false;
@@ -70,3 +73,4 @@ void makeGetRequest(Client client){
 
   close(sockfd);
 }
+*/
