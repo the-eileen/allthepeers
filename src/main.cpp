@@ -39,7 +39,8 @@ main(int argc, char** argv)
     // Josh: tests to see if decoded properly
     std::cout << "Name:  " << client.m_info->getName() << std::endl;
     std::cout << "Torrent file length: " << client.m_info->getLength() << std::endl;
-    std::cout << "Announce: " << client.m_info->getAnnounce() << std::endl;
+    std::cout << "Announce: " << client.m_url << std::endl;
+    std::cout << "TrackerPort: " << client.m_trackPort << std::endl;
   }
   catch (std::exception& e)
   {
