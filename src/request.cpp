@@ -15,7 +15,7 @@ here for now */
 
 
 #include "meta-info.hpp"
-#include "http-request.hpp"
+#include "http/http-request.hpp"
 #include <string>
 #include <cstring>
 	using namespace std;

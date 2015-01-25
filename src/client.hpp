@@ -22,6 +22,7 @@
 #ifndef SBT_CLIENT_HPP
 #define SBT_CLIENT_HPP
 
+#include <fstream>
 #include "common.hpp"
 #include "meta-info.hpp"
 
@@ -34,7 +35,8 @@ public:
   { 
     m_currPort = port;
     m_info = new MetaInfo;
-    m_info->wireDecode(torrent);  // Josh: decode bencoded torrent file
+    std::ifstream torrentStream(torrent, std::ifstream::in); //Jchu: convert to istream
+    m_info->wireDecode(torrentStream);  // Josh: decode bencoded torrent file
    
   }
   MetaInfo* m_info;
