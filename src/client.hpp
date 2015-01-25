@@ -33,17 +33,16 @@ public:
   Client(const std::string& port, const std::string& torrent)
   { 
     m_currPort = port;
-    m_MetaInfo.wireDecode(torrent);  // Josh: decode bencoded torrent file
+    m_info.wireDecode(torrent);  // Josh: decode bencoded torrent file
    
   }
-  MetaInfo m_MetaInfo;
+  MetaInfo m_info;
   std::string getPort() const
   {  
     return m_currPort;
   }
 private:
   std::string m_currPort;
- 
 };
 
 } // namespace sbt
