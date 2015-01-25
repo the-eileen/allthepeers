@@ -23,6 +23,7 @@
 #define SBT_CLIENT_HPP
 
 #include <fstream>
+#include <string>
 #include "common.hpp"
 #include "meta-info.hpp"
 
@@ -39,13 +40,13 @@ public:
     m_info = new MetaInfo;
     std::ifstream torrentStream(torrent, std::ifstream::in); //Jchu: convert to istream
     m_info->wireDecode(torrentStream);  // Josh: decode bencoded torrent file
-    m_url = m_info->getAnnounce();   
-    m_trackPort = getPortFromAnnounce(m_url);
+    m_url = m_info->getAnnounce(); 
+    m_trackPort = atoi(getPortFromAnnounce(m_url).c_str());
   }
   MetaInfo* m_info;
   uint8_t* m_peerid;
   std::string m_url;
-  std::string m_trackPort;
+  unsigned short m_trackPort;
   std::string getPort() const
   {  
     return m_currPort;
@@ -64,7 +65,7 @@ std::string getPortFromAnnounce(std::string announce)
     int i = 0;
     int strlen = 0;
     int startPos = 0;
-    while (announce[i] != '/0') {
+    while (announce[i] != '\0') {
         i++;
         startPos++;
         if (announce[i] == ':' && isdigit(announce[i+1]) )
