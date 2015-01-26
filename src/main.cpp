@@ -38,15 +38,12 @@
 #include "http/http-request.hpp"
 #include "http/url-encoding.hpp"
 #include "client.hpp"
+#include "tracker-response.hpp"
 #include <string>
 #include <cstring>
   using namespace std;
   using namespace sbt;
 
-
-
-#include "client.hpp"
-//#include <iostream>
 
 void makeGetRequest(Client client){
   MetaInfo* metainfo = client.m_info;
