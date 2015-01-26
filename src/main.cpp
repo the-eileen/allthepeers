@@ -62,7 +62,7 @@ void makeGetRequest(Client client){
     req.formatRequest(buf);
     string formatted = buf;
 
-    cerr << "request is:" << buf;
+    //cerr << "request is:" << buf;
 
  
     //return buf;
@@ -94,7 +94,7 @@ void makeGetRequest(Client client){
     bool isEnd = false;
     bool isFirst = true;
   //std::string input;
-  char rbuf[20] = {0};
+  char rbuf[10000] = {0};
   std::stringstream ss;
 // fprintf(stderr,"before while");
   while (!isEnd) {
