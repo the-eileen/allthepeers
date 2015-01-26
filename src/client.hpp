@@ -26,7 +26,8 @@
 #include <string>
 #include "common.hpp"
 #include "meta-info.hpp"
-
+#include "http/http-request.hpp"
+#include "http/http-response.hpp"
 namespace sbt {
 
 std::string getPortFromAnnounce(std::string announce);
@@ -42,8 +43,8 @@ public:
     m_info->wireDecode(torrentStream);  // Josh: decode bencoded torrent file
     m_url = "localhost"; 
     m_trackPort = atoi(getPortFromAnnounce(m_info->getAnnounce()).c_str());
-    m_Port = atoi(port.c_str());
-    m_strCport = getPortFromAnnounce(m_url);
+    //m_Port = atoi(port.c_str());
+    //m_strCport = getPortFromAnnounce(m_url);
   }
   MetaInfo* m_info;
   uint8_t* m_peerid;
