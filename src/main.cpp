@@ -96,6 +96,7 @@ void makeGetRequest(Client client){
     ntohs(clientAddr.sin_port) << std::endl;*/
 
     bool isEnd = false;
+    bool isFirst = true;
   //std::string input;
   char rbuf[10000] = {'\0'};
 
@@ -167,7 +168,15 @@ void makeGetRequest(Client client){
     dict.wireDecode(req_stream);
     TrackerResponse* trackerResponse = new TrackerResponse();
     trackerResponse->decode(dict);
-
+    if(isFirst)
+    {
+    isFirst = false;
+    std::vector<PeerInfo> peerList = trackerResponse->getPeers();
+    for(std::vector<PeerInfo>::iterator it = peerList.begin(); it != peerList.end() ; it++)
+    {
+        cout<< it->ip << ":" << it->port << std::endl;
+    }
+    }
     int waitTime = trackerResponse->getInterval();
     sleep(waitTime);
 
