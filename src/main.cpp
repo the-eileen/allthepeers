@@ -55,7 +55,7 @@ void makeGetRequest(Client client){
     req.setPort(client.m_trackPort);
     req.setMethod(HttpRequest::GET);
     string left = to_string(metainfo->getLength());
-    string path = "/announce.php?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
+    string path = client.m_path + "?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
       "&port=" + client.getPort() + "&uploaded=0&downloaded=0&left=" + left + "&event=started";
     req.setPath(path);
     req.setVersion("1.0");
