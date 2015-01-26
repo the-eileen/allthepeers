@@ -48,7 +48,7 @@
 void makeGetRequest(Client client){
   MetaInfo* metainfo = client.m_info;
   HttpRequest req;
-    req.setHost(client.m_url);
+    req.setHost(client.m_hostName);
     req.setPort(client.m_trackPort);
     req.setMethod(HttpRequest::GET);
     string left = to_string(metainfo->getLength());

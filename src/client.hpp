@@ -30,7 +30,9 @@
 #include "http/http-response.hpp"
 namespace sbt {
 
-std::string getPortFromAnnounce(std::string announce);
+std::string getHostNameFromAnnounce(std::string announce, int &start);
+std::string getPortFromAnnounce(std::string announce, int &start);
+std::string getPathFromAnnounce(std::string announce, int &start);
 
 class Client
 {
@@ -41,17 +43,25 @@ public:
     m_info = new MetaInfo;
     std::ifstream torrentStream(torrent, std::ifstream::in); //Jchu: convert to istream
     m_info->wireDecode(torrentStream);  // Josh: decode bencoded torrent file
-    m_url = "localhost"; 
-    m_trackPort = atoi(getPortFromAnnounce(m_info->getAnnounce()).c_str());
+
+    // Josh: DO NOT change the order of the three functions below; dependent on each other
+    m_announce = (m_info->getAnnounce()).c_str();
+    m_announcePos = 0;
+    m_hostName = getHostNameFromAnnounce(m_announce, m_announcePos); 
+    m_trackPort = atoi(getPortFromAnnounce(m_announce, m_announcePos).c_str());
+    m_path = getPathFromAnnounce(m_announce, m_announcePos);
     //m_Port = atoi(port.c_str());
     //m_strCport = getPortFromAnnounce(m_url);
   }
   MetaInfo* m_info;
   uint8_t* m_peerid;
-  std::string m_url;
+  std::string m_hostName;
   unsigned short m_trackPort;
   unsigned short m_Port;
   std::string m_strCport;
+  std::string m_announce;
+  std::string m_path;
+  int m_announcePos;
   std::string getPort() const
   {  
     return m_currPort;
@@ -60,19 +70,46 @@ private:
   std::string m_currPort;
 };
 
-std::string getPortFromAnnounce(std::string announce)
+std::string getHostNameFromAnnounce(std::string announce, int &start)
 {
     if (announce == "")
     {
         std::cerr << "No Announce File\n";
         return "";
     }
-    int i = 0;
+    int i = start;
     int strlen = 0;
-    int startPos = 0;
+    int startPos = start;
     while (announce[i] != '\0') {
-        i++;
-        startPos++;
+        if (announce[i] == '/' && announce[i+1] == '/' )
+        {
+            startPos += 2;
+            strlen++;
+            i += 2;
+            while (announce[i+1] != ':') {
+                strlen++;
+                i++;
+            }
+            break;
+        }
+      i++;
+      startPos++;
+    }
+    start = i;
+    return announce.substr(startPos, strlen);
+}
+
+std::string getPortFromAnnounce(std::string announce, int &start)
+{
+    if (announce == "")
+    {
+        std::cerr << "No Announce File\n";
+        return "";
+    }
+    int i = start;
+    int strlen = 0;
+    int startPos = start;
+    while (announce[i] != '\0') {
         if (announce[i] == ':' && isdigit(announce[i+1]) )
         {
             startPos++;
@@ -84,6 +121,35 @@ std::string getPortFromAnnounce(std::string announce)
             }
             break;
         }
+        i++;
+        startPos++;
+    }
+    start = i;
+    return announce.substr(startPos, strlen);
+}
+
+std::string getPathFromAnnounce(std::string announce, int &start)
+{
+    if (announce == "")
+    {
+        std::cerr << "No Announce File\n";
+        return "";
+    }
+    int i = start;
+    int strlen = 0;
+    int startPos = start;
+    while (announce[i] != '\0') {
+        if (announce[i] == '/' )
+        {
+            strlen++;
+            while (announce[i+1] != '\0') {
+                strlen++;
+                i++;
+            }
+            break;
+        }
+        i++;
+        startPos++;
     }
     return announce.substr(startPos, strlen);
 }
