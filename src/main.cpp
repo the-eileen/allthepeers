@@ -52,7 +52,7 @@ void makeGetRequest(Client client){
     req.setPort(client.m_trackPort);
     req.setMethod(HttpRequest::GET);
     string left = to_string(metainfo->getLength());
-    string path = "/announce.php?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
+    string path = client.m_path + "?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
       "&port=" + client.getPort() + "&uploaded=0&downloaded=0&left=" + left + "&event=started";
     req.setPath(path);
     req.setVersion("1.0");
@@ -122,17 +122,17 @@ void makeGetRequest(Client client){
 
   char ipstr[INET_ADDRSTRLEN] = {'\0'};
   inet_ntop(clientAddr.sin_family, &clientAddr.sin_addr, ipstr, sizeof(ipstr));
-  std::cout << "Set up a connection from: " << ipstr << ":" <<
-    ntohs(clientAddr.sin_port) << std::endl;
+//  std::cout << "Set up a connection from: " << ipstr << ":" <<
+//    ntohs(clientAddr.sin_port) << std::endl;
 
     if (send(sockfd, formatted.c_str(), formatted.size(), 0) == -1) {
-      fprintf(stderr, "SEND FAILED");
+      //fprintf(stderr, "SEND FAILED");
       perror("send");
       //return 4;
       
     }
 
-    path = "/announce.php?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
+    path = client.m_path + "?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
       "&port=" + client.getPort() + "&uploaded=0&downloaded=0&left=" + left;
     req.setPath(path);
     size_t reqLeng = req.getTotalLength();
