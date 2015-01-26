@@ -26,7 +26,8 @@
 #include <string>
 #include "common.hpp"
 #include "meta-info.hpp"
-
+#include "http/http-request.hpp"
+#include "http/http-response.hpp"
 namespace sbt {
 
 std::string getPortFromAnnounce(std::string announce);
