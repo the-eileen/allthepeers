@@ -38,7 +38,6 @@
 #include "http/http-request.hpp"
 #include "http/url-encoding.hpp"
 #include "client.hpp"
-#include "tracker-response.hpp"
 #include <string>
 #include <cstring>
   using namespace std;
@@ -97,12 +96,11 @@ void makeGetRequest(Client client){
 
     bool isEnd = false;
   //std::string input;
-  char rbuf[10000] = {'\0'};
-
+  char rbuf[20] = {0};
   std::stringstream ss;
- fprintf(stderr,"before while");
+// fprintf(stderr,"before while");
   while (!isEnd) {
-   fprintf(stderr,"inside while");
+  // fprintf(stderr,"inside while");
 
    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     struct sockaddr_in serverAddr;
@@ -138,41 +136,26 @@ void makeGetRequest(Client client){
 
     path = "/announce.php?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
       "&port=" + client.getPort() + "&uploaded=0&downloaded=0&left=" + left;
-    req.formatRequest(buf);
-    string formatted = buf;
+    req.setPath(path);
+    size_t reqLeng = req.getTotalLength();
+    char *buf2 = new char [reqLeng];
+    
+    req.formatRequest(buf2);
+    formatted = buf2;
+
+    //cerr << "formatted is" << formatted;
 
 
-    fprintf(stderr, "SENT");
+    //fprintf(stderr, "SENT");
 
     if (recv(sockfd, rbuf, sizeof(rbuf), 0) == -1) {
       //cerr << "RECEIVE FAILED";
       perror("recv");
+      
       //return 5;
     }
    // cerr << endl << "RECIEVED";
-    int rbuf_size = 0;
-    while(rbuf[rbuf_size] != '\0')
-    {
-        rbuf_size++;
-    } 
-    if(rbuf_size == 0){
-      continue; 
-    }
-    const char* body;
-    bencoding::Dictionary dict;
-    HttpResponse httpResp;
-    body = httpResp.parseResponse(rbuf, rbuf_size);
-
-    std::istringstream req_stream(body);
-    dict.wireDecode(req_stream);
-    TrackerResponse* trackerResponse = new TrackerResponse();
-    trackerResponse->decode(dict);
-
-    int waitTime = trackerResponse->getInterval();
-    sleep(waitTime);
-
     ss << buf << std::endl;
-
 
     if (ss.str() == "close\n")
       break;
