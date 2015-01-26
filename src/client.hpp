@@ -40,13 +40,17 @@ public:
     m_info = new MetaInfo;
     std::ifstream torrentStream(torrent, std::ifstream::in); //Jchu: convert to istream
     m_info->wireDecode(torrentStream);  // Josh: decode bencoded torrent file
-    m_url = m_info->getAnnounce(); 
-    m_trackPort = atoi(getPortFromAnnounce(m_url).c_str());
+    m_url = "localhost"; 
+    m_trackPort = atoi(getPortFromAnnounce(m_info->getAnnounce()).c_str());
+    m_Port = atoi(port.c_str());
+    m_strCport = getPortFromAnnounce(m_url);
   }
   MetaInfo* m_info;
   uint8_t* m_peerid;
   std::string m_url;
   unsigned short m_trackPort;
+  unsigned short m_Port;
+  std::string m_strCport;
   std::string getPort() const
   {  
     return m_currPort;

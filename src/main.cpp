@@ -55,59 +55,104 @@ void makeGetRequest(Client client){
     req.setPort(client.m_trackPort);
     req.setMethod(HttpRequest::GET);
     string left = to_string(metainfo->getLength());
-    string path = "/announce?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
+    string path = "/announce.php?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
       "&port=" + client.getPort() + "&uploaded=0&downloaded=0&left=" + left + "&event=started";
     req.setPath(path);
-    req.setVersion("1.1");
+    req.setVersion("1.0");
     //req.addHeader("Accept-Language", "en-US");
     size_t reqLen = req.getTotalLength();
     char *buf = new char [reqLen];
     req.formatRequest(buf);
+    string formatted = buf;
 
-    //cout << "request is:" << buf;
+    cerr << "request is:" << buf;
 
  
     //return buf;
-    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    /*int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    struct sockaddr_in serverAddr;
+  serverAddr.sin_family = AF_INET;
+  serverAddr.sin_port = htons(client.m_trackPort);     // short, network byte order
+  serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+  memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
+*/
+  // connect to the server
+  /*if (connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) == -1) {
+    perror("connect");
+    //return 2;
+  }
+
+  struct sockaddr_in clientAddr;
+  socklen_t clientAddrLen = sizeof(clientAddr);
+  if (getsockname(sockfd, (struct sockaddr *)&clientAddr, &clientAddrLen) == -1) {
+    perror("getsockname");
+    //return 3;
+  }
+
+  char ipstr[INET_ADDRSTRLEN] = {'\0'};
+  inet_ntop(clientAddr.sin_family, &clientAddr.sin_addr, ipstr, sizeof(ipstr));
+  std::cout << "Set up a connection from: " << ipstr << ":" <<
+    ntohs(clientAddr.sin_port) << std::endl;*/
+
     bool isEnd = false;
   //std::string input;
   char rbuf[20] = {0};
   std::stringstream ss;
- cout << "before while" << endl;
+ fprintf(stderr,"before while");
   while (!isEnd) {
-    cout << "inside while" << endl << "still inside" << endl;
-    cout << "cout";
-    //memset(buf, '\0', sizeof(buf));
-    cout << "aaaand are we still here";
-    //std::cin >> input;
-cout << "still here?";
+   fprintf(stderr,"inside while");
 
-    if (send(sockfd, buf, sizeof(buf), 0) == -1) {
-      cout << "SEND FAILED";
+   int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    struct sockaddr_in serverAddr;
+  serverAddr.sin_family = AF_INET;
+  serverAddr.sin_port = htons(client.m_trackPort);     // short, network byte order
+  serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+  memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
+
+
+   if (connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) == -1) {
+    perror("connect");
+    //return 2;
+  }
+
+  struct sockaddr_in clientAddr;
+  socklen_t clientAddrLen = sizeof(clientAddr);
+  if (getsockname(sockfd, (struct sockaddr *)&clientAddr, &clientAddrLen) == -1) {
+    perror("getsockname");
+    //return 3;
+  }
+
+  char ipstr[INET_ADDRSTRLEN] = {'\0'};
+  inet_ntop(clientAddr.sin_family, &clientAddr.sin_addr, ipstr, sizeof(ipstr));
+  std::cout << "Set up a connection from: " << ipstr << ":" <<
+    ntohs(clientAddr.sin_port) << std::endl;
+
+    if (send(sockfd, formatted.c_str(), formatted.size(), 0) == -1) {
+      fprintf(stderr, "SEND FAILED");
       perror("send");
       //return 4;
       
     }
 
-    cout << "SENT" << endl;
+    fprintf(stderr, "SENT");
 
     if (recv(sockfd, rbuf, sizeof(rbuf), 0) == -1) {
-      cout << "RECEIVE FAILED";
+      //cerr << "RECEIVE FAILED";
       perror("recv");
       
       //return 5;
     }
-    cout << endl << "RECIEVED";
+   // cerr << endl << "RECIEVED";
     ss << buf << std::endl;
 
     if (ss.str() == "close\n")
       break;
 
     ss.str("");
+    close(sockfd);
   }
 
-  cout << "out of while" << endl;
-  close(sockfd);
+ // close(sockfd);
 }
 
 int
