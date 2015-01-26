@@ -122,8 +122,8 @@ void makeGetRequest(Client client){
 
   char ipstr[INET_ADDRSTRLEN] = {'\0'};
   inet_ntop(clientAddr.sin_family, &clientAddr.sin_addr, ipstr, sizeof(ipstr));
-  std::cout << "Set up a connection from: " << ipstr << ":" <<
-    ntohs(clientAddr.sin_port) << std::endl;
+//  std::cout << "Set up a connection from: " << ipstr << ":" <<
+//    ntohs(clientAddr.sin_port) << std::endl;
 
     if (send(sockfd, formatted.c_str(), formatted.size(), 0) == -1) {
       fprintf(stderr, "SEND FAILED");
