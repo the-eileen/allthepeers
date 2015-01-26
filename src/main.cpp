@@ -45,10 +45,6 @@
   using namespace sbt;
 
 
-
-#include "client.hpp"
-//#include <iostream>
-
 void makeGetRequest(Client client){
   MetaInfo* metainfo = client.m_info;
   HttpRequest req;
@@ -66,7 +62,7 @@ void makeGetRequest(Client client){
     req.formatRequest(buf);
     string formatted = buf;
 
-    cerr << "request is:" << buf;
+    //cerr << "request is:" << buf;
 
  
     //return buf;
@@ -96,13 +92,13 @@ void makeGetRequest(Client client){
     ntohs(clientAddr.sin_port) << std::endl;*/
 
     bool isEnd = false;
+    bool isFirst = true;
   //std::string input;
-  char rbuf[10000] = {'\0'};
-
+  char rbuf[10000] = {0};
   std::stringstream ss;
- fprintf(stderr,"before while");
+// fprintf(stderr,"before while");
   while (!isEnd) {
-   fprintf(stderr,"inside while");
+  // fprintf(stderr,"inside while");
 
    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     struct sockaddr_in serverAddr;
@@ -138,15 +134,22 @@ void makeGetRequest(Client client){
 
     path = "/announce.php?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
       "&port=" + client.getPort() + "&uploaded=0&downloaded=0&left=" + left;
-    req.formatRequest(buf);
-    string formatted = buf;
+    req.setPath(path);
+    size_t reqLeng = req.getTotalLength();
+    char *buf2 = new char [reqLeng];
+    
+    req.formatRequest(buf2);
+    formatted = buf2;
+
+    //cerr << "formatted is" << formatted;
 
 
-    fprintf(stderr, "SENT");
+    //fprintf(stderr, "SENT");
 
     if (recv(sockfd, rbuf, sizeof(rbuf), 0) == -1) {
       //cerr << "RECEIVE FAILED";
       perror("recv");
+      
       //return 5;
     }
    // cerr << endl << "RECIEVED";
@@ -167,12 +170,19 @@ void makeGetRequest(Client client){
     dict.wireDecode(req_stream);
     TrackerResponse* trackerResponse = new TrackerResponse();
     trackerResponse->decode(dict);
-
+    if(isFirst)
+    {
+    isFirst = false;
+    std::vector<PeerInfo> peerList = trackerResponse->getPeers();
+    for(std::vector<PeerInfo>::iterator it = peerList.begin(); it != peerList.end() ; it++)
+    {
+        cout<< it->ip << ":" << it->port << std::endl;
+    }
+    }
     int waitTime = trackerResponse->getInterval();
     sleep(waitTime);
 
     ss << buf << std::endl;
-
 
     if (ss.str() == "close\n")
       break;
