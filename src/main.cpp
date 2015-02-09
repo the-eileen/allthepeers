@@ -19,7 +19,180 @@
  * \author Yingdi Yu <yingdi@cs.ucla.edu>
  */
 
+
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <string.h>
+#include <stdio.h>
+#include <errno.h>
+#include <unistd.h>
+
+#include <iostream>
+#include <sstream>
+
+
+#include "meta-info.hpp"
+#include "http/http-request.hpp"
+#include "http/url-encoding.hpp"
 #include "client.hpp"
+#include "tracker-response.hpp"
+#include <string>
+#include <cstring>
+  using namespace std;
+  using namespace sbt;
+
+
+void makeGetRequest(Client client){
+  MetaInfo* metainfo = client.m_info;
+  HttpRequest req;
+    req.setHost(client.m_hostName);
+    req.setPort(client.m_trackPort);
+    req.setMethod(HttpRequest::GET);
+    string left = to_string(metainfo->getLength());
+    string path = client.m_path + "?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
+      "&port=" + client.getPort() + "&uploaded=0&downloaded=0&left=" + left + "&event=started";
+    req.setPath(path);
+    req.setVersion("1.0");
+    //req.addHeader("Accept-Language", "en-US");
+    size_t reqLen = req.getTotalLength();
+    char *buf = new char [reqLen];
+    req.formatRequest(buf);
+    string formatted = buf;
+
+    //cerr << "request is:" << buf;
+
+ 
+    //return buf;
+    /*int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    struct sockaddr_in serverAddr;
+  serverAddr.sin_family = AF_INET;
+  serverAddr.sin_port = htons(client.m_trackPort);     // short, network byte order
+  serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+  memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
+*/
+  // connect to the server
+  /*if (connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) == -1) {
+    perror("connect");
+    //return 2;
+  }
+
+  struct sockaddr_in clientAddr;
+  socklen_t clientAddrLen = sizeof(clientAddr);
+  if (getsockname(sockfd, (struct sockaddr *)&clientAddr, &clientAddrLen) == -1) {
+    perror("getsockname");
+    //return 3;
+  }
+
+  char ipstr[INET_ADDRSTRLEN] = {'\0'};
+  inet_ntop(clientAddr.sin_family, &clientAddr.sin_addr, ipstr, sizeof(ipstr));
+  std::cout << "Set up a connection from: " << ipstr << ":" <<
+    ntohs(clientAddr.sin_port) << std::endl;*/
+
+    bool isEnd = false;
+    bool isFirst = true;
+  //std::string input;
+  char rbuf[10000] = {0};
+  std::stringstream ss;
+// fprintf(stderr,"before while");
+  while (!isEnd) {
+  // fprintf(stderr,"inside while");
+
+   int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    struct sockaddr_in serverAddr;
+  serverAddr.sin_family = AF_INET;
+  serverAddr.sin_port = htons(client.m_trackPort);     // short, network byte order
+  serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+  memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
+
+
+   if (connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) == -1) {
+    perror("connect");
+    //return 2;
+  }
+
+  struct sockaddr_in clientAddr;
+  socklen_t clientAddrLen = sizeof(clientAddr);
+  if (getsockname(sockfd, (struct sockaddr *)&clientAddr, &clientAddrLen) == -1) {
+    perror("getsockname");
+    //return 3;
+  }
+
+  char ipstr[INET_ADDRSTRLEN] = {'\0'};
+  inet_ntop(clientAddr.sin_family, &clientAddr.sin_addr, ipstr, sizeof(ipstr));
+//  std::cout << "Set up a connection from: " << ipstr << ":" <<
+//    ntohs(clientAddr.sin_port) << std::endl;
+
+    if (send(sockfd, formatted.c_str(), formatted.size(), 0) == -1) {
+      //fprintf(stderr, "SEND FAILED");
+      perror("send");
+      //return 4;
+      
+    }
+
+    path = client.m_path + "?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
+      "&port=" + client.getPort() + "&uploaded=0&downloaded=0&left=" + left;
+    req.setPath(path);
+    size_t reqLeng = req.getTotalLength();
+    char *buf2 = new char [reqLeng];
+    
+    req.formatRequest(buf2);
+    formatted = buf2;
+
+    //cerr << "formatted is" << formatted;
+
+
+    //fprintf(stderr, "SENT");
+
+    if (recv(sockfd, rbuf, sizeof(rbuf), 0) == -1) {
+      //cerr << "RECEIVE FAILED";
+      perror("recv");
+      
+      //return 5;
+    }
+   // cerr << endl << "RECIEVED";
+    int rbuf_size = 0;
+    while(rbuf[rbuf_size] != '\0')
+    {
+        rbuf_size++;
+    } 
+    if(rbuf_size == 0){
+      continue; 
+    }
+    const char* body;
+    bencoding::Dictionary dict;
+    HttpResponse httpResp;
+    body = httpResp.parseResponse(rbuf, rbuf_size);
+
+    std::istringstream req_stream(body);
+    dict.wireDecode(req_stream);
+    TrackerResponse* trackerResponse = new TrackerResponse();
+    trackerResponse->decode(dict);
+    if(isFirst)
+    {
+    isFirst = false;
+    std::vector<PeerInfo> peerList = trackerResponse->getPeers();
+    for(std::vector<PeerInfo>::iterator it = peerList.begin(); it != peerList.end() ; it++)
+    {
+        cout<< it->ip << ":" << it->port << std::endl;
+    }
+    }
+    int waitTime = trackerResponse->getInterval();
+    sleep(waitTime);
+
+    ss << buf << std::endl;
+
+    if (ss.str() == "close\n")
+      break;
+
+    ss.str("");
+    close(sockfd);
+  }
+
+ // close(sockfd);
+}
 
 int
 main(int argc, char** argv)
@@ -35,6 +208,12 @@ main(int argc, char** argv)
 
     // Initialise the client.
     sbt::Client client(argv[1], argv[2]);
+    // Josh: tests to see if decoded properly
+    //std::cout << "Name:  " << client.m_info->getName() << std::endl;
+    //std::cout << "Torrent file length: " << client.m_info->getLength() << std::endl;
+    //std::cout << "Announce: " << client.m_url << std::endl;
+    //std::cout << "TrackerPort: " << client.m_trackPort << std::endl;
+    makeGetRequest(client);
   }
   catch (std::exception& e)
   {
