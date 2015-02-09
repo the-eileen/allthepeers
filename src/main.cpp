@@ -39,11 +39,11 @@
 #include "http/url-encoding.hpp"
 #include "client.hpp"
 #include "tracker-response.hpp"
+#include "handshake.hpp"
 #include <string>
 #include <cstring>
   using namespace std;
   using namespace sbt;
-
 
 void makeGetRequest(Client client){
   MetaInfo* metainfo = client.m_info;
@@ -177,6 +177,9 @@ void makeGetRequest(Client client){
     for(std::vector<PeerInfo>::iterator it = peerList.begin(); it != peerList.end() ; it++)
     {
         cout<< it->ip << ":" << it->port << std::endl;
+          //Eileen: I have no clue where the handshake is supposed to go so I'm just putting it here for now (y)
+        Handshake hshake = Handshake(metainfo->getHash(), it->PEER_ID);
+
     }
     }
     int waitTime = trackerResponse->getInterval();
@@ -190,6 +193,8 @@ void makeGetRequest(Client client){
     ss.str("");
     close(sockfd);
   }
+
+
 
  // close(sockfd);
 }
