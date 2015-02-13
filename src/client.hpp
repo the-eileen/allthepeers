@@ -34,6 +34,20 @@ std::string getHostNameFromAnnounce(std::string announce, int &start);
 std::string getPortFromAnnounce(std::string announce, int &start);
 std::string getPathFromAnnounce(std::string announce, int &start);
 
+class Peer
+{
+public:
+  Peer(PeerInfo* m_peerInfo)
+  {
+    m_choked = true;
+    m_interested = false; 
+  }
+  bool m_choked;
+  bool m_interested;
+
+};
+
+
 class Client
 {
 public:
@@ -53,6 +67,7 @@ public:
     //m_Port = atoi(port.c_str());
     //m_strCport = getPortFromAnnounce(m_url);
   }
+
   MetaInfo* m_info;
   uint8_t* m_peerid;
   std::string m_hostName;

@@ -32,14 +32,14 @@
 
 #include <iostream>
 #include <sstream>
-
+#include <fstream>
 
 #include "meta-info.hpp"
 #include "http/http-request.hpp"
 #include "http/url-encoding.hpp"
 #include "client.hpp"
 #include "tracker-response.hpp"
-#include "handshake.hpp"
+#include "handshake.cpp"
 #include <string>
 #include <cstring>
   using namespace std;
@@ -97,6 +97,9 @@ void makeGetRequest(Client client){
   char rbuf[10000] = {0};
   std::stringstream ss;
 // fprintf(stderr,"before while");
+
+  std::list<Peer> peerList; // Josh: Peer obj contains peerInfo, m_choked, m_interested
+
   while (!isEnd) {
   // fprintf(stderr,"inside while");
 
@@ -169,16 +172,26 @@ void makeGetRequest(Client client){
     std::istringstream req_stream(body);
     dict.wireDecode(req_stream);
     TrackerResponse* trackerResponse = new TrackerResponse();
-    trackerResponse->decode(dict);
+    trackerResponse->decode(dict); 
     if(isFirst)
     {
     isFirst = false;
-    std::vector<PeerInfo> peerList = trackerResponse->getPeers();
+    // Josh: first create file that we'll be writing to
+    fstream targetFile;
+    targetFile.open("text.txt"); 
+    for(std::vector<PeerInfo>::iterator it = trackerResponse->getPeers().begin(); it != trackerResponse->getPeers().end(); it++)
+    {
+      if ((it->ip != "127.0.0.1") && (it->port != client.getPort()) // not client
+        peerList.push_front(*it);
+
+    }
+
+    
     for(std::vector<PeerInfo>::iterator it = peerList.begin(); it != peerList.end() ; it++)
     {
         cout<< it->ip << ":" << it->port << std::endl;
           //Eileen: I have no clue where the handshake is supposed to go so I'm just putting it here for now (y)
-        Handshake hshake = Handshake(metainfo->getHash(), it->PEER_ID);
+        //Handshake hshake = Handshake(metainfo->getHash(), it->PEER_ID);
 
     }
     }
