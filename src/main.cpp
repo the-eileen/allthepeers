@@ -29,7 +29,10 @@
 #include <stdio.h>
 #include <errno.h>
 #include <unistd.h>
+#include <math.h>
 
+#include <list>
+#include <iterator>
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -99,7 +102,7 @@ void makeGetRequest(Client client){
 // fprintf(stderr,"before while");
 
   std::list<Peer> peerList; // Josh: Peer obj contains peerInfo, m_choked, m_interested
-
+  int numOfPieces = ceil(client.m_info->getLength() / client.m_info->getPieceLength());
   while (!isEnd) {
   // fprintf(stderr,"inside while");
 
@@ -173,6 +176,7 @@ void makeGetRequest(Client client){
     dict.wireDecode(req_stream);
     TrackerResponse* trackerResponse = new TrackerResponse();
     trackerResponse->decode(dict); 
+
     if(isFirst)
     {
     isFirst = false;
@@ -182,7 +186,7 @@ void makeGetRequest(Client client){
     for(std::vector<PeerInfo>::iterator it = trackerResponse->getPeers().begin(); it != trackerResponse->getPeers().end(); it++)
     {
       if ((it->ip != "127.0.0.1") && (it->port != client.getPort()) // not client
-        peerList.push_front(*it);
+        peerList.push_front(*it, numOfPieces);
 
     }
 

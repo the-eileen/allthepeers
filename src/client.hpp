@@ -28,6 +28,7 @@
 #include "meta-info.hpp"
 #include "http/http-request.hpp"
 #include "http/http-response.hpp"
+#include "tracker-response.hpp"
 namespace sbt {
 
 std::string getHostNameFromAnnounce(std::string announce, int &start);
@@ -37,11 +38,18 @@ std::string getPathFromAnnounce(std::string announce, int &start);
 class Peer
 {
 public:
-  Peer(PeerInfo* m_peerInfo)
+  Peer(PeerInfo* m_peerInfo, int numPieces)
   {
+    m_pieceIndex = new bool[numPieces](); // zero-initialized (false)
     m_choked = true;
     m_interested = false; 
+    
   }
+  ~Peer()
+  {
+    delete[] m_pieceIndex;
+  }
+  bool* m_pieceIndex;
   bool m_choked;
   bool m_interested;
 
