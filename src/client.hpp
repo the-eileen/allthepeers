@@ -38,18 +38,18 @@ std::string getPathFromAnnounce(std::string announce, int &start);
 class Peer
 {
 public:
-  Peer(PeerInfo* m_peerInfo, int numPieces)
+  Peer(PeerInfo* m_peerInfo/*, int numPieces*/)
   {
-    m_pieceIndex = new bool[numPieces](); // zero-initialized (false)
+    //m_pieceIndex = new bool[numPieces](); // zero-initialized (false)
     m_choked = true;
     m_interested = false; 
     
   }
-  ~Peer()
+ /* ~Peer()
   {
     delete[] m_pieceIndex;
-  }
-  bool* m_pieceIndex;
+  }*/
+  //bool* m_pieceIndex;
   bool m_choked;
   bool m_interested;
 
