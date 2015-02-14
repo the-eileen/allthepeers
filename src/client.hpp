@@ -29,6 +29,9 @@
 #include "http/http-request.hpp"
 #include "http/http-response.hpp"
 #include "tracker-response.hpp"
+
+extern bool* PIECESOBTAINED; // declared in main.cpp
+
 namespace sbt {
 
 std::string getHostNameFromAnnounce(std::string announce, int &start);
@@ -66,11 +69,24 @@ public:
   {
     delete[] m_pieceIndex;
   }
+  void setInterest(int whichPiece)
+  {
+     m_pieceIndex[whichPiece] = true;
+     for (int i = 0; i < m_numPieces; i++)
+     {
+       if (PIECESOBTAINED[i] == false && m_pieceIndex[i] == true)
+       {
+          m_amInterested = true;
+          break;
+       }
+     }
+  }
   std::string m_peerId;
   std::string m_ip;
   uint16_t m_port;
   bool* m_pieceIndex;  // keep track of pieces this peer has
   int m_numPieces;
+  // Josh: not sure how many of these we need
   bool m_amChoked;     // I am choked by this peer
   bool m_amInterested; // I am interested in this peer
   bool m_peerChoked;   // I am choking this peer

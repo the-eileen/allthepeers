@@ -49,6 +49,13 @@
   using namespace sbt;
   using namespace msg;
 
+bool* PIECESOBTAINED;  // Josh: global; size declared once numOfPieces obtained
+
+void updatePiecesArray(int whichPiece) // use to update PIECES array
+{
+  PIECESOBTAINED[whichPiece] = true;
+}
+ 
 int shakeHands(Peer pr, Client client){ //takes peer and client, returns socket created for this peer
   MetaInfo* metainfo = client.m_info;
   int sockfd = socket(AF_INET, SOCK_STREAM, 0); //create socket
@@ -133,6 +140,7 @@ void makeGetRequest(Client client){
 
   std::vector<Peer> peerList;
   int numOfPieces = ceil(client.m_info->getLength() / client.m_info->getPieceLength());
+  PIECESOBTAINED = new bool[numOfPieces](); // Josh: all pieces false (not obtained yet)
   while (!isEnd) {
     // fprintf(stderr,"inside while");
 
