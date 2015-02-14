@@ -32,6 +32,7 @@
 #include <math.h>
 
 #include <list>
+#include <vector>
 #include <iterator>
 #include <iostream>
 #include <sstream>
