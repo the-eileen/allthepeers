@@ -30,10 +30,10 @@
 #include <errno.h>
 #include <unistd.h>
 #include <math.h>
+#include <vector>
 
 #include <list>
 #include <vector>
-#include <iterator>
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -43,11 +43,12 @@
 #include "http/url-encoding.hpp"
 #include "client.hpp"
 #include "tracker-response.hpp"
-#include "handshake.cpp"
+#include "msg/handshake.hpp"
 #include <string>
 #include <cstring>
   using namespace std;
   using namespace sbt;
+  using namespace msg;
 
 void makeGetRequest(Client client){
   MetaInfo* metainfo = client.m_info;
@@ -102,35 +103,36 @@ void makeGetRequest(Client client){
   std::stringstream ss;
 // fprintf(stderr,"before while");
 
-  std::list<Peer> peerList; // Josh: Peer obj contains peerInfo, m_choked, m_interested
-  int numOfPieces = ceil(client.m_info->getLength() / client.m_info->getPieceLength());
+  std::vector<PeerInfo> peerList; // Josh: Peer obj contains peerInfo, m_choked, m_interested
+ // int numOfPieces = ceil(client.m_info->getLength() / client.m_info->getPieceLength());
+  std::vector<Peer> realPeerList;
   while (!isEnd) {
-  // fprintf(stderr,"inside while");
+    // fprintf(stderr,"inside while");
 
-   int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     struct sockaddr_in serverAddr;
-  serverAddr.sin_family = AF_INET;
-  serverAddr.sin_port = htons(client.m_trackPort);     // short, network byte order
-  serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
-  memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_port = htons(client.m_trackPort);     // short, network byte order
+    serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
 
 
-   if (connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) == -1) {
+    if (connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) == -1) {
     perror("connect");
     //return 2;
-  }
+    }
 
-  struct sockaddr_in clientAddr;
-  socklen_t clientAddrLen = sizeof(clientAddr);
-  if (getsockname(sockfd, (struct sockaddr *)&clientAddr, &clientAddrLen) == -1) {
-    perror("getsockname");
-    //return 3;
-  }
+    struct sockaddr_in clientAddr;
+    socklen_t clientAddrLen = sizeof(clientAddr);
+    if (getsockname(sockfd, (struct sockaddr *)&clientAddr, &clientAddrLen) == -1) {
+      perror("getsockname");
+      //return 3;
+    }
 
-  char ipstr[INET_ADDRSTRLEN] = {'\0'};
-  inet_ntop(clientAddr.sin_family, &clientAddr.sin_addr, ipstr, sizeof(ipstr));
-//  std::cout << "Set up a connection from: " << ipstr << ":" <<
-//    ntohs(clientAddr.sin_port) << std::endl;
+    char ipstr[INET_ADDRSTRLEN] = {'\0'};
+    inet_ntop(clientAddr.sin_family, &clientAddr.sin_addr, ipstr, sizeof(ipstr));
+    //  std::cout << "Set up a connection from: " << ipstr << ":" <<
+    //    ntohs(clientAddr.sin_port) << std::endl;
 
     if (send(sockfd, formatted.c_str(), formatted.size(), 0) == -1) {
       //fprintf(stderr, "SEND FAILED");
@@ -184,19 +186,27 @@ void makeGetRequest(Client client){
     // Josh: first create file that we'll be writing to
     fstream targetFile;
     targetFile.open("text.txt"); 
-    for(std::vector<PeerInfo>::iterator it = trackerResponse->getPeers().begin(); it != trackerResponse->getPeers().end(); it++)
+   /* for(std::vector<PeerInfo>::iterator it = trackerResponse->getPeers().begin(); it != trackerResponse->getPeers().end(); it++)
     {
-      if ((it->ip != "127.0.0.1") && (it->port != client.getPort()) // not client
+      if ((it->ip != "127.0.0.1") && (it->port != client.getPort())) // not client
         peerList.push_front(*it, numOfPieces);
 
-    }
-
+    }*/
+      char rshake[68] = {0};
     
     for(std::vector<PeerInfo>::iterator it = peerList.begin(); it != peerList.end() ; it++)
     {
-        cout<< it->ip << ":" << it->port << std::endl;
+        //cout<< it->ip << ":" << it->port << std::endl;
           //Eileen: I have no clue where the handshake is supposed to go so I'm just putting it here for now (y)
-        //Handshake hshake = Handshake(metainfo->getHash(), it->PEER_ID);
+        HandShake hshake = HandShake(metainfo->getHash(), it->peerId);
+        char* buf = (char*)hshake.encode()->buf();
+        if(send(sockfd, buf, 68, 0) == -1)
+          perror("send");
+        if (recv(sockfd, rshake, sizeof(rshake), 0) == -1) 
+          perror("recv");
+        ConstBufferPtr peerShake = std::make_shared<Buffer>(rshake, 68);
+
+      
 
     }
     }
