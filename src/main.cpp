@@ -211,6 +211,7 @@ void makeGetRequest(Client client){
     }
     }
     int waitTime = trackerResponse->getInterval();
+
     sleep(waitTime);
 
     ss << buf << std::endl;
