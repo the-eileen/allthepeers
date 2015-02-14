@@ -84,7 +84,35 @@ int shakeHands(Peer pr, Client client){ //takes peer and client, returns socket 
   ConstBufferPtr peerShake = std::make_shared<Buffer>(rshake, 68);
   return sockfd;
 }
+void bitFieldProt(Peer peer, int peersock){
+    //takes in a peer and it's socket, sends bitfield, populates 
+    //      the peer's boolean array
+    //assumes that it's already connected to the peer
 
+    //this should technically work, since arrays are just sequential bits...right?
+    ConstBufferPtr tempPtr = make_shared<Buffer>(PIECESOBTAINED, sizeof(PIECESOBTAINED));
+    Bitfield* bitField = new Bitfield(tempPtr);
+
+    //rumor has it that PIECESOBTAINED needs to be a multiple of 8? Maybe?
+
+    bitField->encodePayload();
+    Bitfield* pBitField = new Bitfield();
+
+    if(send(peersock, bitField, sizeof(bitField), 0) == -1)
+    {
+        perror("send");
+    }
+    if(recv(peersock, pBitField, sizeof(bitField), 0) == -1)
+    {
+        perror("receive");
+    }
+
+    pBitField->decodePayload();
+    ConstBufferPtr newBF = pBitField->getPayload();
+
+    peer.m_pieceIndex = (bool*)newBF->buf();
+
+}
 void makeGetRequest(Client client){
   MetaInfo* metainfo = client.m_info;
   HttpRequest req;
