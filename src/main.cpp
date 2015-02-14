@@ -192,6 +192,7 @@ void makeGetRequest(Client client){
       if ((it->ip != "127.0.0.1") && (port != client.getPort())) // check that it's not client
         peerList.push_back(Peer(*it, numOfPieces));
     }
+    
       char rshake[68] = {0};
     
     //Eileen start
@@ -212,7 +213,6 @@ for(std::vector<Peer>::iterator it = peerList.begin(); it != peerList.end() ; it
     }
 
 
-
   HandShake hshake = HandShake(metainfo->getHash(), client.m_strId);
   char* buf = (char*)hshake.encode()->buf();
   if(send(sockfd, buf, 68, 0) == -1)
@@ -222,6 +222,7 @@ for(std::vector<Peer>::iterator it = peerList.begin(); it != peerList.end() ; it
   ConstBufferPtr peerShake = std::make_shared<Buffer>(rshake, 68);
 }
 //Eileen end
+
     }
     int waitTime = trackerResponse->getInterval();
 
