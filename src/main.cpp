@@ -194,10 +194,10 @@ void makeGetRequest(Client client){
     }*/
       char rshake[68] = {0};
     
-    for(std::vector<PeerInfo>::iterator it = peerList.begin(); it != peerList.end() ; it++)
+    /*for(std::vector<PeerInfo>::iterator it = peerList.begin(); it != peerList.end() ; it++)
     {
         //cout<< it->ip << ":" << it->port << std::endl;
-          //Eileen: I have no clue where the handshake is supposed to go so I'm just putting it here for now (y)
+          //Eileen: I have no clue where the handshake is vesupposed to go so I'm just putting it here for now (y)
         HandShake hshake = HandShake(metainfo->getHash(), it->peerId);
         char* buf = (char*)hshake.encode()->buf();
         if(send(sockfd, buf, 68, 0) == -1)
@@ -208,9 +208,10 @@ void makeGetRequest(Client client){
 
       
 
-    }
+    }*/
     }
     int waitTime = trackerResponse->getInterval();
+
     sleep(waitTime);
 
     ss << buf << std::endl;
