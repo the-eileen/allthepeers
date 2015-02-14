@@ -192,6 +192,7 @@ void makeGetRequest(Client client){
       if ((it->ip != "127.0.0.1") && (port != client.getPort())) // check that it's not client
         peerList.push_back(Peer(*it, numOfPieces));
     }
+    /*
       char rshake[68] = {0};
     
     for(std::vector<Peer>::iterator it = peerList.begin(); it != peerList.end() ; it++)
@@ -208,7 +209,7 @@ void makeGetRequest(Client client){
 
       
 
-    }
+    }*/
     }
     int waitTime = trackerResponse->getInterval();
 
