@@ -30,7 +30,6 @@
 #include <errno.h>
 #include <unistd.h>
 #include <math.h>
-#include <vector>
 
 #include <list>
 #include <vector>
@@ -103,9 +102,8 @@ void makeGetRequest(Client client){
   std::stringstream ss;
 // fprintf(stderr,"before while");
 
-  std::vector<PeerInfo> peerList; // Josh: Peer obj contains peerInfo, m_choked, m_interested
- // int numOfPieces = ceil(client.m_info->getLength() / client.m_info->getPieceLength());
-  std::vector<Peer> realPeerList;
+  std::vector<Peer> peerList;
+  int numOfPieces = ceil(client.m_info->getLength() / client.m_info->getPieceLength());
   while (!isEnd) {
     // fprintf(stderr,"inside while");
 
@@ -186,19 +184,21 @@ void makeGetRequest(Client client){
     // Josh: first create file that we'll be writing to
     fstream targetFile;
     targetFile.open("text.txt"); 
-   /* for(std::vector<PeerInfo>::iterator it = trackerResponse->getPeers().begin(); it != trackerResponse->getPeers().end(); it++)
+    for(std::vector<PeerInfo>::const_iterator it = (trackerResponse->getPeers()).begin(); it != (trackerResponse->getPeers()).end(); it++)
     {
-      if ((it->ip != "127.0.0.1") && (it->port != client.getPort())) // not client
-        peerList.push_front(*it, numOfPieces);
-
-    }*/
+      std::stringstream ss;
+      ss << it->port;
+      string port = ss.str();
+      if ((it->ip != "127.0.0.1") && (port != client.getPort())) // check that it's not client
+        peerList.push_back(Peer(*it, numOfPieces));
+    }
       char rshake[68] = {0};
     
-    for(std::vector<PeerInfo>::iterator it = peerList.begin(); it != peerList.end() ; it++)
+    for(std::vector<Peer>::iterator it = peerList.begin(); it != peerList.end() ; it++)
     {
         //cout<< it->ip << ":" << it->port << std::endl;
           //Eileen: I have no clue where the handshake is supposed to go so I'm just putting it here for now (y)
-        HandShake hshake = HandShake(metainfo->getHash(), it->peerId);
+        HandShake hshake = HandShake(metainfo->getHash(), it->m_peerId);
         char* buf = (char*)hshake.encode()->buf();
         if(send(sockfd, buf, 68, 0) == -1)
           perror("send");

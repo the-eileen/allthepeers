@@ -38,20 +38,43 @@ std::string getPathFromAnnounce(std::string announce, int &start);
 class Peer
 {
 public:
-  Peer(PeerInfo* m_peerInfo/*, int numPieces*/)
+  Peer(PeerInfo pi, int numPieces)
   {
-    //m_pieceIndex = new bool[numPieces](); // zero-initialized (false)
-    m_choked = true;
-    m_interested = false; 
-    
+    m_peerId = pi.peerId;
+    m_ip = pi.ip;
+    m_port = pi.port;
+    m_pieceIndex = new bool[numPieces](); // zero-initialized (false)
+    m_numPieces = numPieces;
+    m_peerChoked = true;
+    m_peerInterested = false; 
+    m_amChoked = true;
+    m_amInterested = false;
   }
- /* ~Peer()
+  Peer(const Peer& other)
+  {
+    memcpy(m_pieceIndex, other.m_pieceIndex, sizeof(bool) * m_numPieces);
+    m_peerId = other.m_peerId;
+    m_ip = other.m_ip;
+    m_port = other.m_port;
+    m_numPieces = other.m_numPieces;
+    m_amChoked = other.m_amChoked;
+    m_amInterested = other.m_amInterested;
+    m_peerChoked = other.m_peerChoked;
+    m_peerInterested = other.m_peerInterested;  
+  }
+  ~Peer()
   {
     delete[] m_pieceIndex;
-  }*/
-  //bool* m_pieceIndex;
-  bool m_choked;
-  bool m_interested;
+  }
+  std::string m_peerId;
+  std::string m_ip;
+  uint16_t m_port;
+  bool* m_pieceIndex;  // keep track of pieces this peer has
+  int m_numPieces;
+  bool m_amChoked;     // I am choked by this peer
+  bool m_amInterested; // I am interested in this peer
+  bool m_peerChoked;   // I am choking this peer
+  bool m_peerInterested;//This peer is interested in me
 
 };
 
