@@ -194,21 +194,34 @@ void makeGetRequest(Client client){
     }
       char rshake[68] = {0};
     
-    for(std::vector<Peer>::iterator it = peerList.begin(); it != peerList.end() ; it++)
-    {
-        //cout<< it->ip << ":" << it->port << std::endl;
-          //Eileen: I have no clue where the handshake is supposed to go so I'm just putting it here for now (y)
-        HandShake hshake = HandShake(metainfo->getHash(), it->m_peerId);
-        char* buf = (char*)hshake.encode()->buf();
-        if(send(sockfd, buf, 68, 0) == -1)
-          perror("send");
-        if (recv(sockfd, rshake, sizeof(rshake), 0) == -1) 
-          perror("recv");
-        ConstBufferPtr peerShake = std::make_shared<Buffer>(rshake, 68);
+    //Eileen start
+   vector<int> socketList;
 
-      
-
+for(std::vector<Peer>::iterator it = peerList.begin(); it != peerList.end() ; it++){
+  int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+  socketList.push_back(sockfd);
+  struct sockaddr_in addr;
+  addr.sin_family = AF_INET;
+  addr.sin_port = htons(it->m_port);     // short, network byte order
+  const char* peerip = it->m_ip.c_str();
+  addr.sin_addr.s_addr = inet_addr(peerip);
+  memset(addr.sin_zero, '\0', sizeof(addr.sin_zero));
+  if (connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) == -1) {
+    perror("connect");
+    //return 2;
     }
+
+
+
+  HandShake hshake = HandShake(metainfo->getHash(), client.m_strId);
+  char* buf = (char*)hshake.encode()->buf();
+  if(send(sockfd, buf, 68, 0) == -1)
+    perror("send");
+  if (recv(sockfd, rshake, sizeof(rshake), 0) == -1) 
+    perror("recv");
+  ConstBufferPtr peerShake = std::make_shared<Buffer>(rshake, 68);
+}
+//Eileen end
     }
     int waitTime = trackerResponse->getInterval();
 

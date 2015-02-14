@@ -5,13 +5,13 @@ for(std::vector<PeerInfo>::iterator it = peerList.begin(); it != peerList.end() 
   socketList.push_back(sockfd);
   struct sockaddr_in addr;
   addr.sin_family = AF_INET;
-  addr.sin_port = htons(8008);     // short, network byte order
-  addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+  addr.sin_port = htons(it->port);     // short, network byte order
+  addr.sin_addr.s_addr = inet_addr(it->ip);
   memset(addr.sin_zero, '\0', sizeof(addr.sin_zero));
-  if (bind(sockfd, (struct sockaddr *)&addr, sizeof(addr)) == -1) {
-    perror("bind");
-    return 1;
-  }
+  if (connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) == -1) {
+    perror("connect");
+    //return 2;
+    }
 
 
   HandShake hshake = HandShake(metainfo->getHash(), metainfo->m_peerid);

@@ -94,6 +94,7 @@ public:
     m_announcePos = 0;
     m_hostName = getHostNameFromAnnounce(m_announce, m_announcePos); 
     m_trackPort = atoi(getPortFromAnnounce(m_announce, m_announcePos).c_str());
+    m_strId = reinterpret_cast<const char*>(m_peerid);
     m_path = getPathFromAnnounce(m_announce, m_announcePos);
     //m_Port = atoi(port.c_str());
     //m_strCport = getPortFromAnnounce(m_url);
@@ -108,6 +109,7 @@ public:
   std::string m_announce;
   std::string m_path;
   int m_announcePos;
+  std::string m_strId;
   std::string getPort() const
   {  
     return m_currPort;
