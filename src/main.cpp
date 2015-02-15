@@ -168,6 +168,7 @@ void makeGetRequest(Client client){
 
   std::vector<Peer> peerList;
   int numOfPieces = ceil(client.m_info->getLength() / client.m_info->getPieceLength());
+  // cerr << "numOfPieces: " << numOfPieces << std::endl;
   PIECESOBTAINED = new bool[numOfPieces](); // Josh: all pieces false (not obtained yet)
   while (!isEnd) {
     // fprintf(stderr,"inside while");
@@ -175,6 +176,7 @@ void makeGetRequest(Client client){
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     struct sockaddr_in serverAddr;
     serverAddr.sin_family = AF_INET;
+    //cerr << client.m_trackPort << std::endl;
     serverAddr.sin_port = htons(client.m_trackPort);     // short, network byte order
     serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
     memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
@@ -306,6 +308,7 @@ main(int argc, char** argv)
     //std::cout << "Torrent file length: " << client.m_info->getLength() << std::endl;
     //std::cout << "Announce: " << client.m_url << std::endl;
     //std::cout << "TrackerPort: " << client.m_trackPort << std::endl;
+    //cerr << "about to enter makeGetRequest: " << std::endl;
     makeGetRequest(client);
   }
   catch (std::exception& e)
