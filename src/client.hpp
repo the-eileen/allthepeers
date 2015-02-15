@@ -64,6 +64,7 @@ public:
     m_amInterested = other.m_amInterested;
     m_peerChoked = other.m_peerChoked;
     m_peerInterested = other.m_peerInterested;  
+    memcpy(m_buff, other.m_buff, sizeof(char) * 50);
   }
   ~Peer()
   {
@@ -91,7 +92,7 @@ public:
   bool m_amInterested; // I am interested in this peer
   bool m_peerChoked;   // I am choking this peer
   bool m_peerInterested;//This peer is interested in me
-
+  char m_buff[50] = {}; // store messages
 };
 
 
