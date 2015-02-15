@@ -80,8 +80,9 @@ int shakeHands(Peer pr, Client client){ //takes peer and client, returns socket 
   if (recv(sockfd, rshake, sizeof(rshake), 0) == -1) 
     perror("recv");
 
+  cerr << "rshake is" << rshake;
   fprintf(stderr, "PRINT");
-  //ConstBufferPtr peerShake = std::make_shared<Buffer>(rshake, 68);
+  ConstBufferPtr peerShake = std::make_shared<Buffer>(rshake, 68);
   return sockfd;
 }
 void bitFieldProt(Peer peer, int peersock){
@@ -143,11 +144,11 @@ void bitFieldProt(Peer peer, int peersock){
     bitField->encodePayload();
     Bitfield* pBitField = new Bitfield();
 
-    if(send(peersock, bitField, sizeof(bitField), 0) == -1)
+    if(send(peersock, bitField, toSendSize+5, 0) == -1)
     {
         perror("send");
     }
-    if(recv(peersock, pBitField, sizeof(bitField), 0) == -1)
+    if(recv(peersock, pBitField, toSendSize+5, 0) == -1)
     {
         perror("receive");
     }
@@ -158,7 +159,7 @@ void bitFieldProt(Peer peer, int peersock){
     peer.m_pieceIndex = (bool*)(newBF->buf());
 
 }
-void doAllTheThings(Client client){
+void makeGetRequest(Client client){
   
     MetaInfo* metainfo = client.m_info;
     HttpRequest req;
@@ -382,7 +383,8 @@ main(int argc, char** argv)
     //std::cout << "Announce: " << client.m_url << std::endl;
     //std::cout << "TrackerPort: " << client.m_trackPort << std::endl;
     //cerr << "about to enter makeGetRequest: " << std::endl;
-    doAllTheThings(client);
+
+    makeGetRequest(client);
 
   }
   catch (std::exception& e)
