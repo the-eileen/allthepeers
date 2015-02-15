@@ -80,9 +80,8 @@ int shakeHands(Peer pr, Client client){ //takes peer and client, returns socket 
   if (recv(sockfd, rshake, sizeof(rshake), 0) == -1) 
     perror("recv");
 
-  cerr << "rshake is" << rshake;
   fprintf(stderr, "PRINT");
-  ConstBufferPtr peerShake = std::make_shared<Buffer>(rshake, 68);
+  //ConstBufferPtr peerShake = std::make_shared<Buffer>(rshake, 68);
   return sockfd;
 }
 void bitFieldProt(Peer peer, int peersock){
@@ -159,7 +158,7 @@ void bitFieldProt(Peer peer, int peersock){
     peer.m_pieceIndex = (bool*)(newBF->buf());
 
 }
-void makeGetRequest(Client client){
+void doAllTheThings(Client client){
   
     MetaInfo* metainfo = client.m_info;
     HttpRequest req;
@@ -383,8 +382,7 @@ main(int argc, char** argv)
     //std::cout << "Announce: " << client.m_url << std::endl;
     //std::cout << "TrackerPort: " << client.m_trackPort << std::endl;
     //cerr << "about to enter makeGetRequest: " << std::endl;
-
-    makeGetRequest(client);
+    doAllTheThings(client);
 
   }
   catch (std::exception& e)
