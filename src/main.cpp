@@ -137,23 +137,36 @@ void bitFieldProt(Peer peer, int peersock){
 
     //rumor has it that PIECESOBTAINED needs to be a multiple of 8? Maybe?
 
-    bitField->encodePayload();
+    //bitField->encodePayload();
     Bitfield* pBitField = new Bitfield();
 
-    if(send(peersock, bitField, toSendSize+5, 0) == -1)
+    ConstBufferPtr enc_mes = bitField->encode();
+    int msg_len = bitField->getPayload()->size() + 5;
+    const char* b_msg = reinterpret_cast<const char*>(enc_mes->buf());
+    cerr << "sending" << endl;
+    if(send(peersock, b_msg, msg_len, 0) == -1)
     {
         perror("send");
     }
-    if(recv(peersock, pBitField, toSendSize+5, 0) == -1)
+    cerr <<"receining"<< endl;
+
+    uint8_t hs_buf[1000] = {'\0'};
+    ssize_t n_buf = 0;
+    if((n_buf = recv(peersock, hs_buf, sizeof(hs_buf), 0)) == -1)
+    //if(recv(peersock, pBitField, toSendSize+5, 0) == -1)
     {
+      cerr <<"uh oh spahghethgti o" << endl;
         perror("receive");
     }
 
-    pBitField->decodePayload();
-    ConstBufferPtr newBF = pBitField->getPayload();
+    ConstBufferPtr hs_res = make_shared<Buffer>(hs_buf, n_buf);
 
-    peer.m_pieceIndex = (bool*)(newBF->buf());
-    cerr << "Peer's bitfield 1 is " << peer.m_pieceIndex[0] << endl;
+    cerr <<"theers a thing here somethinwere :" << sizeof(hs_res->buf()) << endl;
+    //pBitField->decodePayload();
+    ///ConstBufferPtr newBF = pBitField->getPayload();
+
+    //peer.m_pieceIndex = (bool*)(newBF->buf());
+    //cerr << "Peer's bitfield 1 is " << peer.m_pieceIndex[0] << endl;
 }
 void makeGetRequest(Client client){
   
