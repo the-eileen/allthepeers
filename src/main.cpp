@@ -114,6 +114,7 @@ void bitFieldProt(Peer peer, int peersock){
 
 }
 void makeGetRequest(Client client){
+  
   MetaInfo* metainfo = client.m_info;
   HttpRequest req;
     req.setHost(client.m_hostName);
@@ -131,7 +132,7 @@ void makeGetRequest(Client client){
     string formatted = buf;
 
     //cerr << "request is:" << buf;
-
+cout << "printed";
  
     //return buf;
     /*int sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -260,15 +261,13 @@ void makeGetRequest(Client client){
         peerList.push_back(Peer(*it, numOfPieces));
     }
     
+    cout << "reached";
     
-    
-    //Eileen start
    vector<int> socketList;
 
 for(std::vector<Peer>::iterator it = peerList.begin(); it != peerList.end() ; it++){
    socketList.push_back(shakeHands(*it,client));
 }
-//Eileen end
 
     }
     int waitTime = trackerResponse->getInterval();
@@ -300,7 +299,7 @@ main(int argc, char** argv)
       std::cerr << "Usage: simple-bt <port> <torrent_file>\n";
       return 1;
     }
-
+  c
     // Initialise the client.
     sbt::Client client(argv[1], argv[2]);
     // Josh: tests to see if decoded properly
@@ -309,7 +308,9 @@ main(int argc, char** argv)
     //std::cout << "Announce: " << client.m_url << std::endl;
     //std::cout << "TrackerPort: " << client.m_trackPort << std::endl;
     //cerr << "about to enter makeGetRequest: " << std::endl;
+
     makeGetRequest(client);
+
   }
   catch (std::exception& e)
   {

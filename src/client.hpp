@@ -111,7 +111,8 @@ public:
     m_announcePos = 0;
     m_hostName = getHostNameFromAnnounce(m_announce, m_announcePos); 
     m_trackPort = atoi(getPortFromAnnounce(m_announce, m_announcePos).c_str());
-    m_strId = reinterpret_cast<const char*>(m_peerid);
+    //m_strId = reinterpret_cast<const char*>(m_peerid);
+    m_strId = "SIMPLEBT.TEST.800813";
     m_path = getPathFromAnnounce(m_announce, m_announcePos);
     //m_Port = atoi(port.c_str());
     //m_strCport = getPortFromAnnounce(m_url);
