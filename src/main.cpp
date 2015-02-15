@@ -341,8 +341,11 @@ void makeGetRequest(Client client){
         vector<int> socketList;
     
         for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++){
-           socketList.push_back(shakeHands(**it,client));
+           int curSock = shakeHands(**it,client);
+           socketList.push_back(curSock);
+           bitFieldProt(**it, curSock);
         }
+
         
     }
     int waitTime = trackerResponse->getInterval();
