@@ -355,61 +355,22 @@ void makeGetRequest(Client client){
    for (int i = 0; i < 23; i++)
         cerr << PIECESOBTAINED[i] << " ";
    */
-   vector<int> socketList;
    
-for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++){
-   int sockfd = shakeHands(**it, client);
-   socketList.push_back(sockfd);
-   (*it)->m_sockfd = sockfd;
-}
-        isFirst = false;
-        // Josh: first create file that we'll be writing to
-        fstream targetFile;
-        targetFile.open("text.txt"); 
-        for(std::vector<PeerInfo>::const_iterator it = (trackerResponse->getPeers()).begin(); it != (trackerResponse->getPeers()).end(); it++)
-        {
-          /*
-          cerr << "PeerInfo Size: " << trackerResponse->getPeers().size() << std::endl;
-          cerr << "PeerInfo ID: " << it->peerId << std::endl;
-          cerr << "PeerInfo ip: " << it->ip << std::endl;
-          cerr << "PeerInfo Port: " << it->port << std::endl;
-          */
-          std::stringstream ss;
-          ss << it->port;
-          string port = ss.str();
-          
-          //cerr << "PeerInfo port: " << port << std::endl;
-          //cerr << "Client Port: " << client.getPort() << std::endl;
-          if (!((it->ip == "127.0.0.1") && (port == client.getPort()))) // check that it's not client
-          {
-            //cerr << "Condition passed" << std::endl;
-            Peer* temp = new Peer(*it, numOfPieces);
-            peerList.push_back(temp);
-          }
-        }
-         
-         //cerr << "reached" << std::endl;
-         /*
-        for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++)
-        {
-           cerr << "Peer Size: " << peerList.size() << std::endl;
-           cerr << "Peer ID: " << (*it)->m_peerId << std::endl;
-           cerr << "Peer ip: " << (*it)->m_ip << std::endl;
-           cerr << "Peer Port: " << (*it)->m_port << std::endl;
-        }*/
         vector<int> socketList;
     
         for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++){
            int curSock = shakeHands(**it,client);
            socketList.push_back(curSock);
            bitFieldProt(**it, curSock);
-        }
+           (*it)->m_sockfd = curSock; 
+       }
 
         
     }
     // end of isFirst
-
-    // Josh start
+    
+    // Josh start (WORK IN PROGRESS)
+    /*
     for (std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end(); it++)
     {
        if ((*it)->m_amInterested == true)
@@ -466,6 +427,7 @@ for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; i
          }
        }
     }
+    */
     // Josh end
     int waitTime = trackerResponse->getInterval();
 
