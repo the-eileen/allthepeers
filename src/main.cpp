@@ -114,6 +114,7 @@ void bitFieldProt(Peer peer, int peersock){
 
 }
 void makeGetRequest(Client client){
+  
   MetaInfo* metainfo = client.m_info;
   HttpRequest req;
     req.setHost(client.m_hostName);
@@ -131,7 +132,7 @@ void makeGetRequest(Client client){
     string formatted = buf;
 
     //cerr << "request is:" << buf;
-
+cout << "printed";
  
     //return buf;
     /*int sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -296,7 +297,7 @@ main(int argc, char** argv)
       std::cerr << "Usage: simple-bt <port> <torrent_file>\n";
       return 1;
     }
-
+  c
     // Initialise the client.
     sbt::Client client(argv[1], argv[2]);
     // Josh: tests to see if decoded properly
@@ -304,7 +305,9 @@ main(int argc, char** argv)
     //std::cout << "Torrent file length: " << client.m_info->getLength() << std::endl;
     //std::cout << "Announce: " << client.m_url << std::endl;
     //std::cout << "TrackerPort: " << client.m_trackPort << std::endl;
+
     makeGetRequest(client);
+
   }
   catch (std::exception& e)
   {

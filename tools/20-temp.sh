@@ -15,11 +15,11 @@ echo "Run 6 test cases..."
 
 sleep 1
 
-./tools/sbt-peer 11111 ./tools/test-2.torrent ./tools/ SIMPLEBT.TEST.111111 2>/dev/null &
+./tools/sbt-peer 11111 ./tools/test-2.torrent ./tools/ SIMPLEBT.TEST.111111 2>/tmp/output.txt &
 
 sleep 1
 
-./build/simple-bt 60207 ./tools/test-2.torrent &
+./build/simple-bt 60207 ./tools/test-2.torrent > /tmp/output.txt 2>&1 &
 
 for ((x = 0; x < 30; x++)); do
   printf %s .
@@ -27,7 +27,7 @@ for ((x = 0; x < 30; x++)); do
 done
 echo
 
-killall sbt-tracker > /dev/null 2>&1
+killall sbt-tracker > /tmp/output 2>&1
 
 sleep 1
 
