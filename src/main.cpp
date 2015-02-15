@@ -102,12 +102,11 @@ void bitFieldProt(Peer peer, int peersock){
             int bitsNeeded = numOfPieces % 8;
             bitsNeeded = (bitsNeeded == 0) ? 8 : bitsNeeded;
             tmp = {0};
-            int base = toSendSize - bitsNeeded;  //start of our byte (index in the bool array)
             for(int j = 0; j < 8; j++)
             {
                 tmp = tmp << 1;
 
-                if(j < bitsNeeded && PIECESOBTAINED[base+j] == 1)
+                if(j < bitsNeeded && PIECESOBTAINED[(i*8)+j] == 1)
                 {
                     //gotta add one bruh
                     tmp = tmp | 0x01;
