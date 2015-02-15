@@ -50,6 +50,7 @@
   using namespace msg;
 
 bool* PIECESOBTAINED;  // Josh: global; size declared once numOfPieces obtained
+int numOfPieces;
 
 void updatePiecesArray(int whichPiece) // use to update PIECES array
 {
@@ -90,7 +91,52 @@ void bitFieldProt(Peer peer, int peersock){
     //assumes that it's already connected to the peer
 
     //this should technically work, since arrays are just sequential bits...right?
-    ConstBufferPtr tempPtr = make_shared<Buffer>(PIECESOBTAINED, sizeof(PIECESOBTAINED));
+    int toSendSize = (numOfPieces + 7) /8;
+    char* moddedBitField;
+    moddedBitField = new char[toSendSize];
+    char tmp = {0};
+    for(int i = 0; i < toSendSize; i++)
+    {
+        if(i == toSendSize - 1)
+        {
+            int bitsNeeded = toSendSize % 8;
+            bitsNeeded = (bitsNeeded == 0) ? 8 : bitsNeeded;
+            tmp = {0};
+            int base = toSendSize - bitsNeeded;  //start of our byte (index in the bool array)
+            for(int j = 0; j < 8; j++)
+            {
+                if(j > bitsNeeded || PIECESOBTAINED[base+j] == 0 )
+                {
+                    tmp = tmp << 1;
+                }
+                else
+                {
+                    //gotta add one bruh
+                    tmp = tmp << 1;
+                    tmp = tmp | 0x01;
+                } //look shit's pretty fucked here but tmp should be a thing
+            }
+            memset(moddedBitField + i, tmp, sizeof(char));
+        }
+        else
+        {
+            for(int j = 0; j < 8; j++)
+            {
+                if(PIECESOBTAINED[(i*8) + j] == 1)
+                {
+                    tmp = tmp << 1;
+                    tmp = tmp | 0x01;
+                }
+                else
+                {
+                    tmp = tmp << 1;
+                }
+            }
+            memset(moddedBitField + i, tmp, sizeof(char));
+        }
+    }
+
+    ConstBufferPtr tempPtr = make_shared<Buffer>(moddedBitField, toSendSize);
     Bitfield* bitField = new Bitfield(tempPtr);
 
     //rumor has it that PIECESOBTAINED needs to be a multiple of 8? Maybe?
@@ -110,13 +156,13 @@ void bitFieldProt(Peer peer, int peersock){
     pBitField->decodePayload();
     ConstBufferPtr newBF = pBitField->getPayload();
 
-    peer.m_pieceIndex = (bool*)newBF->buf();
+    peer.m_pieceIndex = (bool*)(newBF->buf());
 
 }
 void makeGetRequest(Client client){
   
-  MetaInfo* metainfo = client.m_info;
-  HttpRequest req;
+    MetaInfo* metainfo = client.m_info;
+    HttpRequest req;
     req.setHost(client.m_hostName);
     req.setPort(client.m_trackPort);
     req.setMethod(HttpRequest::GET);
@@ -132,7 +178,7 @@ void makeGetRequest(Client client){
     string formatted = buf;
 
     //cerr << "request is:" << buf;
-cout << "printed";
+        cout << "printed";
  
     //return buf;
     /*int sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -163,12 +209,15 @@ cout << "printed";
     bool isEnd = false;
     bool isFirst = true;
   //std::string input;
-  char rbuf[10000] = {0};
-  std::stringstream ss;
+    char rbuf[10000] = {0};
+    std::stringstream ss;
 // fprintf(stderr,"before while");
 
-  std::vector<Peer*> peerList;
-  int numOfPieces = ceil(((double)client.m_info->getLength()) / client.m_info->getPieceLength()); 
+    std::vector<Peer*> peerList;
+  //TODO: This won't work.  Ceil takes in a float.  The int value will be evaluated first
+
+    numOfPieces = ceil(((double)client.m_info->getLength()) / client.m_info->getPieceLength()); 
+    //made this Global
     /*
     cerr << "length of file: " << client.m_info->getLength() << std::endl;
     cerr << "PieceLength: " << client.m_info->getPieceLength() << std::endl;
@@ -176,8 +225,8 @@ cout << "printed";
     cerr << "client id: " << client.m_strId << std::endl;
     cerr << "client port: " << client.getPort() << std::endl;
     */
-  PIECESOBTAINED = new bool[numOfPieces](); // Josh: all pieces false (not obtained yet)
-  while (!isEnd) {
+    PIECESOBTAINED = new bool[numOfPieces](); // Josh: all pieces false (not obtained yet)
+    while (!isEnd) {
     // fprintf(stderr,"inside while");
 
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -254,47 +303,47 @@ cout << "printed";
 
     if(isFirst)
     {
-    isFirst = false;
-    // Josh: first create file that we'll be writing to
-    fstream targetFile;
-    targetFile.open("text.txt"); 
-    for(std::vector<PeerInfo>::const_iterator it = (trackerResponse->getPeers()).begin(); it != (trackerResponse->getPeers()).end(); it++)
-    {
-      /*
-      cerr << "PeerInfo Size: " << trackerResponse->getPeers().size() << std::endl;
-      cerr << "PeerInfo ID: " << it->peerId << std::endl;
-      cerr << "PeerInfo ip: " << it->ip << std::endl;
-      cerr << "PeerInfo Port: " << it->port << std::endl;
-      */
-      std::stringstream ss;
-      ss << it->port;
-      string port = ss.str();
-      
-      //cerr << "PeerInfo port: " << port << std::endl;
-      //cerr << "Client Port: " << client.getPort() << std::endl;
-      if (!((it->ip == "127.0.0.1") && (port == client.getPort()))) // check that it's not client
-      {
-        //cerr << "Condition passed" << std::endl;
-        Peer* temp = new Peer(*it, numOfPieces);
-        peerList.push_back(temp);
-      }
-    }
-     
-    //cerr << "reached" << std::endl;
-    /*
-   for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++)
-   {
-      cerr << "Peer Size: " << peerList.size() << std::endl;
-      cerr << "Peer ID: " << (*it)->m_peerId << std::endl;
-      cerr << "Peer ip: " << (*it)->m_ip << std::endl;
-      cerr << "Peer Port: " << (*it)->m_port << std::endl;
-   }*/
-   vector<int> socketList;
-
-for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++){
-   socketList.push_back(shakeHands(**it,client));
-}
-
+        isFirst = false;
+        // Josh: first create file that we'll be writing to
+        fstream targetFile;
+        targetFile.open("text.txt"); 
+        for(std::vector<PeerInfo>::const_iterator it = (trackerResponse->getPeers()).begin(); it != (trackerResponse->getPeers()).end(); it++)
+        {
+          /*
+          cerr << "PeerInfo Size: " << trackerResponse->getPeers().size() << std::endl;
+          cerr << "PeerInfo ID: " << it->peerId << std::endl;
+          cerr << "PeerInfo ip: " << it->ip << std::endl;
+          cerr << "PeerInfo Port: " << it->port << std::endl;
+          */
+          std::stringstream ss;
+          ss << it->port;
+          string port = ss.str();
+          
+          //cerr << "PeerInfo port: " << port << std::endl;
+          //cerr << "Client Port: " << client.getPort() << std::endl;
+          if (!((it->ip == "127.0.0.1") && (port == client.getPort()))) // check that it's not client
+          {
+            //cerr << "Condition passed" << std::endl;
+            Peer* temp = new Peer(*it, numOfPieces);
+            peerList.push_back(temp);
+          }
+        }
+         
+         //cerr << "reached" << std::endl;
+         /*
+        for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++)
+        {
+           cerr << "Peer Size: " << peerList.size() << std::endl;
+           cerr << "Peer ID: " << (*it)->m_peerId << std::endl;
+           cerr << "Peer ip: " << (*it)->m_ip << std::endl;
+           cerr << "Peer Port: " << (*it)->m_port << std::endl;
+        }*/
+        vector<int> socketList;
+    
+        for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++){
+           socketList.push_back(shakeHands(**it,client));
+        }
+        
     }
     int waitTime = trackerResponse->getInterval();
 
