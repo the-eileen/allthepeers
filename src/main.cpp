@@ -99,20 +99,17 @@ void bitFieldProt(Peer peer, int peersock){
     {
         if(i == toSendSize - 1)
         {
-            int bitsNeeded = toSendSize % 8;
+            int bitsNeeded = numOfPieces % 8;
             bitsNeeded = (bitsNeeded == 0) ? 8 : bitsNeeded;
             tmp = {0};
             int base = toSendSize - bitsNeeded;  //start of our byte (index in the bool array)
             for(int j = 0; j < 8; j++)
             {
-                if(j > bitsNeeded || PIECESOBTAINED[base+j] == 0 )
-                {
-                    tmp = tmp << 1;
-                }
-                else
+                tmp = tmp << 1;
+
+                if(j < bitsNeeded && PIECESOBTAINED[base+j] == 1)
                 {
                     //gotta add one bruh
-                    tmp = tmp << 1;
                     tmp = tmp | 0x01;
                 } //look shit's pretty fucked here but tmp should be a thing
             }
@@ -157,7 +154,7 @@ void bitFieldProt(Peer peer, int peersock){
     ConstBufferPtr newBF = pBitField->getPayload();
 
     peer.m_pieceIndex = (bool*)(newBF->buf());
-
+    cerr << "Peer's bitfield 1 is " << peer.m_pieceIndex[0] << endl;
 }
 void makeGetRequest(Client client){
   
