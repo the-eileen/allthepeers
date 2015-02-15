@@ -167,9 +167,15 @@ cout << "printed";
   std::stringstream ss;
 // fprintf(stderr,"before while");
 
-  std::vector<Peer> peerList;
-  int numOfPieces = ceil(client.m_info->getLength() / client.m_info->getPieceLength());
-  // cerr << "numOfPieces: " << numOfPieces << std::endl;
+  std::vector<Peer*> peerList;
+  int numOfPieces = ceil(((double)client.m_info->getLength()) / client.m_info->getPieceLength()); 
+    /*
+    cerr << "length of file: " << client.m_info->getLength() << std::endl;
+    cerr << "PieceLength: " << client.m_info->getPieceLength() << std::endl;
+    cerr << "numOfPieces: " << numOfPieces << std::endl;
+    cerr << "client id: " << client.m_strId << std::endl;
+    cerr << "client port: " << client.getPort() << std::endl;
+    */
   PIECESOBTAINED = new bool[numOfPieces](); // Josh: all pieces false (not obtained yet)
   while (!isEnd) {
     // fprintf(stderr,"inside while");
@@ -254,19 +260,39 @@ cout << "printed";
     targetFile.open("text.txt"); 
     for(std::vector<PeerInfo>::const_iterator it = (trackerResponse->getPeers()).begin(); it != (trackerResponse->getPeers()).end(); it++)
     {
+      /*
+      cerr << "PeerInfo Size: " << trackerResponse->getPeers().size() << std::endl;
+      cerr << "PeerInfo ID: " << it->peerId << std::endl;
+      cerr << "PeerInfo ip: " << it->ip << std::endl;
+      cerr << "PeerInfo Port: " << it->port << std::endl;
+      */
       std::stringstream ss;
       ss << it->port;
       string port = ss.str();
-      if ((it->ip != "127.0.0.1") && (port != client.getPort())) // check that it's not client
-        peerList.push_back(Peer(*it, numOfPieces));
+      
+      //cerr << "PeerInfo port: " << port << std::endl;
+      //cerr << "Client Port: " << client.getPort() << std::endl;
+      if (!((it->ip == "127.0.0.1") && (port == client.getPort()))) // check that it's not client
+      {
+        //cerr << "Condition passed" << std::endl;
+        Peer* temp = new Peer(*it, numOfPieces);
+        peerList.push_back(temp);
+      }
     }
-    
-    cout << "reached";
-    
+     
+    //cerr << "reached" << std::endl;
+    /*
+   for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++)
+   {
+      cerr << "Peer Size: " << peerList.size() << std::endl;
+      cerr << "Peer ID: " << (*it)->m_peerId << std::endl;
+      cerr << "Peer ip: " << (*it)->m_ip << std::endl;
+      cerr << "Peer Port: " << (*it)->m_port << std::endl;
+   }*/
    vector<int> socketList;
 
-for(std::vector<Peer>::iterator it = peerList.begin(); it != peerList.end() ; it++){
-   socketList.push_back(shakeHands(*it,client));
+for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++){
+   socketList.push_back(shakeHands(**it,client));
 }
 
     }
@@ -299,7 +325,7 @@ main(int argc, char** argv)
       std::cerr << "Usage: simple-bt <port> <torrent_file>\n";
       return 1;
     }
-  c
+  
     // Initialise the client.
     sbt::Client client(argv[1], argv[2]);
     // Josh: tests to see if decoded properly

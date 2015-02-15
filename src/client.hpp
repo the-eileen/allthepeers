@@ -41,7 +41,7 @@ std::string getPathFromAnnounce(std::string announce, int &start);
 class Peer
 {
 public:
-  Peer(PeerInfo pi, int numPieces)
+  Peer(const PeerInfo pi, int numPieces)
   {
     m_peerId = pi.peerId;
     m_ip = pi.ip;
