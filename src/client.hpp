@@ -52,6 +52,7 @@ public:
     m_peerInterested = false; 
     m_amChoked = true;
     m_amInterested = false;
+    m_sockfd = -1;
   }
   Peer(const Peer& other)
   {
@@ -65,6 +66,7 @@ public:
     m_peerChoked = other.m_peerChoked;
     m_peerInterested = other.m_peerInterested;  
     memcpy(m_buff, other.m_buff, sizeof(char) * 50);
+    m_sockfd = other.m_sockfd;
   }
   ~Peer()
   {
@@ -93,6 +95,7 @@ public:
   bool m_peerChoked;   // I am choking this peer
   bool m_peerInterested;//This peer is interested in me
   char m_buff[50] = {}; // store messages
+  int m_sockfd;
 };
 
 

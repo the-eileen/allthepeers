@@ -45,6 +45,8 @@
 #include "msg/handshake.hpp"
 #include <string>
 #include <cstring>
+#include "msg/msg-base.hpp"
+
   using namespace std;
   using namespace sbt;
   using namespace msg;
@@ -55,6 +57,17 @@ int numOfPieces;
 void updatePiecesArray(int whichPiece) // use to update PIECES array
 {
   PIECESOBTAINED[whichPiece] = true;
+}
+
+bool areAllPiecesObtained()
+{
+  int numTrue = 0;
+  for (int i = 0; i < numOfPieces; i++)
+    if (PIECESOBTAINED[i] == true)
+      numTrue++;
+  if (numTrue == numOfPieces)
+    return true;
+  return false; 
 }
  
 int shakeHands(Peer pr, Client client){ //takes peer and client, returns socket created for this peer
@@ -215,7 +228,6 @@ void makeGetRequest(Client client){
   std::cout << "Set up a connection from: " << ipstr << ":" <<
     ntohs(clientAddr.sin_port) << std::endl;*/
 
-    bool isEnd = false;
     bool isFirst = true;
   //std::string input;
     char rbuf[10000] = {0};
@@ -224,7 +236,7 @@ void makeGetRequest(Client client){
 
     std::vector<Peer*> peerList;
   //TODO: This won't work.  Ceil takes in a float.  The int value will be evaluated first
-
+   // Josh: I tested this and by casting the first value to double, it evaluates properly
     numOfPieces = ceil(((double)client.m_info->getLength()) / client.m_info->getPieceLength()); 
     //made this Global
     /*
@@ -234,8 +246,8 @@ void makeGetRequest(Client client){
     cerr << "client id: " << client.m_strId << std::endl;
     cerr << "client port: " << client.getPort() << std::endl;
     */
-    PIECESOBTAINED = new bool[numOfPieces](); // Josh: all pieces false (not obtained yet)
-    while (!isEnd) {
+  PIECESOBTAINED = new bool[numOfPieces](); // Josh: all pieces false (not obtained yet)
+  while (!areAllPiecesObtained()) {
     // fprintf(stderr,"inside while");
 
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -270,7 +282,7 @@ void makeGetRequest(Client client){
       //return 4;
       
     }
-
+    // TRACKER REQUEST NEEDS TO BE UPDATED
     path = client.m_path + "?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
       "&port=" + client.getPort() + "&uploaded=0&downloaded=0&left=" + left;
     req.setPath(path);
@@ -312,51 +324,124 @@ void makeGetRequest(Client client){
 
     if(isFirst)
     {
-        isFirst = false;
-        // Josh: first create file that we'll be writing to
-        fstream targetFile;
-        targetFile.open("text.txt"); 
-        for(std::vector<PeerInfo>::const_iterator it = (trackerResponse->getPeers()).begin(); it != (trackerResponse->getPeers()).end(); it++)
-        {
-          /*
-          cerr << "PeerInfo Size: " << trackerResponse->getPeers().size() << std::endl;
-          cerr << "PeerInfo ID: " << it->peerId << std::endl;
-          cerr << "PeerInfo ip: " << it->ip << std::endl;
-          cerr << "PeerInfo Port: " << it->port << std::endl;
-          */
-          std::stringstream ss;
-          ss << it->port;
-          string port = ss.str();
-          
-          //cerr << "PeerInfo port: " << port << std::endl;
-          //cerr << "Client Port: " << client.getPort() << std::endl;
-          if (!((it->ip == "127.0.0.1") && (port == client.getPort()))) // check that it's not client
-          {
-            //cerr << "Condition passed" << std::endl;
-            Peer* temp = new Peer(*it, numOfPieces);
-            peerList.push_back(temp);
-          }
-        }
-         
-         //cerr << "reached" << std::endl;
-         /*
-        for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++)
-        {
-           cerr << "Peer Size: " << peerList.size() << std::endl;
-           cerr << "Peer ID: " << (*it)->m_peerId << std::endl;
-           cerr << "Peer ip: " << (*it)->m_ip << std::endl;
-           cerr << "Peer Port: " << (*it)->m_port << std::endl;
-        }*/
+    isFirst = false;
+    // Josh: first create file that we'll be writing to
+    fstream targetFile;
+    targetFile.open("text.txt"); 
+    for(std::vector<PeerInfo>::const_iterator it = (trackerResponse->getPeers()).begin(); it != (trackerResponse->getPeers()).end(); it++)
+    {
+      /*
+      cerr << "PeerInfo Size: " << trackerResponse->getPeers().size() << std::endl;
+      cerr << "PeerInfo ID: " << it->peerId << std::endl;
+      cerr << "PeerInfo ip: " << it->ip << std::endl;
+      cerr << "PeerInfo Port: " << it->port << std::endl;
+      */
+      std::stringstream ss;
+      ss << it->port;
+      string port = ss.str();
+      
+      //cerr << "PeerInfo port: " << port << std::endl;
+      //cerr << "Client Port: " << client.getPort() << std::endl;
+      if (!((it->ip == "127.0.0.1") && (port == client.getPort()))) // check that it's not client
+      {
+        //cerr << "Condition passed" << std::endl;
+        Peer* temp = new Peer(*it, numOfPieces);
+        peerList.push_back(temp);
+      }
+    }
+     
+    //cerr << "reached" << std::endl;
+   /* 
+   for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++)
+   {
+      cerr << "Peer Size: " << peerList.size() << std::endl;
+      cerr << "Peer ID: " << (*it)->m_peerId << std::endl;
+      cerr << "Peer ip: " << (*it)->m_ip << std::endl;
+      cerr << "Peer Port: " << (*it)->m_port << std::endl;
+      cerr << "Peer has the following pieces: ";
+      for (int i = 0; i < (*it)->m_numPieces; i++)
+        cerr << (*it)->m_pieceIndex[i] << " ";
+      
+   }
+   
+   cerr << "Pieces Obtained: ";
+   for (int i = 0; i < 23; i++)
+        cerr << PIECESOBTAINED[i] << " ";
+   */
+   
         vector<int> socketList;
     
         for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++){
            int curSock = shakeHands(**it,client);
            socketList.push_back(curSock);
            bitFieldProt(**it, curSock);
-        }
+           (*it)->m_sockfd = curSock; 
+       }
 
         
     }
+    // end of isFirst
+    
+    // Josh start (WORK IN PROGRESS)
+    /*
+    for (std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end(); it++)
+    {
+       if ((*it)->m_amInterested == true)
+       {
+         // starting here, I have a lot of trouble with the formatting
+         if ((*it)->m_buff[0] == '\0') // empty buffer
+         {
+             Choke choke = Choke();
+             char* buf = (char*)choke.encode()->buf();
+             if (send((*it)->m_sockfd, buf, 50, 0) == -1)
+	       perror("send");
+         }
+         else // something in buffer
+         {
+           ConstBufferPtr msg = (MsgBase)((*it)->m_buff);
+           int msgType = msg->getId();
+           switch (msgType) 
+           {
+             case 1: // unchoke
+               //send request
+               break;
+             case 7: // piece
+               // verify piece with hash
+               // if actually piece
+               {
+                 // send have
+               }
+               // else resend request
+           }
+           
+         }
+       
+       }
+       else // uninterested
+       {
+         if ((*it)->m_buff[0] == '\0') // empty buffer
+         {
+           if (recv((*it)->m_sockfd, (*it)->m_buff, sizeof((*it)->m_buff), 0) == -1) 
+            perror("recv");
+         }
+         else // something in buffer
+         {
+           int msgType = (*it)->m_buff[5];
+           switch (msgType)
+           {
+             case 2: // peer interested
+               // send choke
+               break;
+             case 4: // have
+               if ((*it)->m_buff[6] != '\0')
+                 (*it)->setInterest((*it)->m_buff[6]);
+               break;
+           }
+         }
+       }
+    }
+    */
+    // Josh end
     int waitTime = trackerResponse->getInterval();
 
     sleep(waitTime);
