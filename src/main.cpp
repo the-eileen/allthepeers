@@ -258,15 +258,13 @@ void makeGetRequest(Client client){
         peerList.push_back(Peer(*it, numOfPieces));
     }
     
+    cout << "reached";
     
-    
-    //Eileen start
    vector<int> socketList;
 
 for(std::vector<Peer>::iterator it = peerList.begin(); it != peerList.end() ; it++){
    socketList.push_back(shakeHands(*it,client));
 }
-//Eileen end
 
     }
     int waitTime = trackerResponse->getInterval();
