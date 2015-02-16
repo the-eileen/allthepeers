@@ -1,6 +1,8 @@
 #include "client.hpp"
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <iostream>
+    using namespace std;
 
 extern bool* PIECESOBTAINED; // declared in main.cpp
 
@@ -82,6 +84,7 @@ ssize_t Peer::sendMsgWPayload(msg::MsgBase* msg)
 ssize_t Peer::recvMsg()
 {
   m_buffSize = recv(m_sockfd, m_buff, sizeof(m_buff), 0 );
+  cerr << "bufsize is: " << m_buffSize << endl;
   return m_buffSize;
 }
 void Peer::resetBuff()

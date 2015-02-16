@@ -267,18 +267,41 @@ void getNextReq(Peer &peer)
 }
 
 
-bool verifyPiece(const Piece& piece, const char* hash){
+bool verifyPiece(const Piece& piece, vector<uint8_t> hash){
+  //cerr << "enter verify" << endl;
   int offset = piece.getIndex() * 20;
-  char* pieceHash = {0};
-  for(int k = 0; k < 20; k++){
-    pieceHash[k] = hash[offset + k];
-  }
 
-  char* recHash = (char*)sha1(piece.getBlock())->buf();
-  if(strcmp(pieceHash, recHash) == 0)
-    return true;
-  else
+ cerr << "offset is " << offset << endl;
+ cerr << "vector size" << hash.size() << endl;
+
+  //char* b_msg = reinterpret_cast<const char*>(enc_mes->buf());
+ //vector<uint8_t> tempRec;
+  cerr << "hash is ";
+  for(int j = 0; j < 20; j++){
+    cerr << int(hash[j+offset]) << " ";
+  }
+ cerr << endl;
+ // vector<uint8_t> recHash = sha1(tempRec);
+  ConstBufferPtr tempRec = sha1(piece.getBlock());
+  const uint8_t* recHash = tempRec->buf();
+  
+  cerr << "rechashCBP is ";
+  for (int i = 0; i < 20; i++) {
+  cerr << int(recHash[i])<< " ";
+  }
+  cerr << endl;
+
+  cerr << "get block is " << piece.getBlock()->get() << endl;
+
+
+ for(int k = 0; k < 20; k++){
+   if(hash[offset + k] != recHash[k])
     return false;
+  }
+  cerr << "after for" << endl;
+  
+  
+return true;
 
 }
 
@@ -578,8 +601,9 @@ void doAllTheThings(Client client){
                  ConstBufferPtr temp = make_shared<Buffer>((*it)->m_buff, (*it)->m_buffSize);
                  Piece pie;
                  pie.decode(temp);
+                 cerr << "payload size" << pie.getPayload()->size() << endl;
                  cerr << "Is this perhaps the right piece?" << std::endl;
-                 if (verifyPiece(pie,(const char*) (client.m_info->getHash()->get())))
+                 if (verifyPiece(pie,client.m_info->getPieces()))
                  {
                     cerr << "Now I've got a GOLDEN TICKET!!!" << std::endl;
                     Have* hv = new Have(pie.getIndex());
@@ -596,8 +620,13 @@ void doAllTheThings(Client client){
                  }
                  else  // resend request
                  {
+
                    cerr << "Trying to request piece index: " << (*it)->m_desiredPiece;
                    Request* rqst = new Request((*it)->m_desiredPiece, 0, 20);
+
+                   //cerr << "Sry no ticket for you" << endl;
+                   //Request* rqst = new Request((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getLength()));
+
                    if ((*it)->sendMsgWPayload(rqst) == -1)
                      perror("Error sending request");
                  }

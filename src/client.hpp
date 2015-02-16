@@ -57,7 +57,7 @@ public:
   bool m_peerChoking;   // This peer is choking me
   bool m_peerInterested;// This peer is interested in me
   
-  char m_buff[100] = {}; // store messages
+  char m_buff[3000] = {}; // store messages
   int m_buffSize;  // how filled up it is
   int m_sockfd;
   uint32_t m_desiredPiece; //TODO: only holds single value, probably gonna need a peer connection manager implemented later
