@@ -98,7 +98,10 @@ int shakeHands(Peer pr, Client client){ //takes peer and client, returns socket 
   ConstBufferPtr peerShake = std::make_shared<Buffer>(rshake, 68);
   return sockfd;
 }
-void bitFieldProt(Peer peer, int peersock){
+void bitFieldProt(Peer &peer, int peersock){
+    cout << peer.m_numPieces << endl;
+        for(int i = 0; i < peer.m_numPieces; i++)
+        cout << peer.m_pieceIndex[i] ;
     //takes in a peer and it's socket, sends bitfield, populates 
     //      the peer's boolean array
     //assumes that it's already connected to the peer
@@ -108,12 +111,13 @@ void bitFieldProt(Peer peer, int peersock){
     char* moddedBitField;
     moddedBitField = new char[toSendSize];
     char tmp = {0};
+
+    int bitsNeeded = numOfPieces % 8;
+    bitsNeeded = (bitsNeeded == 0) ? 8 : bitsNeeded;
     for(int i = 0; i < toSendSize; i++)
     {
         if(i == toSendSize - 1)
         {
-            int bitsNeeded = numOfPieces % 8;
-            bitsNeeded = (bitsNeeded == 0) ? 8 : bitsNeeded;
             tmp = {0};
             for(int j = 0; j < 8; j++)
             {
@@ -144,14 +148,13 @@ void bitFieldProt(Peer peer, int peersock){
             memset(moddedBitField + i, tmp, sizeof(char));
         }
     }
-
+    //cerr << (int)moddedBitField[0] << endl;
     ConstBufferPtr tempPtr = make_shared<Buffer>(moddedBitField, toSendSize);
     Bitfield* bitField = new Bitfield(tempPtr);
 
     //rumor has it that PIECESOBTAINED needs to be a multiple of 8? Maybe?
 
     //bitField->encodePayload();
-    Bitfield* pBitField = new Bitfield();
 
     ConstBufferPtr enc_mes = bitField->encode();
     int msg_len = bitField->getPayload()->size() + 5;
@@ -171,10 +174,105 @@ void bitFieldProt(Peer peer, int peersock){
       cerr <<"uh oh spahghethgti o" << endl;
         perror("receive");
     }
+    //cerr << " hs_buf is " << (int)hs_buf[7] << " " << (int)hs_buf[4] << endl;
+
+    //the good shit is in hs_buf[5:]
+    for(int i = 5; i < n_buf; i++)
+    {
+        uint8_t cmpX;
+        uint8_t toCmp;
+        if(i == n_buf -1)
+        {
+             toCmp = hs_buf[i]; //the byte we're interested in
+             for(int j = 0; j < bitsNeeded; j++)
+             {
+                 cmpX = toCmp & 0x80;
+                 if(cmpX == 0x80)
+                 {
+                     peer.m_pieceIndex[(i-5)*8 + j] = true;
+                 }
+                 else
+                 {
+                     peer.m_pieceIndex[(i-5)*8 + j] = false;
+                 }
+                 toCmp = toCmp << 1;
+             }
+        }
+        else
+         {
+             toCmp = hs_buf[i]; //the byte we're interested in
+             for(int j = 0; j < 8; j++)
+             {
+                 cmpX = toCmp & 0x80;
+                 if(cmpX == 0x80)
+                 {
+                     peer.m_pieceIndex[(i-5)*8 + j] = true;
+                 }
+                 else
+                 {
+                     peer.m_pieceIndex[(i-5)*8 + j] = false;
+                 }
+                 toCmp = toCmp << 1;
+             }
+        }
+    }
 
     ConstBufferPtr hs_res = make_shared<Buffer>(hs_buf, n_buf);
 
-    cerr <<"theers a thing here somethinwere :" << sizeof(hs_res->buf()) << endl;
+    //cerr <<"theers a thing here somethinwere :" << sizeof(hs_res->getBitfield()) << endl;
+    // int tmpBuff [2];
+    // cerr <<"size of n_buf" << n_buf << endl;
+    // memset(tmpBuff, *(hs_res->buf()), 8);
+    // cerr << tmpBuff;
+/*
+    for(uint8_t k = 0; k < (sizeof(hs_res->buf()) - 5); k++)
+    {
+        char cmpX;
+        char toCmp;
+        if(k == (sizeof(hs_res->buf())-5)-1)
+        {
+            //last one
+            memset(&toCmp, tmpBuff[sizeof(hs_res->buf())-1], 1);
+            //toCmp = tmpBuff[sizeof(hs_res->buf())-1];
+            for(int m = 0; m < bitsNeeded; m++)
+            {
+                cmpX = toCmp & 0x80;
+                if(cmpX == 0x80)
+                {
+                    peer.m_pieceIndex[k*8 + m] = true;
+                }
+                else
+                {
+                    peer.m_pieceIndex[k*8 + m] = false;
+                }
+                toCmp = toCmp << 1;
+            }
+        }
+        else
+        {
+            memset(&toCmp, tmpBuff[k+5], 1);
+            //toCmp = tmpBuff[5+k]; //might need to memset
+            for(int m = 0; m < 8; m++)
+            {
+                cmpX = toCmp & 0x80; //checks first bit
+                if(cmpX == 0x80)
+                {
+                    peer.m_pieceIndex[k*8 + m] = true;
+                }
+                else
+                {
+                    peer.m_pieceIndex[k*8 + m] = false;
+                }
+                toCmp = toCmp << 1;
+            }
+        }
+    }*/
+    //for(int x = 0; x < peer.m_numPieces; x++)
+    //{
+        cout << peer.m_numPieces << endl;
+        for(int i = 0; i < peer.m_numPieces; i++)
+        cout << peer.m_pieceIndex[i] << endl;
+    //}
     //pBitField->decodePayload();
     ///ConstBufferPtr newBF = pBitField->getPayload();
 
