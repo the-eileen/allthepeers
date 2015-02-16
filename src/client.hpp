@@ -29,6 +29,7 @@
 #include "http/http-request.hpp"
 #include "http/http-response.hpp"
 #include "tracker-response.hpp"
+#include "msg/msg-base.hpp"
 
 extern bool* PIECESOBTAINED; // declared in main.cpp
 
@@ -41,18 +42,20 @@ std::string getPathFromAnnounce(std::string announce, int &start);
 class Peer
 {
 public:
-  Peer(const PeerInfo pi, int numPieces)
+  Peer(const PeerInfo& pi, int numPieces)
   {
     m_peerId = pi.peerId;
     m_ip = pi.ip;
     m_port = pi.port;
     m_pieceIndex = new bool[numPieces](); // zero-initialized (false)
     m_numPieces = numPieces;
-    m_peerChoked = true;
+    m_peerChoking = true;
     m_peerInterested = false; 
-    m_amChoked = true;
+    m_amChoking = true;
     m_amInterested = false;
     m_sockfd = -1;
+    m_desiredPiece = -1;
+    m_buffSize = -1;
   }
   Peer(const Peer& other)
   {
@@ -61,12 +64,14 @@ public:
     m_ip = other.m_ip;
     m_port = other.m_port;
     m_numPieces = other.m_numPieces;
-    m_amChoked = other.m_amChoked;
+    m_amChoking = other.m_amChoking;
     m_amInterested = other.m_amInterested;
-    m_peerChoked = other.m_peerChoked;
+    m_peerChoking = other.m_peerChoking;
     m_peerInterested = other.m_peerInterested;  
     memcpy(m_buff, other.m_buff, sizeof(char) * 50);
     m_sockfd = other.m_sockfd;
+    m_buffSize = other.m_buffSize;
+    m_desiredPiece = other.m_desiredPiece;
   }
   ~Peer()
   {
@@ -74,15 +79,27 @@ public:
   }
   void setInterest(int whichPiece)
   {
-     m_pieceIndex[whichPiece] = true;
+     m_pieceIndex[whichPiece] = true; //mark that this peer has this piece
      for (int i = 0; i < m_numPieces; i++)
      {
        if (PIECESOBTAINED[i] == false && m_pieceIndex[i] == true)
        {
           m_amInterested = true;
+          m_desiredPiece = static_cast<uint32_t>(i); // set first piece they have that we don't
           break;
        }
      }
+  }
+  ssize_t sendMsg(msg::MsgBase& msg)
+  {
+    char* buf = (char*)(msg.encode()->buf());
+    int msg_len = msg.getPayload()->size() + 5;
+    return send(m_sockfd, buf, msg_len, 0);
+  }
+  ssize_t recvMsg()
+  {
+    m_buffSize = recv(m_sockfd, m_buff, sizeof(m_buff), 0 );
+    return m_buffSize;
   }
   std::string m_peerId;
   std::string m_ip;
@@ -90,12 +107,14 @@ public:
   bool* m_pieceIndex;  // keep track of pieces this peer has
   int m_numPieces;
   // Josh: not sure how many of these we need
-  bool m_amChoked;     // I am choked by this peer
-  bool m_amInterested; // I am interested in this peer
-  bool m_peerChoked;   // I am choking this peer
-  bool m_peerInterested;//This peer is interested in me
-  char m_buff[50] = {}; // store messages
+  bool m_amChoking;     // I am choking this peer
+  bool m_amInterested;  // I am interested in this peer
+  bool m_peerChoking;   // This peer is choking me
+  bool m_peerInterested;// This peer is interested in me
+  char m_buff[100] = {}; // store messages
+  int m_buffSize;  // how filled up it is
   int m_sockfd;
+  uint32_t m_desiredPiece; //TODO: only holds single value, probably gonna need a peer connection manager implemented later
 };
 
 
