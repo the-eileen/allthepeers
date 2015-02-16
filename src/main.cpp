@@ -240,7 +240,7 @@ void bitFieldProt(Peer &peer, int peersock){
 }
 
 
-bool verifyPiece(Piece piece, char* hash){
+bool verifyPiece(const Piece& piece, const char* hash){
   int offset = piece.getIndex() * 20;
   char* pieceHash = {0};
   for(int k = 0; k < 20; k++){
@@ -314,7 +314,7 @@ void doAllTheThings(Client client){
    // Josh: I tested this and by casting the first value to double, it evaluates properly
     numOfPieces = ceil(((double)client.m_info->getLength()) / client.m_info->getPieceLength()); 
     //made this Global
-    /*
+    /* 
     cerr << "length of file: " << client.m_info->getLength() << std::endl;
     cerr << "PieceLength: " << client.m_info->getPieceLength() << std::endl;
     cerr << "numOfPieces: " << numOfPieces << std::endl;
@@ -405,7 +405,7 @@ void doAllTheThings(Client client){
     targetFile.open("text.txt"); 
     for(std::vector<PeerInfo>::const_iterator it = (trackerResponse->getPeers()).begin(); it != (trackerResponse->getPeers()).end(); it++)
     {
-      /*
+      /* 
       cerr << "PeerInfo Size: " << trackerResponse->getPeers().size() << std::endl;
       cerr << "PeerInfo ID: " << it->peerId << std::endl;
       cerr << "PeerInfo ip: " << it->ip << std::endl;
@@ -414,8 +414,7 @@ void doAllTheThings(Client client){
       std::stringstream ss;
       ss << it->port;
       string port = ss.str();
-      
-      //cerr << "PeerInfo port: " << port << std::endl;
+     
       //cerr << "Client Port: " << client.getPort() << std::endl;
       if (!((it->ip == "127.0.0.1") && (port == client.getPort()))) // check that it's not client
       {
@@ -429,21 +428,23 @@ void doAllTheThings(Client client){
    /* 
    for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++)
    {
+      
       cerr << "Peer Size: " << peerList.size() << std::endl;
       cerr << "Peer ID: " << (*it)->m_peerId << std::endl;
       cerr << "Peer ip: " << (*it)->m_ip << std::endl;
       cerr << "Peer Port: " << (*it)->m_port << std::endl;
       cerr << "Peer has the following pieces: ";
+      
       for (int i = 0; i < (*it)->m_numPieces; i++)
         cerr << (*it)->m_pieceIndex[i] << " ";
       
    }
    
-   cerr << "Pieces Obtained: ";
+   cerr << std::endl << "Pieces Obtained: ";
    for (int i = 0; i < 23; i++)
         cerr << PIECESOBTAINED[i] << " ";
-   */
    
+   */
         vector<int> socketList;
     
         for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++){
@@ -452,19 +453,39 @@ void doAllTheThings(Client client){
            bitFieldProt(**it, curSock);
            (*it)->m_sockfd = curSock; 
        }
+    /*
+    for(std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end() ; it++)
+   {
 
-        
+      cerr << "Peer Size: " << peerList.size() << std::endl;
+      cerr << "Peer ID: " << (*it)->m_peerId << std::endl;
+      cerr << "Peer ip: " << (*it)->m_ip << std::endl;
+      cerr << "Peer Port: " << (*it)->m_port << std::endl;
+      cerr << "Peer has the following pieces: ";
+
+      for (int i = 0; i < (*it)->m_numPieces; i++)
+        cerr << (*it)->m_pieceIndex[i] << " ";
+
+   }
+
+   cerr << "Pieces Obtained: ";
+   for (int i = 0; i < 23; i++)
+        cerr << PIECESOBTAINED[i] << " ";    
+   */ 
     }
     // end of isFirst
    
     // Josh start (WORK IN PROGRESS)
     for (std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end(); it++)
     {
+       cerr << "Peer: " << (*it)->m_peerId << std::endl;
+       cerr << "m_amInterested = " << (*it)->m_amInterested << std::endl;
        if ((*it)->m_amInterested == true)
        {
          if ((*it)->m_buffSize == -1) // empty buffer
          {
            // send interested message
+           cerr << "Sending interested message" << std::endl;
            Interested in;
            if ((*it)->sendMsg(in) == -1)
              perror("Error sending interest");
@@ -486,16 +507,32 @@ void doAllTheThings(Client client){
              }
                break;
              case 7: // piece
-               // verify piece with hash
-               // if actually piece
                {
-                // Have hv;
-                // if(sendMsg(hv) == -1)
-                //   perror("Error sending have");
-                // clear buff  
+                 // verify piece with hash
+                 ConstBufferPtr temp = make_shared<Buffer>((*it)->m_buff, (*it)->m_buffSize);
+                 Piece pie;
+                 pie.decode(temp);
+                 if (verifyPiece(pie,(const char*) (client.m_info->getHash()->get())))
+                 {
+                    Have hv(pie.getIndex());
+                    updatePiecesArray((int)(hv.getIndex()));      
+                    (*it)->updateInterest();
+                    (*it)->m_buffSize = -1; // reset buff
+                    // send have to all the peers
+                    for (std::vector<Peer*>::iterator it_ptr = peerList.begin(); it_ptr != peerList.end(); it_ptr++)
+                    {
+                      if ((*it_ptr)->sendMsg(hv) == -1)
+                        perror("Error sending have");
+                    }
+                 }
                }
                // else resend request
-               break;
+              {
+                  Request rqst((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getLength()));
+                 if ((*it)->sendMsg(rqst) == -1)
+                   perror("Error sending request");
+              } 
+              break;
            }
            
          }

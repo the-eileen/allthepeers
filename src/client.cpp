@@ -4,11 +4,12 @@
 
 extern bool* PIECESOBTAINED; // declared in main.cpp
 
+namespace sbt {
+
 std::string getHostNameFromAnnounce(std::string announce, int &start);
 std::string getPortFromAnnounce(std::string announce, int &start);
 std::string getPathFromAnnounce(std::string announce, int &start);
 
-namespace sbt {
 
 Peer::Peer(const PeerInfo& pi, int numPieces)
 {
@@ -53,9 +54,11 @@ void Peer::updateInterest()
      {
         m_amInterested = true;
         m_desiredPiece = static_cast<uint32_t>(i); // set first piece they have that we don't
-        break;
+        return;
      }
     }
+    m_amInterested = false; // no pieces of interest found
+    m_desiredPiece = -1;
 }
 void Peer::setInterest(int whichPiece) // call after receiving a have
 {
