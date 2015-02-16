@@ -255,6 +255,7 @@ void getNextReq(Peer &peer)
             nextStartReq++;
             nextStartReq = nextStartReq % numOfPieces;
             peer.m_desiredPiece = retVal;
+            return;
         }
         else
         {
