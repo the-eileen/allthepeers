@@ -46,10 +46,12 @@
 #include <string>
 #include <cstring>
 #include "msg/msg-base.hpp"
+#include "util/hash.hpp"
 
   using namespace std;
   using namespace sbt;
   using namespace msg;
+  using namespace util;
 
 bool* PIECESOBTAINED;  // Josh: global; size declared once numOfPieces obtained
 int numOfPieces;
@@ -104,9 +106,7 @@ int shakeHands(Peer pr, Client client){ //takes peer and client, returns socket 
     perror("send");
   if (recv(sockfd, rshake, sizeof(rshake), 0) == -1) 
     perror("recv");
-
-  cerr << "rshake is" << rshake;
-  fprintf(stderr, "PRINT");
+;
   ConstBufferPtr peerShake = std::make_shared<Buffer>(rshake, 68);
   return sockfd;
 }
@@ -171,12 +171,12 @@ void bitFieldProt(Peer &peer, int peersock){
     ConstBufferPtr enc_mes = bitField->encode();
     int msg_len = bitField->getPayload()->size() + 5;
     const char* b_msg = reinterpret_cast<const char*>(enc_mes->buf());
-    cerr << "sending" << endl;
+   // cerr << "sending" << endl;
     if(send(peersock, b_msg, msg_len, 0) == -1)
     {
         perror("send");
     }
-    cerr <<"receining"<< endl;
+   // cerr <<"receining"<< endl;
 
     uint8_t hs_buf[1000] = {'\0'};
     ssize_t n_buf = 0;
@@ -237,7 +237,25 @@ void bitFieldProt(Peer &peer, int peersock){
     //for(int i = 0; i < peer.m_numPieces; i++)
     //cout << peer.m_pieceIndex[i] << endl;
 }
-void makeGetRequest(Client client){
+
+
+bool verifyPiece(Piece piece, char* hash){
+  int offset = piece.getIndex() * 20;
+  char* pieceHash = {0};
+  for(int k = 0; k < 20; k++){
+    pieceHash[k] = hash[offset + k];
+  }
+
+  char* recHash = (char*)sha1(piece.getBlock())->buf();
+  if(strcmp(pieceHash, recHash) == 0)
+    return true;
+  else
+    return false;
+
+}
+
+
+void doAllTheThings(Client client){
   
     MetaInfo* metainfo = client.m_info;
     HttpRequest req;
@@ -535,9 +553,9 @@ main(int argc, char** argv)
     //std::cout << "Torrent file length: " << client.m_info->getLength() << std::endl;
     //std::cout << "Announce: " << client.m_url << std::endl;
     //std::cout << "TrackerPort: " << client.m_trackPort << std::endl;
-    //cerr << "about to enter makeGetRequest: " << std::endl;
+    cerr << "ready, okay! " << std::endl;
 
-    makeGetRequest(client);
+    doAllTheThings(client);
 
   }
   catch (std::exception& e)
