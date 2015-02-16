@@ -59,6 +59,7 @@ void updatePiecesArray(int whichPiece) // use to update PIECES array
   PIECESOBTAINED[whichPiece] = true;
 }
 
+/* Josh: already implemented in client.cpp
 void checkAndUpdateInterested(Peer &peer)
 {
     peer.m_amInterested = false;
@@ -69,7 +70,7 @@ void checkAndUpdateInterested(Peer &peer)
             peer.m_amInterested = true;
         }
     }
-}
+}*/
 
 bool areAllPiecesObtained()
 {
@@ -228,7 +229,7 @@ void bitFieldProt(Peer &peer, int peersock){
              }
         }
     }
-    checkAndUpdateInterested(peer);
+    peer.updateInterest();
 
     //cerr << "interested in peer? :" <<peer.m_amInterested<<endl;
     //ConstBufferPtr hs_res = make_shared<Buffer>(hs_buf, n_buf);
@@ -437,38 +438,46 @@ void makeGetRequest(Client client){
         
     }
     // end of isFirst
-    
+   
     // Josh start (WORK IN PROGRESS)
-    /*
     for (std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end(); it++)
     {
-       (*it)->updateInterest();
        if ((*it)->m_amInterested == true)
        {
-         // starting here, I have a lot of trouble with the formatting
-         if ((*it)->m_buff[0] == '\0') // empty buffer
+         if ((*it)->m_buffSize == -1) // empty buffer
          {
-             Choke choke = Choke();
-             char* buf = (char*)choke.encode()->buf();
-             if (send((*it)->m_sockfd, buf, 50, 0) == -1)
-	       perror("send");
+           // send interested message
+           Interested in;
+           if ((*it)->sendMsg(in) == -1)
+             perror("Error sending interest");
          }
          else // something in buffer
          {
-           ConstBufferPtr msg = (MsgBase)((*it)->m_buff);
-           int msgType = msg->getId();
+           int msgType = (*it)->m_buff[4]; // 5th byte is id
            switch (msgType) 
            {
              case 1: // unchoke
-               //send request
+             {
+               // request the piece
+               if ((int)((*it)->m_desiredPiece) <  (numOfPieces-1)) // not the last piece
+               {
+                 Request rqst((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getLength()));
+                 if ((*it)->sendMsg(rqst) == -1)
+                   perror("Error sending request");
+               }
+             }
                break;
              case 7: // piece
                // verify piece with hash
                // if actually piece
                {
-                 // send have
+                // Have hv;
+                // if(sendMsg(hv) == -1)
+                //   perror("Error sending have");
+                // clear buff  
                }
                // else resend request
+               break;
            }
            
          }
@@ -476,29 +485,38 @@ void makeGetRequest(Client client){
        }
        else // uninterested
        {
-         if ((*it)->m_buff[0] == '\0') // empty buffer
+         if ((*it)->m_buffSize == -1) // empty buffer
          {
-           if (recv((*it)->m_sockfd, (*it)->m_buff, sizeof((*it)->m_buff), 0) == -1) 
-            perror("recv");
+           if ((*it)->recvMsg() == -1) 
+             perror("recv");
          }
          else // something in buffer
          {
-           int msgType = (*it)->m_buff[5];
+           int msgType = (*it)->m_buff[4];
            switch (msgType)
            {
              case 2: // peer interested
-               // send choke
+               // but we're not so send choke
+               {
+                 Choke choke;
+                 if ((*it)->sendMsg(choke) == -1)
+                   perror("Error sending choke");
+               }
                break;
-             case 4: // have
-               if ((*it)->m_buff[6] != '\0')
-                 (*it)->setInterest((*it)->m_buff[6]);
+             case 4: // received have
+             {
+               ConstBufferPtr temp = make_shared<Buffer>((*it)->m_buff, (*it)->m_buffSize);
+               Have hv;
+               hv.decode(temp);  
+               (*it)->setInterest((int)hv.getIndex());
+             }
                break;
            }
          }
        }
     }
-    */
     // Josh end
+ 
     int waitTime = trackerResponse->getInterval();
 
     sleep(waitTime);
