@@ -59,6 +59,18 @@ void updatePiecesArray(int whichPiece) // use to update PIECES array
   PIECESOBTAINED[whichPiece] = true;
 }
 
+void checkAndUpdateInterested(Peer &peer)
+{
+    peer.m_amInterested = false;
+    for(int i = 0; i < peer.m_numPieces; i++)
+    {
+        if(PIECESOBTAINED[i] == false && peer.m_pieceIndex[i] == true)
+        {
+            peer.m_amInterested = true;
+        }
+    }
+}
+
 bool areAllPiecesObtained()
 {
   int numTrue = 0;
@@ -216,8 +228,10 @@ void bitFieldProt(Peer &peer, int peersock){
              }
         }
     }
+    checkAndUpdateInterested(peer);
 
-    ConstBufferPtr hs_res = make_shared<Buffer>(hs_buf, n_buf);
+    //cerr << "interested in peer? :" <<peer.m_amInterested<<endl;
+    //ConstBufferPtr hs_res = make_shared<Buffer>(hs_buf, n_buf);
 
     //cout << peer.m_numPieces << endl;
     //for(int i = 0; i < peer.m_numPieces; i++)
