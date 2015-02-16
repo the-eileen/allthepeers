@@ -475,7 +475,7 @@ void doAllTheThings(Client client){
     }
     // end of isFirst
    
-    // Josh start (WORK IN PROGRESS)
+    // Josh start 
     for (std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end(); it++)
     {
        cerr << "Peer: " << (*it)->m_peerId << std::endl;
@@ -498,7 +498,7 @@ void doAllTheThings(Client client){
            int msgType = (*it)->m_buff[4]; // 5th byte is id
            switch (msgType) 
            {
-             case 1: // unchoke
+             case 1: // peer is unchoking us *phew*
              {
                cerr << "I've been unchoked!" << std::endl;
                // request the piece
@@ -509,9 +509,38 @@ void doAllTheThings(Client client){
                    perror("Error sending request");
                  cerr << "Request sent!" << std::endl;
                }
-             }
                (*it)->resetBuff(); // reset buffer to use for next recv
                break;
+             }
+             case 2: // peer interested in us *yeah*
+             {
+                 Unchoke* unchoke = new Unchoke();
+                 if ((*it)->sendMsg(unchoke) == -1)
+                   perror("Error sending unchoke");
+                 (*it)->resetBuff();
+                 break;
+             }
+             case 4: // received have
+             {
+               ConstBufferPtr temp = make_shared<Buffer>((*it)->m_buff, (*it)->m_buffSize);
+               Have hv;
+               hv.decode(temp);
+               (*it)->setInterest((int)hv.getIndex());
+               (*it)->resetBuff(); // reset buffer to use for next recv
+               break;
+             }
+             case 6: // received a request
+             {
+               ConstBufferPtr temp = make_shared<Buffer>((*it)->m_buff, (*it)->m_buffSize);
+               Request req;
+               req.decode(temp); 
+               Piece* pie = new Piece(req.getIndex(), req.getBegin(), req.getPayload());
+               if ((*it)->sendMsgWPayload(pie) == -1)
+                 perror("Error sending piece");
+               cerr << "Piece sent!" << std::endl;
+               (*it)->resetBuff();
+               break;
+             }
              case 7: // piece
                {
                  cerr << "Got a piece!" << std::endl;
@@ -536,7 +565,7 @@ void doAllTheThings(Client client){
                  }
                  else  // resend request
                  {
-                   Request* rqst = new Request((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getLength()));
+                   Request* rqst = new Request((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getPieceLength()));
                    if ((*it)->sendMsgWPayload(rqst) == -1)
                      perror("Error sending request");
                  }
@@ -545,11 +574,10 @@ void doAllTheThings(Client client){
                }
               default:
                 cerr << "Received something else..." << std::endl;
-           }
-         }
+           } // end switch
+         } //end something in buffer
        }
        // not interested
-       // TODO: what if choking?
        else
        {
          if ((*it)->m_buffSize == -1) // empty buffer
@@ -563,29 +591,40 @@ void doAllTheThings(Client client){
            switch (msgType)
            {
              case 2: // peer interested
-               // but we're not so send choke
                {
-                 Choke* choke = new Choke();
-                 if ((*it)->sendMsg(choke) == -1)
-                   perror("Error sending choke");
+                 Unchoke* unchoke = new Unchoke();
+                 if ((*it)->sendMsg(unchoke) == -1)
+                   perror("Error sending unchoke");
                  (*it)->resetBuff();
-               }
                break;
+               }
              case 4: // received have
              {
                ConstBufferPtr temp = make_shared<Buffer>((*it)->m_buff, (*it)->m_buffSize);
                Have hv;
                hv.decode(temp);  
                (*it)->setInterest((int)hv.getIndex());
+               (*it)->resetBuff(); // reset buffer to use for next recv
+               break;
              }
+             case 6: // request
+             {
+               ConstBufferPtr temp = make_shared<Buffer>((*it)->m_buff, (*it)->m_buffSize);
+               Request req;
+               req.decode(temp);
+               Piece* pie = new Piece(req.getIndex(), req.getBegin(), req.getPayload());
+               if ((*it)->sendMsgWPayload(pie) == -1)
+                 perror("Error sending piece");
+               cerr << "Piece sent!" << std::endl;
                (*it)->resetBuff();
                break;
+             } 
              default:
                cerr << "Received something else..." << std::endl;
-           }
-         }
-       }
-    }
+           } // end switch
+         } // end something in buffer
+       } // end uninterest
+    } // end loop
     // Josh end
  
     int waitTime = trackerResponse->getInterval();
