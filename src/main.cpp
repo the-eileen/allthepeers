@@ -85,7 +85,7 @@ bool areAllPiecesObtained()
   return false; 
 }
  
-int shakeHands(Peer pr, Client client){ //takes peer and client, returns socket created for this peer
+int shakeHands(Peer &pr, Client &client){ //takes peer and client, returns socket created for this peer
   MetaInfo* metainfo = client.m_info;
   int sockfd = socket(AF_INET, SOCK_STREAM, 0); //create socket
   
@@ -230,7 +230,6 @@ void bitFieldProt(Peer &peer, int peersock){
         }
     }
     peer.updateInterest();
-
     //cerr << "interested in peer? :" <<peer.m_amInterested<<endl;
     //ConstBufferPtr hs_res = make_shared<Buffer>(hs_buf, n_buf);
 
@@ -266,6 +265,7 @@ void doAllTheThings(Client client){
     string left = to_string(metainfo->getLength());
     string path = client.m_path + "?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
       "&port=" + client.getPort() + "&uploaded=0&downloaded=0&left=" + left + "&event=started";
+    //cerr << path << std::endl;
     req.setPath(path);
     req.setVersion("1.0");
     //req.addHeader("Accept-Language", "en-US");
@@ -363,7 +363,7 @@ void doAllTheThings(Client client){
     req.setPath(path);
     size_t reqLeng = req.getTotalLength();
     char *buf2 = new char [reqLeng];
-    
+    //cerr << path << std::endl; 
     req.formatRequest(buf2);
     formatted = buf2;
 
@@ -482,7 +482,7 @@ void doAllTheThings(Client client){
        cerr << "m_amInterested = " << (*it)->m_amInterested << std::endl;
        if ((*it)->m_amInterested == true)
        {
-         if ((*it)->m_buffSize == -1) // empty buffer
+         if ((*it)->m_buffSize == 0) // empty buffer
          {
            // send interested message
            Interested* in = new Interested();
@@ -504,12 +504,13 @@ void doAllTheThings(Client client){
                // request the piece
                if ((int)((*it)->m_desiredPiece) <  (numOfPieces-1)) // not the last piece
                {
-                 Request* rqst = new Request((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getLength()));
+                 Request* rqst = new Request((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getPieceLength()));
                  if ((*it)->sendMsgWPayload(rqst) == -1)
                    perror("Error sending request");
                  cerr << "Request sent!" << std::endl;
                }
              }
+               (*it)->resetBuff(); // reset buffer to use for next recv
                break;
              case 7: // piece
                {
@@ -518,13 +519,13 @@ void doAllTheThings(Client client){
                  ConstBufferPtr temp = make_shared<Buffer>((*it)->m_buff, (*it)->m_buffSize);
                  Piece pie;
                  pie.decode(temp);
+                 cerr << "Is this perhaps the right piece?" << std::endl;
                  if (verifyPiece(pie,(const char*) (client.m_info->getHash()->get())))
                  {
                     cerr << "Now I've got a GOLDEN TICKET!!!" << std::endl;
                     Have* hv = new Have(pie.getIndex());
                     updatePiecesArray((int)(hv->getIndex()));      
                     (*it)->updateInterest();
-                    (*it)->m_buffSize = -1; // reset buff
                     // send have to all the peers
                     for (std::vector<Peer*>::iterator it_ptr = peerList.begin(); it_ptr != peerList.end(); it_ptr++)
                     {
@@ -533,21 +534,23 @@ void doAllTheThings(Client client){
                       cerr << "Tell ALL the peers!" << std::endl;
                     }
                  }
+                 else  // resend request
+                 {
+                   Request* rqst = new Request((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getLength()));
+                   if ((*it)->sendMsgWPayload(rqst) == -1)
+                     perror("Error sending request");
+                 }
+                 (*it)->resetBuff(); 
+                 break;
                }
-               // else resend request
-              {
-                  Request* rqst = new Request((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getLength()));
-                 if ((*it)->sendMsgWPayload(rqst) == -1)
-                   perror("Error sending request");
-              } 
-              break;
-           default:
-              cerr << "Received something else..." << std::endl;
+              default:
+                cerr << "Received something else..." << std::endl;
            }
          }
-       
        }
-       else // uninterested
+       // not interested
+       // TODO: what if choking?
+       else
        {
          if ((*it)->m_buffSize == -1) // empty buffer
          {
@@ -565,6 +568,7 @@ void doAllTheThings(Client client){
                  Choke* choke = new Choke();
                  if ((*it)->sendMsg(choke) == -1)
                    perror("Error sending choke");
+                 (*it)->resetBuff();
                }
                break;
              case 4: // received have
@@ -574,6 +578,7 @@ void doAllTheThings(Client client){
                hv.decode(temp);  
                (*it)->setInterest((int)hv.getIndex());
              }
+               (*it)->resetBuff();
                break;
              default:
                cerr << "Received something else..." << std::endl;

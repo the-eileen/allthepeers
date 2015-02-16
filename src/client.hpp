@@ -45,7 +45,7 @@ public:
   ssize_t sendMsg(msg::MsgBase* msg);
   ssize_t sendMsgWPayload(msg::MsgBase* msg);
   ssize_t recvMsg();
-  
+  void resetBuff();  
   std::string m_peerId;
   std::string m_ip;
   uint16_t m_port;

@@ -24,7 +24,7 @@ Peer::Peer(const PeerInfo& pi, int numPieces)
     m_amInterested = false;
     m_sockfd = -1;
     m_desiredPiece = -1;
-    m_buffSize = -1;
+    m_buffSize = 0;
 }
 Peer::Peer(const Peer& other)
 {
@@ -65,15 +65,17 @@ void Peer::setInterest(int whichPiece) // call after receiving a have
    m_pieceIndex[whichPiece] = true; //mark that this peer has this piece
    updateInterest();
 }
-ssize_t Peer::sendMsg(msg::MsgBase*msg)
+ssize_t Peer::sendMsg(msg::MsgBase* msg)
 {
-  const char* buf = reinterpret_cast<const char*>(msg->encode()->buf());
+  ConstBufferPtr enc = msg->encode();
+  const char* buf = reinterpret_cast<const char*>(enc->buf());
   int msg_len = 5;
   return send(m_sockfd, buf, msg_len, 0);
 }
 ssize_t Peer::sendMsgWPayload(msg::MsgBase* msg)
 {
-  const char* buf = reinterpret_cast<const char*>(msg->encode()->buf());
+  ConstBufferPtr enc = msg->encode();
+  const char* buf = reinterpret_cast<const char*>(enc->buf());
   int msg_len = msg->getPayload()->size() + 5;
   return send(m_sockfd, buf, msg_len, 0);
 }
@@ -81,6 +83,11 @@ ssize_t Peer::recvMsg()
 {
   m_buffSize = recv(m_sockfd, m_buff, sizeof(m_buff), 0 );
   return m_buffSize;
+}
+void Peer::resetBuff()
+{
+  m_buffSize = 0;
+  memset(m_buff, '\0', sizeof(m_buff));
 }
 
 Client::Client(const std::string& port, const std::string& torrent)
