@@ -529,6 +529,18 @@ void doAllTheThings(Client client){
     // Josh start 
     for (std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end(); it++)
     {
+       cerr << "Their bitField: ";
+       for(int s = 0; s < numOfPieces; s++)
+       {
+        cerr << (*it)->m_pieceIndex[s];
+       } 
+       cerr << std::endl;
+        cerr << "Our bitField: ";
+       for(int s = 0; s < numOfPieces; s++)
+       {
+        cerr << PIECESOBTAINED[s];
+       } 
+       cerr << std::endl;
        cerr << "Peer: " << (*it)->m_peerId << std::endl;
        cerr << "m_amInterested = " << (*it)->m_amInterested << std::endl;
        if ((*it)->m_amInterested == true)
