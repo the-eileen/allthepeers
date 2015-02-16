@@ -556,7 +556,7 @@ void doAllTheThings(Client client){
                if ((int)((*it)->m_desiredPiece) <  (numOfPieces-1)) // not the last piece
                {
                cerr << "Trying to request piece index: " << (*it)->m_desiredPiece;
-                 Request* rqst = new Request((*it)->m_desiredPiece, 0, 20 );
+                 Request* rqst = new Request((*it)->m_desiredPiece, 0, client.m_info->getPieceLength() );
                  if ((*it)->sendMsgWPayload(rqst) == -1)
                    perror("Error sending request");
                  cerr << "Request sent!" << std::endl;
@@ -622,7 +622,7 @@ void doAllTheThings(Client client){
                  {
 
                    cerr << "Trying to request piece index: " << (*it)->m_desiredPiece;
-                   Request* rqst = new Request((*it)->m_desiredPiece, 0, 20);
+                   Request* rqst = new Request((*it)->m_desiredPiece, 0, client.m_info->getPieceLength());
 
                    //cerr << "Sry no ticket for you" << endl;
                    //Request* rqst = new Request((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getLength()));

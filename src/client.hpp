@@ -60,7 +60,7 @@ public:
   char m_buff[3000] = {}; // store messages
   int m_buffSize;  // how filled up it is
   int m_sockfd;
-  uint32_t m_desiredPiece; //TODO: only holds single value, probably gonna need a peer connection manager implemented later
+  uint32_t m_desiredPiece; 
 };
 
 
