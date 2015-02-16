@@ -77,9 +77,8 @@ public:
   {
     delete[] m_pieceIndex;
   }
-  void setInterest(int whichPiece)
+  void updateInterest()
   {
-     m_pieceIndex[whichPiece] = true; //mark that this peer has this piece
      for (int i = 0; i < m_numPieces; i++)
      {
        if (PIECESOBTAINED[i] == false && m_pieceIndex[i] == true)
@@ -88,7 +87,11 @@ public:
           m_desiredPiece = static_cast<uint32_t>(i); // set first piece they have that we don't
           break;
        }
-     }
+  }
+  void setInterest(int whichPiece) // call after receiving a have
+  {
+     m_pieceIndex[whichPiece] = true; //mark that this peer has this piece
+     updateInterest();
   }
   ssize_t sendMsg(msg::MsgBase& msg)
   {

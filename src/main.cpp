@@ -385,6 +385,7 @@ void makeGetRequest(Client client){
     // Josh start (WORK IN PROGRESS)
     for (std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end(); it++)
     {
+       (*it)->updateInterest();
        if ((*it)->m_amInterested == true)
        {
          if ((*it)->m_buffSize == -1) // empty buffer
