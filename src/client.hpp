@@ -42,7 +42,8 @@ public:
   ~Peer();
   void updateInterest();
   void setInterest(int whichPiece);
-  ssize_t sendMsg(msg::MsgBase& msg);
+  ssize_t sendMsg(msg::MsgBase* msg);
+  ssize_t sendMsgWPayload(msg::MsgBase* msg);
   ssize_t recvMsg();
   
   std::string m_peerId;

@@ -65,10 +65,16 @@ void Peer::setInterest(int whichPiece) // call after receiving a have
    m_pieceIndex[whichPiece] = true; //mark that this peer has this piece
    updateInterest();
 }
-ssize_t Peer::sendMsg(msg::MsgBase& msg)
+ssize_t Peer::sendMsg(msg::MsgBase*msg)
 {
-  char* buf = (char*)(msg.encode()->buf());
-  int msg_len = msg.getPayload()->size() + 5;
+  const char* buf = reinterpret_cast<const char*>(msg->encode()->buf());
+  int msg_len = 5;
+  return send(m_sockfd, buf, msg_len, 0);
+}
+ssize_t Peer::sendMsgWPayload(msg::MsgBase* msg)
+{
+  const char* buf = reinterpret_cast<const char*>(msg->encode()->buf());
+  int msg_len = msg->getPayload()->size() + 5;
   return send(m_sockfd, buf, msg_len, 0);
 }
 ssize_t Peer::recvMsg()

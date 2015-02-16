@@ -485,10 +485,13 @@ void doAllTheThings(Client client){
          if ((*it)->m_buffSize == -1) // empty buffer
          {
            // send interested message
-           cerr << "Sending interested message" << std::endl;
-           Interested in;
+           Interested* in = new Interested();
            if ((*it)->sendMsg(in) == -1)
              perror("Error sending interest");
+           cerr << "Interested Message sent" << std::endl;
+           if ((*it)->recvMsg() == -1)
+             perror("Error recv");
+           cerr << "Received something!" << std::endl;
          }
          else // something in buffer
          {
@@ -497,44 +500,50 @@ void doAllTheThings(Client client){
            {
              case 1: // unchoke
              {
+               cerr << "I've been unchoked!" << std::endl;
                // request the piece
                if ((int)((*it)->m_desiredPiece) <  (numOfPieces-1)) // not the last piece
                {
-                 Request rqst((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getLength()));
-                 if ((*it)->sendMsg(rqst) == -1)
+                 Request* rqst = new Request((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getLength()));
+                 if ((*it)->sendMsgWPayload(rqst) == -1)
                    perror("Error sending request");
+                 cerr << "Request sent!" << std::endl;
                }
              }
                break;
              case 7: // piece
                {
+                 cerr << "Got a piece!" << std::endl;
                  // verify piece with hash
                  ConstBufferPtr temp = make_shared<Buffer>((*it)->m_buff, (*it)->m_buffSize);
                  Piece pie;
                  pie.decode(temp);
                  if (verifyPiece(pie,(const char*) (client.m_info->getHash()->get())))
                  {
-                    Have hv(pie.getIndex());
-                    updatePiecesArray((int)(hv.getIndex()));      
+                    cerr << "Now I've got a GOLDEN TICKET!!!" << std::endl;
+                    Have* hv = new Have(pie.getIndex());
+                    updatePiecesArray((int)(hv->getIndex()));      
                     (*it)->updateInterest();
                     (*it)->m_buffSize = -1; // reset buff
                     // send have to all the peers
                     for (std::vector<Peer*>::iterator it_ptr = peerList.begin(); it_ptr != peerList.end(); it_ptr++)
                     {
-                      if ((*it_ptr)->sendMsg(hv) == -1)
+                      if ((*it_ptr)->sendMsgWPayload(hv) == -1)
                         perror("Error sending have");
+                      cerr << "Tell ALL the peers!" << std::endl;
                     }
                  }
                }
                // else resend request
               {
-                  Request rqst((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getLength()));
-                 if ((*it)->sendMsg(rqst) == -1)
+                  Request* rqst = new Request((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getLength()));
+                 if ((*it)->sendMsgWPayload(rqst) == -1)
                    perror("Error sending request");
               } 
               break;
+           default:
+              cerr << "Received something else..." << std::endl;
            }
-           
          }
        
        }
@@ -553,7 +562,7 @@ void doAllTheThings(Client client){
              case 2: // peer interested
                // but we're not so send choke
                {
-                 Choke choke;
+                 Choke* choke = new Choke();
                  if ((*it)->sendMsg(choke) == -1)
                    perror("Error sending choke");
                }
@@ -566,6 +575,8 @@ void doAllTheThings(Client client){
                (*it)->setInterest((int)hv.getIndex());
              }
                break;
+             default:
+               cerr << "Received something else..." << std::endl;
            }
          }
        }
