@@ -55,6 +55,8 @@
 
 bool* PIECESOBTAINED;  // Josh: global; size declared once numOfPieces obtained
 int numOfPieces;
+int nextStartReq = 0;
+
 
 void updatePiecesArray(int whichPiece) // use to update PIECES array
 {
@@ -236,6 +238,29 @@ void bitFieldProt(Peer &peer, int peersock){
     //cout << peer.m_numPieces << endl;
     //for(int i = 0; i < peer.m_numPieces; i++)
     //cout << peer.m_pieceIndex[i] << endl;
+}
+
+int getNextReq(Peer &peer)
+{
+    //only call if you're sure it's interested
+    //returns -1 if none found
+    for(int i = 0; i < numOfPieces; i++)
+    {
+        nextStartReq = nextStartReq % numOfPieces;
+        if(peer.m_pieceIndex[nextStartReq] == 1 && PIECESOBTAINED[nextStartReq] == 0)
+        {
+            int retVal = nextStartReq;
+            nextStartReq++;
+            nextStartReq = nextStartReq % numOfPieces;
+            return retVal;
+        }
+        else
+        {
+            nextStartReq++;
+            nextStartReq = nextStartReq % numOfPieces;
+        }
+    }
+    return -1;
 }
 
 
