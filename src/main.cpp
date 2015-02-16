@@ -99,9 +99,9 @@ int shakeHands(Peer pr, Client client){ //takes peer and client, returns socket 
   return sockfd;
 }
 void bitFieldProt(Peer &peer, int peersock){
-    cout << peer.m_numPieces << endl;
-        for(int i = 0; i < peer.m_numPieces; i++)
-        cout << peer.m_pieceIndex[i] ;
+    //cout << peer.m_numPieces << endl;
+    //    for(int i = 0; i < peer.m_numPieces; i++)
+    //    cout << peer.m_pieceIndex[i] ;
     //takes in a peer and it's socket, sends bitfield, populates 
     //      the peer's boolean array
     //assumes that it's already connected to the peer
@@ -219,65 +219,9 @@ void bitFieldProt(Peer &peer, int peersock){
 
     ConstBufferPtr hs_res = make_shared<Buffer>(hs_buf, n_buf);
 
-    //cerr <<"theers a thing here somethinwere :" << sizeof(hs_res->getBitfield()) << endl;
-    // int tmpBuff [2];
-    // cerr <<"size of n_buf" << n_buf << endl;
-    // memset(tmpBuff, *(hs_res->buf()), 8);
-    // cerr << tmpBuff;
-/*
-    for(uint8_t k = 0; k < (sizeof(hs_res->buf()) - 5); k++)
-    {
-        char cmpX;
-        char toCmp;
-        if(k == (sizeof(hs_res->buf())-5)-1)
-        {
-            //last one
-            memset(&toCmp, tmpBuff[sizeof(hs_res->buf())-1], 1);
-            //toCmp = tmpBuff[sizeof(hs_res->buf())-1];
-            for(int m = 0; m < bitsNeeded; m++)
-            {
-                cmpX = toCmp & 0x80;
-                if(cmpX == 0x80)
-                {
-                    peer.m_pieceIndex[k*8 + m] = true;
-                }
-                else
-                {
-                    peer.m_pieceIndex[k*8 + m] = false;
-                }
-                toCmp = toCmp << 1;
-            }
-        }
-        else
-        {
-            memset(&toCmp, tmpBuff[k+5], 1);
-            //toCmp = tmpBuff[5+k]; //might need to memset
-            for(int m = 0; m < 8; m++)
-            {
-                cmpX = toCmp & 0x80; //checks first bit
-                if(cmpX == 0x80)
-                {
-                    peer.m_pieceIndex[k*8 + m] = true;
-                }
-                else
-                {
-                    peer.m_pieceIndex[k*8 + m] = false;
-                }
-                toCmp = toCmp << 1;
-            }
-        }
-    }*/
-    //for(int x = 0; x < peer.m_numPieces; x++)
-    //{
-        cout << peer.m_numPieces << endl;
-        for(int i = 0; i < peer.m_numPieces; i++)
-        cout << peer.m_pieceIndex[i] << endl;
-    //}
-    //pBitField->decodePayload();
-    ///ConstBufferPtr newBF = pBitField->getPayload();
-
-    //peer.m_pieceIndex = (bool*)(newBF->buf());
-    //cerr << "Peer's bitfield 1 is " << peer.m_pieceIndex[0] << endl;
+    //cout << peer.m_numPieces << endl;
+    //for(int i = 0; i < peer.m_numPieces; i++)
+    //cout << peer.m_pieceIndex[i] << endl;
 }
 void makeGetRequest(Client client){
   
@@ -481,45 +425,36 @@ void makeGetRequest(Client client){
     // end of isFirst
     
     // Josh start (WORK IN PROGRESS)
+    /*
     for (std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end(); it++)
     {
        (*it)->updateInterest();
        if ((*it)->m_amInterested == true)
        {
-         if ((*it)->m_buffSize == -1) // empty buffer
+         // starting here, I have a lot of trouble with the formatting
+         if ((*it)->m_buff[0] == '\0') // empty buffer
          {
-           // send interested message
-           Interested in;
-           if ((*it)->sendMsg(in) == -1)
-             perror("Error sending interest");
+             Choke choke = Choke();
+             char* buf = (char*)choke.encode()->buf();
+             if (send((*it)->m_sockfd, buf, 50, 0) == -1)
+	       perror("send");
          }
          else // something in buffer
          {
-           int msgType = (*it)->m_buff[4]; // 5th byte is id
+           ConstBufferPtr msg = (MsgBase)((*it)->m_buff);
+           int msgType = msg->getId();
            switch (msgType) 
            {
              case 1: // unchoke
-             {
-               // request the piece
-               if ((int)((*it)->m_desiredPiece) <  (numOfPieces-1)) // not the last piece
-               {
-                 Request rqst((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getLength()));
-                 if ((*it)->sendMsg(rqst) == -1)
-                   perror("Error sending request");
-               }
-             }
+               //send request
                break;
              case 7: // piece
                // verify piece with hash
                // if actually piece
                {
-                // Have hv;
-                // if(sendMsg(hv) == -1)
-                //   perror("Error sending have");
-                // clear buff  
+                 // send have
                }
                // else resend request
-               break;
            }
            
          }
@@ -527,36 +462,28 @@ void makeGetRequest(Client client){
        }
        else // uninterested
        {
-         if ((*it)->m_buffSize == -1) // empty buffer
+         if ((*it)->m_buff[0] == '\0') // empty buffer
          {
-           if ((*it)->recvMsg() == -1) 
-             perror("recv");
+           if (recv((*it)->m_sockfd, (*it)->m_buff, sizeof((*it)->m_buff), 0) == -1) 
+            perror("recv");
          }
          else // something in buffer
          {
-           int msgType = (*it)->m_buff[4];
+           int msgType = (*it)->m_buff[5];
            switch (msgType)
            {
              case 2: // peer interested
-               // but we're not so send choke
-               {
-                 Choke choke;
-                 if ((*it)->sendMsg(choke) == -1)
-                   perror("Error sending choke");
-               }
+               // send choke
                break;
-             case 4: // received have
-             {
-               ConstBufferPtr temp = make_shared<Buffer>((*it)->m_buff, (*it)->m_buffSize);
-               Have hv;
-               hv.decode(temp);  
-               (*it)->setInterest((int)hv.getIndex());
-             }
+             case 4: // have
+               if ((*it)->m_buff[6] != '\0')
+                 (*it)->setInterest((*it)->m_buff[6]);
                break;
            }
          }
        }
     }
+    */
     // Josh end
     int waitTime = trackerResponse->getInterval();
 
