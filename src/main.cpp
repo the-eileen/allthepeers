@@ -57,6 +57,7 @@ bool* PIECESOBTAINED;  // Josh: global; size declared once numOfPieces obtained
 int numOfPieces;
 int nextStartReq = 0;
 
+void getNextReq(Peer &peer);
 
 void updatePiecesArray(int whichPiece) // use to update PIECES array
 {
@@ -231,7 +232,8 @@ void bitFieldProt(Peer &peer, int peersock){
              }
         }
     }
-    peer.updateInterest();
+    if(peer.updateInterest())
+      getNextReq(peer);
     //cerr << "interested in peer? :" <<peer.m_amInterested<<endl;
     //ConstBufferPtr hs_res = make_shared<Buffer>(hs_buf, n_buf);
 
@@ -240,7 +242,7 @@ void bitFieldProt(Peer &peer, int peersock){
     //cout << peer.m_pieceIndex[i] << endl;
 }
 
-int getNextReq(Peer &peer)
+void getNextReq(Peer &peer)
 {
     //only call if you're sure it's interested
     //returns -1 if none found
@@ -252,7 +254,7 @@ int getNextReq(Peer &peer)
             int retVal = nextStartReq;
             nextStartReq++;
             nextStartReq = nextStartReq % numOfPieces;
-            return retVal;
+            peer.m_desiredPiece = retVal;
         }
         else
         {
@@ -260,7 +262,7 @@ int getNextReq(Peer &peer)
             nextStartReq = nextStartReq % numOfPieces;
         }
     }
-    return -1;
+    peer.m_desiredPiece = -1;
 }
 
 
@@ -529,7 +531,8 @@ void doAllTheThings(Client client){
                // request the piece
                if ((int)((*it)->m_desiredPiece) <  (numOfPieces-1)) // not the last piece
                {
-                 Request* rqst = new Request((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getPieceLength()));
+               cerr << "Trying to request piece index: " << (*it)->m_desiredPiece;
+                 Request* rqst = new Request((*it)->m_desiredPiece, 0, 20 );
                  if ((*it)->sendMsgWPayload(rqst) == -1)
                    perror("Error sending request");
                  cerr << "Request sent!" << std::endl;
@@ -550,7 +553,8 @@ void doAllTheThings(Client client){
                ConstBufferPtr temp = make_shared<Buffer>((*it)->m_buff, (*it)->m_buffSize);
                Have hv;
                hv.decode(temp);
-               (*it)->setInterest((int)hv.getIndex());
+               if ((*it)->setInterest((int)hv.getIndex()))
+                 getNextReq(**it);
                (*it)->resetBuff(); // reset buffer to use for next recv
                break;
              }
@@ -579,7 +583,8 @@ void doAllTheThings(Client client){
                     cerr << "Now I've got a GOLDEN TICKET!!!" << std::endl;
                     Have* hv = new Have(pie.getIndex());
                     updatePiecesArray((int)(hv->getIndex()));      
-                    (*it)->updateInterest();
+                    if ((*it)->updateInterest())
+                      getNextReq(**it);
                     // send have to all the peers
                     for (std::vector<Peer*>::iterator it_ptr = peerList.begin(); it_ptr != peerList.end(); it_ptr++)
                     {
@@ -590,7 +595,8 @@ void doAllTheThings(Client client){
                  }
                  else  // resend request
                  {
-                   Request* rqst = new Request((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getPieceLength()));
+                   cerr << "Trying to request piece index: " << (*it)->m_desiredPiece;
+                   Request* rqst = new Request((*it)->m_desiredPiece, 0, 20);
                    if ((*it)->sendMsgWPayload(rqst) == -1)
                      perror("Error sending request");
                  }
@@ -628,7 +634,8 @@ void doAllTheThings(Client client){
                ConstBufferPtr temp = make_shared<Buffer>((*it)->m_buff, (*it)->m_buffSize);
                Have hv;
                hv.decode(temp);  
-               (*it)->setInterest((int)hv.getIndex());
+               if ((*it)->setInterest((int)hv.getIndex()))
+                 getNextReq(**it);
                (*it)->resetBuff(); // reset buffer to use for next recv
                break;
              }

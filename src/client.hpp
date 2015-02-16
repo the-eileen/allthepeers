@@ -40,8 +40,8 @@ public:
   Peer(const PeerInfo& pi, int numPieces);
   Peer(const Peer& other);
   ~Peer();
-  void updateInterest();
-  void setInterest(int whichPiece);
+  bool updateInterest();
+  bool setInterest(int whichPiece);
   ssize_t sendMsg(msg::MsgBase* msg);
   ssize_t sendMsgWPayload(msg::MsgBase* msg);
   ssize_t recvMsg();

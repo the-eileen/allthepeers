@@ -46,24 +46,24 @@ Peer::~Peer()
 {
     delete[] m_pieceIndex;
 }
-void Peer::updateInterest()
+bool Peer::updateInterest()
 {
     for (int i = 0; i < m_numPieces; i++)
     {
      if (PIECESOBTAINED[i] == false && m_pieceIndex[i] == true)
      {
         m_amInterested = true;
-        m_desiredPiece = static_cast<uint32_t>(i); // set first piece they have that we don't
-        return;
+        return m_amInterested;
      }
     }
     m_amInterested = false; // no pieces of interest found
     m_desiredPiece = -1;
+    return m_amInterested;
 }
-void Peer::setInterest(int whichPiece) // call after receiving a have
+bool Peer::setInterest(int whichPiece) // call after receiving a have
 {
    m_pieceIndex[whichPiece] = true; //mark that this peer has this piece
-   updateInterest();
+   return updateInterest();
 }
 ssize_t Peer::sendMsg(msg::MsgBase* msg)
 {
