@@ -279,16 +279,13 @@ bool verifyPiece(const Piece& piece, vector<uint8_t> hash){
   //cerr << "enter verify" << endl;
   int offset = piece.getIndex() * 20;
 
- cerr << "offset is " << offset << endl;
- cerr << "vector size" << hash.size() << endl;
-
   //char* b_msg = reinterpret_cast<const char*>(enc_mes->buf());
  //vector<uint8_t> tempRec;
-  cerr << "hash is ";
+ /* cerr << "hash is ";
   for(int j = 0; j < 20; j++){
     cerr << int(hash[j+offset]) << " ";
   }
- cerr << endl;
+ cerr << endl;*/
  // vector<uint8_t> recHash = sha1(tempRec);
   ConstBufferPtr tempRec = sha1(piece.getBlock());
   const uint8_t* recHash = tempRec->buf();
@@ -306,7 +303,6 @@ bool verifyPiece(const Piece& piece, vector<uint8_t> hash){
    if(hash[offset + k] != recHash[k])
     return false;
   }
-  cerr << "after for" << endl;
   
   
 return true;
@@ -335,35 +331,6 @@ void doAllTheThings(Client client){
     string formatted = buf;
     int sleepCounter = 0;
 
-
-    //cerr << "request is:" << buf;
-   //     cout << "printed";
- 
-    //return buf;
-    /*int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    struct sockaddr_in serverAddr;
-  serverAddr.sin_family = AF_INET;
-  serverAddr.sin_port = htons(client.m_trackPort);     // short, network byte order
-  serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
-  memset(serverAddr.sin_zero, '\0', sizeof(serverAddr.sin_zero));
-*/
-  // connect to the server
-  /*if (connect(sockfd, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) == -1) {
-    perror("connect");
-    //return 2;
-  }
-
-  struct sockaddr_in clientAddr;
-  socklen_t clientAddrLen = sizeof(clientAddr);
-  if (getsockname(sockfd, (struct sockaddr *)&clientAddr, &clientAddrLen) == -1) {
-    perror("getsockname");
-    //return 3;
-  }
-
-  char ipstr[INET_ADDRSTRLEN] = {'\0'};
-  inet_ntop(clientAddr.sin_family, &clientAddr.sin_addr, ipstr, sizeof(ipstr));
-  std::cout << "Set up a connection from: " << ipstr << ":" <<
-    ntohs(clientAddr.sin_port) << std::endl;*/
 
     bool isFirst = true;
   //std::string input;
