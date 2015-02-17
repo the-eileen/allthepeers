@@ -429,8 +429,8 @@ void doAllTheThings(Client client){
     cerr << path << std::endl; 
     req.formatRequest(buf2);
     formatted = buf2;
-    cerr << "formatted is" << formatted;
-
+    //cerr << "formatted is" << formatted;
+    cerr << path << std::endl;
 
     //fprintf(stderr, "SENT");
 
@@ -641,6 +641,8 @@ void doAllTheThings(Client client){
                  cerr << "Is this perhaps the right piece?" << std::endl;
                  if (verifyPiece(pie,client.m_info->getPieces()))
                  {
+                  if (!PIECESOBTAINED[pie.getIndex()])
+                  {
                     cerr << "Now I've got a GOLDEN TICKET!!!" << std::endl;
                     uint32_t pieIndex = pie.getIndex();
                     Have* hv = new Have(pieIndex);
@@ -660,9 +662,7 @@ void doAllTheThings(Client client){
                       int lastPieceSize = static_cast<int>(totalSize % mostPiecesSize);
                       writeToFile(index, lastPieceSize, pieceBegin, client);
                       amountLeft -= lastPieceSize;
-                    }   
-                    if ((*it)->updateInterest())
-                      getNextReq(**it);
+                    }
                     // send have to all the peers
                     ConstBufferPtr enc = hv->encode();
                     const char* buf = reinterpret_cast<const char*>(enc->buf());
@@ -675,6 +675,9 @@ void doAllTheThings(Client client){
                         perror("Error sending have");
                       //cerr << "Tell ALL the peers!" << std::endl;
                     }
+                   }
+                    if ((*it)->updateInterest())
+                      getNextReq(**it);
                  }
                  else  // resend request
                  {
