@@ -324,6 +324,8 @@ void doAllTheThings(Client client){
     char *buf = new char [reqLen];
     req.formatRequest(buf);
     string formatted = buf;
+    int sleepCounter = 0;
+
 
     //cerr << "request is:" << buf;
         cout << "printed";
@@ -700,11 +702,15 @@ void doAllTheThings(Client client){
        } // end uninterest
     } // end loop
     // Josh end
- 
-    int waitTime = trackerResponse->getInterval();
-
-    sleep(waitTime);
-
+    
+    sleepCounter++;
+    sleepCounter = sleepCounter % 8;
+    if(sleepCounter == 0)
+    {
+        int waitTime = trackerResponse->getInterval();
+    
+        sleep(waitTime);
+    }
     ss << buf << std::endl;
 
     if (ss.str() == "close\n")
