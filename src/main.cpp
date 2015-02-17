@@ -56,7 +56,7 @@
 bool* PIECESOBTAINED;  // Josh: global; size declared once numOfPieces obtained
 int numOfPieces;
 int nextStartReq = 0;
-fstream targetFile;
+ofstream targetFile;
 
 void getNextReq(Peer &peer);
 
@@ -76,15 +76,20 @@ bool areAllPiecesObtained()
   return false; 
 }
 
-void writeToFile(int index, int pieceSize, const char* piece)
+void writeToFile(int index, int pieceSize, const char* piece, Client& c)
 {
-  cerr << "Writing to file... " << std::endl;
-  for (int i = 0; i < pieceSize; i++)
-   cerr << piece[i];
-  cerr << std::endl;
-  int pos = index * 20;
-  targetFile.seekp(pos, ios::beg);
-  targetFile.write(piece, pieceSize);
+  int pos = index * c.m_info->getPieceLength();
+  if (targetFile.is_open())
+  {
+    //cerr << "Writing to file..." << std::endl;
+    //for (int i = 0; i < pieceSize; i++)
+      //cerr << piece[i];
+    //cerr << std::endl;
+    targetFile.seekp(pos, ios::beg);
+    targetFile.write(piece, pieceSize);
+  }
+  else
+    perror("Can't write to file");
 }
  
 int shakeHands(Peer &pr, Client &client){ //takes peer and client, returns socket created for this peer
@@ -453,7 +458,7 @@ void doAllTheThings(Client client){
     {
     isFirst = false;
     // Josh: first create file that we'll be writing to
-    targetFile.open("/home/cs118/CS118-Project-SimpleBT/text.txt"); 
+    targetFile.open("text.txt", ios::out | ios::binary); 
     for(std::vector<PeerInfo>::const_iterator it = (trackerResponse->getPeers()).begin(); it != (trackerResponse->getPeers()).end(); it++)
     {
       /* 
@@ -635,14 +640,14 @@ void doAllTheThings(Client client){
                     const char* pieceBegin = reinterpret_cast<const char*>(pie.getBlock()->get());
                     if (index <  (numOfPieces-1)) // not the last piece
                     {
-                      writeToFile(index, static_cast<int>(client.m_info->getPieceLength()), pieceBegin);
+                      writeToFile(index, static_cast<int>(client.m_info->getPieceLength()), pieceBegin, client);
                     }
                     else // last piece
                     {
                       int64_t totalSize = client.m_info->getLength();
                       int64_t mostPiecesSize = client.m_info->getPieceLength();
                       int lastPieceSize = static_cast<int>(totalSize % mostPiecesSize);
-                      writeToFile(index, lastPieceSize, pieceBegin);
+                      writeToFile(index, lastPieceSize, pieceBegin, client);
                     }   
                     if ((*it)->updateInterest())
                       getNextReq(**it);
@@ -756,7 +761,6 @@ void doAllTheThings(Client client){
   }
   targetFile.close();
   cerr << "Congratulations you WIN!!! " << std::endl;
-
 
  // close(sockfd);
 }
