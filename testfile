@@ -1,0 +1,1257 @@
+Run 6 test cases...
+.ready, okay! 
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=0&left=46822
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=0&left=46822
+Their bitField: 11111111111111111111111
+Our bitField: 00000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=0&left=46822
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=0&left=46822
+Their bitField: 11111111111111111111111
+Our bitField: 00000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 0
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=0&left=46822
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=0&left=46822
+Their bitField: 11111111111111111111111
+Our bitField: 00000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=0&left=46822
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=0&left=46822
+Their bitField: 11111111111111111111111
+Our bitField: 00000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 0
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=2048&left=44774
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=2048&left=44774
+Their bitField: 11111111111111111111111
+Our bitField: 10000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=2048&left=44774
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=2048&left=44774
+Their bitField: 11111111111111111111111
+Our bitField: 10000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 1
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=2048&left=44774
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=2048&left=44774
+Their bitField: 11111111111111111111111
+Our bitField: 10000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=2048&left=44774
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=2048&left=44774
+Their bitField: 11111111111111111111111
+Our bitField: 10000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 1
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=2048&left=44774
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=2048&left=44774
+Their bitField: 11111111111111111111111
+Our bitField: 10000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=2048&left=44774
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=2048&left=44774
+Their bitField: 11111111111111111111111
+Our bitField: 10000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 1
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=4096&left=42726
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=4096&left=42726
+Their bitField: 11111111111111111111111
+Our bitField: 11000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=4096&left=42726
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=4096&left=42726
+Their bitField: 11111111111111111111111
+Our bitField: 11000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 2
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=4096&left=42726
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=4096&left=42726
+Their bitField: 11111111111111111111111
+Our bitField: 11000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=4096&left=42726
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=4096&left=42726
+Their bitField: 11111111111111111111111
+Our bitField: 11000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=6144&left=42726
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=6144&left=42726
+Their bitField: 11111111111111111111111
+Our bitField: 11000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 10
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=6144&left=42726
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=6144&left=42726
+Their bitField: 11111111111111111111111
+Our bitField: 11000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 3
+Request sent!
+./announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=6144&left=42726
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=6144&left=42726
+Their bitField: 11111111111111111111111
+Our bitField: 11000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 2071
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=6144&left=42726
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=6144&left=42726
+Their bitField: 11111111111111111111111
+Our bitField: 11000000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 2
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=8192&left=40678
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=8192&left=40678
+Their bitField: 11111111111111111111111
+Our bitField: 11100000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=8192&left=40678
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=8192&left=40678
+Their bitField: 11111111111111111111111
+Our bitField: 11100000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 3
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=10240&left=38630
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=10240&left=38630
+Their bitField: 11111111111111111111111
+Our bitField: 11110000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 10
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=10240&left=38630
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=10240&left=38630
+Their bitField: 11111111111111111111111
+Our bitField: 11110000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 5
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=10240&left=38630
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=10240&left=38630
+Their bitField: 11111111111111111111111
+Our bitField: 11110000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=10240&left=38630
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=10240&left=38630
+Their bitField: 11111111111111111111111
+Our bitField: 11110000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 5
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=10240&left=38630
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=10240&left=38630
+Their bitField: 11111111111111111111111
+Our bitField: 11110000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=10240&left=38630
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=10240&left=38630
+Their bitField: 11111111111111111111111
+Our bitField: 11110000000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 5
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=12288&left=36582
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=12288&left=36582
+Their bitField: 11111111111111111111111
+Our bitField: 11110100000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=12288&left=36582
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=12288&left=36582
+Their bitField: 11111111111111111111111
+Our bitField: 11110100000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 6
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=12288&left=36582
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=12288&left=36582
+Their bitField: 11111111111111111111111
+Our bitField: 11110100000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=12288&left=36582
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=12288&left=36582
+Their bitField: 11111111111111111111111
+Our bitField: 11110100000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=14336&left=36582
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=14336&left=36582
+Their bitField: 11111111111111111111111
+Our bitField: 11110100000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 10
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=14336&left=36582
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=14336&left=36582
+Their bitField: 11111111111111111111111
+Our bitField: 11110100000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 7
+Request sent!
+./announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=14336&left=36582
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=14336&left=36582
+Their bitField: 11111111111111111111111
+Our bitField: 11110100000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 2071
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=14336&left=36582
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=14336&left=36582
+Their bitField: 11111111111111111111111
+Our bitField: 11110100000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 6
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=16384&left=34534
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=16384&left=34534
+Their bitField: 11111111111111111111111
+Our bitField: 11110110000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=16384&left=34534
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=16384&left=34534
+Their bitField: 11111111111111111111111
+Our bitField: 11110110000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 7
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=18432&left=32486
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=18432&left=32486
+Their bitField: 11111111111111111111111
+Our bitField: 11110111000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 10
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=18432&left=32486
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=18432&left=32486
+Their bitField: 11111111111111111111111
+Our bitField: 11110111000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 9
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=18432&left=32486
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=18432&left=32486
+Their bitField: 11111111111111111111111
+Our bitField: 11110111000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=18432&left=32486
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=18432&left=32486
+Their bitField: 11111111111111111111111
+Our bitField: 11110111000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 9
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=18432&left=32486
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=18432&left=32486
+Their bitField: 11111111111111111111111
+Our bitField: 11110111000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=18432&left=32486
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=18432&left=32486
+Their bitField: 11111111111111111111111
+Our bitField: 11110111000000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 9
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=20480&left=30438
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=20480&left=30438
+Their bitField: 11111111111111111111111
+Our bitField: 11110111010000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=20480&left=30438
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=20480&left=30438
+Their bitField: 11111111111111111111111
+Our bitField: 11110111010000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 10
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=20480&left=30438
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=20480&left=30438
+Their bitField: 11111111111111111111111
+Our bitField: 11110111010000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=20480&left=30438
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=20480&left=30438
+Their bitField: 11111111111111111111111
+Our bitField: 11110111010000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=22528&left=30438
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=22528&left=30438
+Their bitField: 11111111111111111111111
+Our bitField: 11110111010000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 10
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=22528&left=30438
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=22528&left=30438
+Their bitField: 11111111111111111111111
+Our bitField: 11110111010000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 11
+Request sent!
+./announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=22528&left=30438
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=22528&left=30438
+Their bitField: 11111111111111111111111
+Our bitField: 11110111010000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 2071
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=22528&left=30438
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=22528&left=30438
+Their bitField: 11111111111111111111111
+Our bitField: 11110111010000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 10
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=24576&left=28390
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=24576&left=28390
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=24576&left=28390
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=24576&left=28390
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011000000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 11
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=26624&left=26342
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=26624&left=26342
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011100000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 10
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=26624&left=26342
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=26624&left=26342
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011100000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 13
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=26624&left=26342
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=26624&left=26342
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011100000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=26624&left=26342
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=26624&left=26342
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011100000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 13
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=26624&left=26342
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=26624&left=26342
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011100000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=26624&left=26342
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=26624&left=26342
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011100000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 13
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=28672&left=24294
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=28672&left=24294
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=28672&left=24294
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=28672&left=24294
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 14
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=28672&left=24294
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=28672&left=24294
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=28672&left=24294
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=28672&left=24294
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=30720&left=24294
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=30720&left=24294
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 10
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=30720&left=24294
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=30720&left=24294
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 15
+Request sent!
+./announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=30720&left=24294
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=30720&left=24294
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 2071
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=30720&left=24294
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=30720&left=24294
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101000000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 14
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=32768&left=22246
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=32768&left=22246
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101100000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=32768&left=22246
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=32768&left=22246
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101100000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 15
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=34816&left=20198
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=34816&left=20198
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 10
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=34816&left=20198
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=34816&left=20198
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 17
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=34816&left=20198
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=34816&left=20198
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=34816&left=20198
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=34816&left=20198
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 17
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=34816&left=20198
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=34816&left=20198
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=34816&left=20198
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=34816&left=20198
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110000000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 17
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=36864&left=18150
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=36864&left=18150
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110100000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=36864&left=18150
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=36864&left=18150
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110100000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 18
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=36864&left=18150
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=36864&left=18150
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110100000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=36864&left=18150
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=36864&left=18150
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110100000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=38912&left=18150
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=38912&left=18150
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110100000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 10
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=38912&left=18150
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=38912&left=18150
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110100000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 19
+Request sent!
+./announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=38912&left=18150
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=38912&left=18150
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110100000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 2071
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=38912&left=18150
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=38912&left=18150
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110100000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 18
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=40960&left=16102
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=40960&left=16102
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110110000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=40960&left=16102
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=40960&left=16102
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110110000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 19
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=43008&left=14054
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=43008&left=14054
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 10
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=43008&left=14054
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=43008&left=14054
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 21
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=43008&left=14054
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=43008&left=14054
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=43008&left=14054
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=43008&left=14054
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 21
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=43008&left=14054
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=43008&left=14054
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=43008&left=14054
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=43008&left=14054
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111000
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 21
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=45056&left=12006
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=45056&left=12006
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111010
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=45056&left=12006
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=45056&left=12006
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111010
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 22
+lastPieceSize is: 1766
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=45056&left=12006
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=45056&left=12006
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111010
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=45056&left=12006
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=45056&left=12006
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111010
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=47104&left=12006
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=47104&left=12006
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111010
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 10
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=47104&left=12006
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=47104&left=12006
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111010
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 4
+Request sent!
+./announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=47104&left=12006
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=47104&left=12006
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111010
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 1789
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=47104&left=12006
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=47104&left=12006
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111010
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size1766
+getPieceLength2048
+payload size1774
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 22
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=48870&left=10240
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=48870&left=10240
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=48870&left=10240
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=48870&left=10240
+Their bitField: 11111111111111111111111
+Our bitField: 11110111011101110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 4
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=50918&left=8192
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=50918&left=8192
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011101110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 10
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=50918&left=8192
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=50918&left=8192
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011101110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 12
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=50918&left=8192
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=50918&left=8192
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011101110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=50918&left=8192
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=50918&left=8192
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011101110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 12
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=50918&left=8192
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=50918&left=8192
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011101110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=50918&left=8192
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=50918&left=8192
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011101110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 12
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=52966&left=6144
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=52966&left=6144
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=52966&left=6144
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=52966&left=6144
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 16
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=52966&left=6144
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=52966&left=6144
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=52966&left=6144
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=52966&left=6144
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=55014&left=6144
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=55014&left=6144
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 10
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=55014&left=6144
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=55014&left=6144
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 20
+Request sent!
+./announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=55014&left=6144
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=55014&left=6144
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 2071
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=55014&left=6144
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=55014&left=6144
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111110111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 16
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=57062&left=4096
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=57062&left=4096
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111111111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=57062&left=4096
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=57062&left=4096
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111111111011
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 20
+Sending have to socketfd: 5
+of message length: 9
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=59110&left=2048
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=59110&left=2048
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111111111111
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 10
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=59110&left=2048
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=59110&left=2048
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111111111111
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 8
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=59110&left=2048
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=59110&left=2048
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111111111111
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+bufsize is: 5
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=59110&left=2048
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=59110&left=2048
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111111111111
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+I've been unchoked!
+Trying to request piece index: 8
+Request sent!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=59110&left=2048
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=59110&left=2048
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111111111111
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Interested Message sent
+.bufsize is: 2061
+Received something!
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=59110&left=2048
+/announce.php?info_hash=%D3%B2%E0J%D6%80%9F.%E01%BE%E3%3C%A3%F7%0C%FF%ED%F6%C7&peer_id=H%89%C1%EB%C1%0F%1FD%00%00H%8B%05q%0F%23%00%5B%5DH&port=60207&uploaded=0&downloaded=59110&left=2048
+Their bitField: 11111111111111111111111
+Our bitField: 11111111011111111111111
+Peer: SIMPLEBT.TEST.111111
+m_amInterested = 1
+Got a piece!
+getPayload() size2048
+getPieceLength2048
+payload size2056
+Is this perhaps the right piece?
+Now I've got a GOLDEN TICKET!!!
+hv's index: 8
+Sending have to socketfd: 5
+of message length: 9
+Congratulations you WIN!!! 
+....
+[Test case 5] Passed
+[Test case 6] Failed (did not send have msg correctly)

@@ -1,14 +1,14 @@
 Jonathan Chu
 804141479
 
-Parsed the response from the client, created the peer list
+Worked on the bitfield, figured out how to parse and send messages.  Figured out how to send the next piece correctly
 
 Eileen The
 104141878
 
-Formatted and executed the GET request
+Worked on the hash function, worked on the tracker requests and communication
 
 Joshua St Clair
 904187688
 
-Grabbed and parsed tracker info from announce
+Worked on the object orientation of the peer, as well as populating the peer list and the algorithms.
