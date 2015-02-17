@@ -56,6 +56,7 @@
 bool* PIECESOBTAINED;  // Josh: global; size declared once numOfPieces obtained
 int numOfPieces;
 int nextStartReq = 0;
+fstream targetFile;
 
 void getNextReq(Peer &peer);
 
@@ -63,19 +64,6 @@ void updatePiecesArray(int whichPiece) // use to update PIECES array
 {
   PIECESOBTAINED[whichPiece] = true;
 }
-
-/* Josh: already implemented in client.cpp
-void checkAndUpdateInterested(Peer &peer)
-{
-    peer.m_amInterested = false;
-    for(int i = 0; i < peer.m_numPieces; i++)
-    {
-        if(PIECESOBTAINED[i] == false && peer.m_pieceIndex[i] == true)
-        {
-            peer.m_amInterested = true;
-        }
-    }
-}*/
 
 bool areAllPiecesObtained()
 {
@@ -86,6 +74,17 @@ bool areAllPiecesObtained()
   if (numTrue == numOfPieces)
     return true;
   return false; 
+}
+
+void writeToFile(int index, int pieceSize, const char* piece)
+{
+  cerr << "Writing to file... " << std::endl;
+  for (int i = 0; i < pieceSize; i++)
+   cerr << piece[i];
+  cerr << std::endl;
+  int pos = index * 20;
+  targetFile.seekp(pos, ios::beg);
+  targetFile.write(piece, pieceSize);
 }
  
 int shakeHands(Peer &pr, Client &client){ //takes peer and client, returns socket created for this peer
@@ -452,8 +451,7 @@ void doAllTheThings(Client client){
     {
     isFirst = false;
     // Josh: first create file that we'll be writing to
-    fstream targetFile;
-    targetFile.open("text.txt"); 
+    targetFile.open("/home/cs118/CS118-Project-SimpleBT/text.txt"); 
     for(std::vector<PeerInfo>::const_iterator it = (trackerResponse->getPeers()).begin(); it != (trackerResponse->getPeers()).end(); it++)
     {
       /* 
@@ -553,10 +551,21 @@ void doAllTheThings(Client client){
              {
                cerr << "I've been unchoked!" << std::endl;
                // request the piece
+               cerr << "Trying to request piece index: " << (*it)->m_desiredPiece << std::endl;
                if ((int)((*it)->m_desiredPiece) <  (numOfPieces-1)) // not the last piece
                {
-               cerr << "Trying to request piece index: " << (*it)->m_desiredPiece;
                  Request* rqst = new Request((*it)->m_desiredPiece, 0, client.m_info->getPieceLength() );
+                 if ((*it)->sendMsgWPayload(rqst) == -1)
+                   perror("Error sending request");
+                 cerr << "Request sent!" << std::endl;
+               }
+               else // last piece
+               {
+                 int64_t totalSize = client.m_info->getLength();
+                 int64_t mostPiecesSize = client.m_info->getPieceLength();
+                 int lastPieceSize = static_cast<int>(totalSize % mostPiecesSize);
+                 cerr << "lastPieceSize is: " << lastPieceSize << std::endl;
+                 Request* rqst = new Request((*it)->m_desiredPiece, 0, lastPieceSize );
                  if ((*it)->sendMsgWPayload(rqst) == -1)
                    perror("Error sending request");
                  cerr << "Request sent!" << std::endl;
@@ -606,8 +615,21 @@ void doAllTheThings(Client client){
                  if (verifyPiece(pie,client.m_info->getPieces()))
                  {
                     cerr << "Now I've got a GOLDEN TICKET!!!" << std::endl;
+                    int index = static_cast<int>(pie.getIndex());
                     Have* hv = new Have(pie.getIndex());
-                    updatePiecesArray((int)(hv->getIndex()));      
+                    updatePiecesArray(index);
+                    const char* pieceBegin = reinterpret_cast<const char*>(pie.getBlock()->get());
+                    if (index <  (numOfPieces-1)) // not the last piece
+                    {
+                      writeToFile(index, static_cast<int>(client.m_info->getPieceLength()), pieceBegin);
+                    }
+                    else // last piece
+                    {
+                      int64_t totalSize = client.m_info->getLength();
+                      int64_t mostPiecesSize = client.m_info->getPieceLength();
+                      int lastPieceSize = static_cast<int>(totalSize % mostPiecesSize);
+                      writeToFile(index, lastPieceSize, pieceBegin);
+                    }   
                     if ((*it)->updateInterest())
                       getNextReq(**it);
                     // send have to all the peers
@@ -620,15 +642,28 @@ void doAllTheThings(Client client){
                  }
                  else  // resend request
                  {
+                   cerr << "Sry no ticket for you" << endl;
+                   cerr << "Trying to request piece index: " << (*it)->m_desiredPiece << std::endl;
+                   if ((int)((*it)->m_desiredPiece) <  (numOfPieces-1)) // not the last piece
+                   {
 
-                   cerr << "Trying to request piece index: " << (*it)->m_desiredPiece;
-                   Request* rqst = new Request((*it)->m_desiredPiece, 0, client.m_info->getPieceLength());
+                     cerr << "Trying to request piece index: " << (*it)->m_desiredPiece;
+                     Request* rqst = new Request((*it)->m_desiredPiece, 0, client.m_info->getPieceLength());
 
-                   //cerr << "Sry no ticket for you" << endl;
-                   //Request* rqst = new Request((*it)->m_desiredPiece, 0, static_cast<uint32_t>(client.m_info->getLength()));
-
-                   if ((*it)->sendMsgWPayload(rqst) == -1)
-                     perror("Error sending request");
+                     if ((*it)->sendMsgWPayload(rqst) == -1)
+                       perror("Error sending request");
+                   }
+                   else // last piece
+                   {
+                     int64_t totalSize = client.m_info->getLength();
+                     int64_t mostPiecesSize = client.m_info->getPieceLength();
+                     int lastPieceSize = static_cast<int>(totalSize % mostPiecesSize);
+                     cerr << "lastPieceSize is: " << lastPieceSize << std::endl;
+                     Request* rqst = new Request((*it)->m_desiredPiece, 0, lastPieceSize );
+                     if ((*it)->sendMsgWPayload(rqst) == -1)
+                       perror("Error sending request");
+                     cerr << "Request sent!" << std::endl;
+                   }
                  }
                  (*it)->resetBuff(); 
                  break;
@@ -701,7 +736,8 @@ void doAllTheThings(Client client){
     ss.str("");
     close(sockfd);
   }
-
+  targetFile.close();
+  cerr << "Congratulations you WIN!!! " << std::endl;
 
 
  // close(sockfd);
