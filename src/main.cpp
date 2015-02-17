@@ -321,8 +321,8 @@ void doAllTheThings(Client client){
     string left = to_string(metainfo->getLength());
     string path = client.m_path + "?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
       "&port=" + client.getPort() + "&uploaded=0&downloaded=0&left=" + left + "&event=started";
-    cerr << "path is" << path << std::endl;
-    cerr << "peerid is"<< (char*)client.m_peerid << endl;
+    //cerr << "path is" << path << std::endl;
+    //cerr << "peerid is"<< (char*)client.m_peerid << endl;
     req.setPath(path);
     req.setVersion("1.0");
     //req.addHeader("Accept-Language", "en-US");
@@ -611,10 +611,10 @@ void doAllTheThings(Client client){
                  {
                   if (!PIECESOBTAINED[pie.getIndex()])
                   {
-                    cerr << "Now I've got a GOLDEN TICKET!!!" << std::endl;
+                    //cerr << "Now I've got a GOLDEN TICKET!!!" << std::endl;
                     uint32_t pieIndex = pie.getIndex();
                     Have* hv = new Have(pieIndex);
-                    cerr << "hv's index: " << hv->getIndex() << std::endl;
+                    //cerr << "hv's index: " << hv->getIndex() << std::endl;
                     int index = static_cast<int>(pie.getIndex());
                     updatePiecesArray(index);
                     const char* pieceBegin = reinterpret_cast<const char*>(pie.getBlock()->get());
@@ -678,7 +678,8 @@ void doAllTheThings(Client client){
                  break;
                }
               default:
-                cerr << "Received something else..." << std::endl;
+                break;
+                //cerr << "Received something else..." << std::endl;
            } // end switch
          } //end something in buffer
        }
@@ -727,7 +728,8 @@ void doAllTheThings(Client client){
                break;
              } 
              default:
-               cerr << "Received something else..." << std::endl;
+               break;
+               //cerr << "Received something else..." << std::endl;
            } // end switch
          } // end something in buffer
        } // end uninterest
@@ -751,7 +753,7 @@ void doAllTheThings(Client client){
     close(sockfd);
   }
   targetFile.close();
-  cerr << "Congratulations you WIN!!! " << std::endl;
+  //cerr << "Congratulations you WIN!!! " << std::endl;
 
  // close(sockfd);
 }
@@ -775,7 +777,7 @@ main(int argc, char** argv)
     //std::cout << "Torrent file length: " << client.m_info->getLength() << std::endl;
     //std::cout << "Announce: " << client.m_url << std::endl;
     //std::cout << "TrackerPort: " << client.m_trackPort << std::endl;
-    cerr << "ready, okay! " << std::endl;
+    //cerr << "ready, okay! " << std::endl;
 
     doAllTheThings(client);
 
