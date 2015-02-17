@@ -744,7 +744,7 @@ void doAllTheThings(Client client){
     // Josh end
     
     sleepCounter++;
-    sleepCounter = sleepCounter % 8;
+    sleepCounter = sleepCounter % 16;
     if(sleepCounter == 0)
     {
         int waitTime = trackerResponse->getInterval();
