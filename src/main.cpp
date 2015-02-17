@@ -671,7 +671,7 @@ void doAllTheThings(Client client){
                     {
                       cerr << "Sending have to socketfd: " << (*it_ptr)->m_sockfd << std::endl;
                       cerr << "of message length: " << msg_len << std::endl;
-                      if (send((*it_ptr)->m_sockfd, buf, msg_len, 0))
+                      if (send((*it_ptr)->m_sockfd, buf, msg_len, 0) == -1)
                         perror("Error sending have");
                       //cerr << "Tell ALL the peers!" << std::endl;
                     }
