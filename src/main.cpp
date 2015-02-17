@@ -58,6 +58,10 @@ int numOfPieces;
 int nextStartReq = 0;
 ofstream targetFile;
 
+int amountLeft;
+int amountUploaded = 0;
+int amountDownloaded = 0;
+
 void getNextReq(Peer &peer);
 
 void updatePiecesArray(int whichPiece) // use to update PIECES array
@@ -288,7 +292,7 @@ bool verifyPiece(const Piece& piece, vector<uint8_t> hash){
  // vector<uint8_t> recHash = sha1(tempRec);
   ConstBufferPtr tempRec = sha1(piece.getBlock());
   const uint8_t* recHash = tempRec->buf();
-  
+  /*
   cerr << "rechashCBP is ";
   for (int i = 0; i < 20; i++) {
   cerr << int(recHash[i])<< " ";
@@ -296,7 +300,7 @@ bool verifyPiece(const Piece& piece, vector<uint8_t> hash){
   cerr << endl;
 
   cerr << "get block is " << piece.getBlock()->get() << endl;
-
+*/
 
  for(int k = 0; k < 20; k++){
    if(hash[offset + k] != recHash[k])
@@ -317,6 +321,7 @@ void doAllTheThings(Client client){
     req.setHost(client.m_hostName);
     req.setPort(client.m_trackPort);
     req.setMethod(HttpRequest::GET);
+    amountLeft = static_cast<int>(metainfo->getLength());
     string left = to_string(metainfo->getLength());
     string path = client.m_path + "?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
       "&port=" + client.getPort() + "&uploaded=0&downloaded=0&left=" + left + "&event=started";
@@ -332,7 +337,7 @@ void doAllTheThings(Client client){
 
 
     //cerr << "request is:" << buf;
-        cout << "printed";
+   //     cout << "printed";
  
     //return buf;
     /*int sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -367,7 +372,6 @@ void doAllTheThings(Client client){
 // fprintf(stderr,"before while");
 
     std::vector<Peer*> peerList;
-  //TODO: This won't work.  Ceil takes in a float.  The int value will be evaluated first
    // Josh: I tested this and by casting the first value to double, it evaluates properly
     numOfPieces = ceil(((double)client.m_info->getLength()) / client.m_info->getPieceLength()); 
     //made this Global
@@ -412,19 +416,20 @@ void doAllTheThings(Client client){
       //fprintf(stderr, "SEND FAILED");
       perror("send");
       //return 4;
-      
+     
     }
-    // TRACKER REQUEST NEEDS TO BE UPDATED
-    path = client.m_path + "?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
-      "&port=" + client.getPort() + "&uploaded=0&downloaded=0&left=" + left;
+    string up = to_string(amountUploaded);
+    string down = to_string(amountDownloaded);
+    string left = to_string(amountLeft); 
+    path = client.m_path + "?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) + 
+    "&port=" + client.getPort() + "&uploaded=" + up + "&downloaded=" + down + "&left=" + left;
     req.setPath(path);
     size_t reqLeng = req.getTotalLength();
     char *buf2 = new char [reqLeng];
-    //cerr << path << std::endl; 
+    cerr << path << std::endl; 
     req.formatRequest(buf2);
     formatted = buf2;
-
-    //cerr << "formatted is" << formatted;
+    cerr << "formatted is" << formatted;
 
 
     //fprintf(stderr, "SENT");
@@ -629,18 +634,24 @@ void doAllTheThings(Client client){
                  ConstBufferPtr temp = make_shared<Buffer>((*it)->m_buff, (*it)->m_buffSize);
                  Piece pie;
                  pie.decode(temp);
-                 cerr << "payload size" << pie.getPayload()->size() << endl;
+                 amountDownloaded += (pie.getPayload()->size()) - 8; // index, begin 4 bytes each
+                 cerr << "getPayload() size" <<  (pie.getPayload()->size()) - 8 << std::endl;
+                 cerr << "getPieceLength" << (client.m_info->getPieceLength()) << std::endl;
+                 cerr << "payload size" << pie.getPayload()->size() << std::endl;
                  cerr << "Is this perhaps the right piece?" << std::endl;
                  if (verifyPiece(pie,client.m_info->getPieces()))
                  {
                     cerr << "Now I've got a GOLDEN TICKET!!!" << std::endl;
+                    uint32_t pieIndex = pie.getIndex();
+                    Have* hv = new Have(pieIndex);
+                    cerr << "hv's index: " << hv->getIndex() << std::endl;
                     int index = static_cast<int>(pie.getIndex());
-                    Have* hv = new Have(pie.getIndex());
                     updatePiecesArray(index);
                     const char* pieceBegin = reinterpret_cast<const char*>(pie.getBlock()->get());
                     if (index <  (numOfPieces-1)) // not the last piece
                     {
                       writeToFile(index, static_cast<int>(client.m_info->getPieceLength()), pieceBegin, client);
+                      amountLeft -= static_cast<int>(client.m_info->getPieceLength());
                     }
                     else // last piece
                     {
@@ -648,15 +659,21 @@ void doAllTheThings(Client client){
                       int64_t mostPiecesSize = client.m_info->getPieceLength();
                       int lastPieceSize = static_cast<int>(totalSize % mostPiecesSize);
                       writeToFile(index, lastPieceSize, pieceBegin, client);
+                      amountLeft -= lastPieceSize;
                     }   
                     if ((*it)->updateInterest())
                       getNextReq(**it);
                     // send have to all the peers
+                    ConstBufferPtr enc = hv->encode();
+                    const char* buf = reinterpret_cast<const char*>(enc->buf());
+                    int msg_len = hv->getPayload()->size() + 5;
                     for (std::vector<Peer*>::iterator it_ptr = peerList.begin(); it_ptr != peerList.end(); it_ptr++)
                     {
-                      if ((*it_ptr)->sendMsgWPayload(hv) == -1)
+                      cerr << "Sending have to socketfd: " << (*it_ptr)->m_sockfd << std::endl;
+                      cerr << "of message length: " << msg_len << std::endl;
+                      if (send((*it_ptr)->m_sockfd, buf, msg_len, 0))
                         perror("Error sending have");
-                      cerr << "Tell ALL the peers!" << std::endl;
+                      //cerr << "Tell ALL the peers!" << std::endl;
                     }
                  }
                  else  // resend request
@@ -732,6 +749,7 @@ void doAllTheThings(Client client){
                if ((*it)->sendMsgWPayload(pie) == -1)
                  perror("Error sending piece");
                cerr << "Piece sent!" << std::endl;
+               amountUploaded += pie->getPayload()->size() - 8;
                (*it)->resetBuff();
                break;
              } 
