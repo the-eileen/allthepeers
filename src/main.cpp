@@ -321,7 +321,8 @@ void doAllTheThings(Client client){
     string left = to_string(metainfo->getLength());
     string path = client.m_path + "?info_hash=" + url::encode((const uint8_t *)(metainfo->getHash()->get()), 20) + "&peer_id=" + url::encode(client.m_peerid, 20) +
       "&port=" + client.getPort() + "&uploaded=0&downloaded=0&left=" + left + "&event=started";
-    //cerr << path << std::endl;
+    cerr << "path is" << path << std::endl;
+    cerr << "peerid is"<< (char*)client.m_peerid << endl;
     req.setPath(path);
     req.setVersion("1.0");
     //req.addHeader("Accept-Language", "en-US");
@@ -393,11 +394,11 @@ void doAllTheThings(Client client){
     req.setPath(path);
     size_t reqLeng = req.getTotalLength();
     char *buf2 = new char [reqLeng];
-    cerr << path << std::endl; 
+    //cerr << path << std::endl; 
     req.formatRequest(buf2);
     formatted = buf2;
     //cerr << "formatted is" << formatted;
-    cerr << path << std::endl;
+   // cerr << path << std::endl;
 
     //fprintf(stderr, "SENT");
 
@@ -506,7 +507,7 @@ void doAllTheThings(Client client){
     // Josh start 
     for (std::vector<Peer*>::iterator it = peerList.begin(); it != peerList.end(); it++)
     {
-       cerr << "Their bitField: ";
+       /*cerr << "Their bitField: ";
        for(int s = 0; s < numOfPieces; s++)
        {
         cerr << (*it)->m_pieceIndex[s];
@@ -519,7 +520,7 @@ void doAllTheThings(Client client){
        } 
        cerr << std::endl;
        cerr << "Peer: " << (*it)->m_peerId << std::endl;
-       cerr << "m_amInterested = " << (*it)->m_amInterested << std::endl;
+       cerr << "m_amInterested = " << (*it)->m_amInterested << std::endl;*/
        if ((*it)->m_amInterested == true)
        {
          if ((*it)->m_buffSize == 0) // empty buffer
@@ -528,10 +529,10 @@ void doAllTheThings(Client client){
            Interested* in = new Interested();
            if ((*it)->sendMsg(in) == -1)
              perror("Error sending interest");
-           cerr << "Interested Message sent" << std::endl;
+           //cerr << "Interested Message sent" << std::endl;
            if ((*it)->recvMsg() == -1)
              perror("Error recv");
-           cerr << "Received something!" << std::endl;
+           //cerr << "Received something!" << std::endl;
          }
          else // something in buffer
          {
@@ -540,26 +541,26 @@ void doAllTheThings(Client client){
            {
              case 1: // peer is unchoking us *phew*
              {
-               cerr << "I've been unchoked!" << std::endl;
+               //cerr << "I've been unchoked!" << std::endl;
                // request the piece
-               cerr << "Trying to request piece index: " << (*it)->m_desiredPiece << std::endl;
+               //cerr << "Trying to request piece index: " << (*it)->m_desiredPiece << std::endl;
                if ((int)((*it)->m_desiredPiece) <  (numOfPieces-1)) // not the last piece
                {
                  Request* rqst = new Request((*it)->m_desiredPiece, 0, client.m_info->getPieceLength() );
                  if ((*it)->sendMsgWPayload(rqst) == -1)
                    perror("Error sending request");
-                 cerr << "Request sent!" << std::endl;
+                /// cerr << "Request sent!" << std::endl;
                }
                else // last piece
                {
                  int64_t totalSize = client.m_info->getLength();
                  int64_t mostPiecesSize = client.m_info->getPieceLength();
                  int lastPieceSize = static_cast<int>(totalSize % mostPiecesSize);
-                 cerr << "lastPieceSize is: " << lastPieceSize << std::endl;
+                 //cerr << "lastPieceSize is: " << lastPieceSize << std::endl;
                  Request* rqst = new Request((*it)->m_desiredPiece, 0, lastPieceSize );
                  if ((*it)->sendMsgWPayload(rqst) == -1)
                    perror("Error sending request");
-                 cerr << "Request sent!" << std::endl;
+                 //cerr << "Request sent!" << std::endl;
                }
                (*it)->resetBuff(); // reset buffer to use for next recv
                break;
@@ -590,22 +591,22 @@ void doAllTheThings(Client client){
                Piece* pie = new Piece(req.getIndex(), req.getBegin(), req.getPayload());
                if ((*it)->sendMsgWPayload(pie) == -1)
                  perror("Error sending piece");
-               cerr << "Piece sent!" << std::endl;
+               // << "Piece sent!" << std::endl;
                (*it)->resetBuff();
                break;
              }
              case 7: // piece
                {
-                 cerr << "Got a piece!" << std::endl;
+                 //cerr << "Got a piece!" << std::endl;
                  // verify piece with hash
                  ConstBufferPtr temp = make_shared<Buffer>((*it)->m_buff, (*it)->m_buffSize);
                  Piece pie;
                  pie.decode(temp);
                  amountDownloaded += (pie.getPayload()->size()) - 8; // index, begin 4 bytes each
-                 cerr << "getPayload() size" <<  (pie.getPayload()->size()) - 8 << std::endl;
+                 /*cerr << "getPayload() size" <<  (pie.getPayload()->size()) - 8 << std::endl;
                  cerr << "getPieceLength" << (client.m_info->getPieceLength()) << std::endl;
                  cerr << "payload size" << pie.getPayload()->size() << std::endl;
-                 cerr << "Is this perhaps the right piece?" << std::endl;
+                 cerr << "Is this perhaps the right piece?" << std::endl;*/
                  if (verifyPiece(pie,client.m_info->getPieces()))
                  {
                   if (!PIECESOBTAINED[pie.getIndex()])
@@ -636,9 +637,11 @@ void doAllTheThings(Client client){
                     int msg_len = hv->getPayload()->size() + 5;
                     for (std::vector<Peer*>::iterator it_ptr = peerList.begin(); it_ptr != peerList.end(); it_ptr++)
                     {
-                      cerr << "Sending have to socketfd: " << (*it_ptr)->m_sockfd << std::endl;
-                      cerr << "of message length: " << msg_len << std::endl;
+
+                      //cerr << "Sending have to socketfd: " << (*it_ptr)->m_sockfd << std::endl;
+                      //cerr << "of message length: " << msg_len << std::endl;
                       if (send((*it_ptr)->m_sockfd, buf, msg_len, 0) == -1)
+
                         perror("Error sending have");
                       //cerr << "Tell ALL the peers!" << std::endl;
                     }
@@ -648,12 +651,12 @@ void doAllTheThings(Client client){
                  }
                  else  // resend request
                  {
-                   cerr << "Sry no ticket for you" << endl;
-                   cerr << "Trying to request piece index: " << (*it)->m_desiredPiece << std::endl;
+                   //cerr << "Sry no ticket for you" << endl;
+                   //cerr << "Trying to request piece index: " << (*it)->m_desiredPiece << std::endl;
                    if ((int)((*it)->m_desiredPiece) <  (numOfPieces-1)) // not the last piece
                    {
 
-                     cerr << "Trying to request piece index: " << (*it)->m_desiredPiece;
+                     //cerr << "Trying to request piece index: " << (*it)->m_desiredPiece;
                      Request* rqst = new Request((*it)->m_desiredPiece, 0, client.m_info->getPieceLength());
 
                      if ((*it)->sendMsgWPayload(rqst) == -1)
@@ -664,11 +667,11 @@ void doAllTheThings(Client client){
                      int64_t totalSize = client.m_info->getLength();
                      int64_t mostPiecesSize = client.m_info->getPieceLength();
                      int lastPieceSize = static_cast<int>(totalSize % mostPiecesSize);
-                     cerr << "lastPieceSize is: " << lastPieceSize << std::endl;
+                     //cerr << "lastPieceSize is: " << lastPieceSize << std::endl;
                      Request* rqst = new Request((*it)->m_desiredPiece, 0, lastPieceSize );
                      if ((*it)->sendMsgWPayload(rqst) == -1)
                        perror("Error sending request");
-                     cerr << "Request sent!" << std::endl;
+                     //cerr << "Request sent!" << std::endl;
                    }
                  }
                  (*it)->resetBuff(); 
@@ -718,7 +721,7 @@ void doAllTheThings(Client client){
                Piece* pie = new Piece(req.getIndex(), req.getBegin(), req.getPayload());
                if ((*it)->sendMsgWPayload(pie) == -1)
                  perror("Error sending piece");
-               cerr << "Piece sent!" << std::endl;
+               //cerr << "Piece sent!" << std::endl;
                amountUploaded += pie->getPayload()->size() - 8;
                (*it)->resetBuff();
                break;

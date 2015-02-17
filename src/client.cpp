@@ -84,7 +84,7 @@ ssize_t Peer::sendMsgWPayload(msg::MsgBase* msg)
 ssize_t Peer::recvMsg()
 {
   m_buffSize = recv(m_sockfd, m_buff, sizeof(m_buff), 0 );
-  cerr << "bufsize is: " << m_buffSize << endl;
+
   return m_buffSize;
 }
 void Peer::resetBuff()
@@ -106,7 +106,8 @@ Client::Client(const std::string& port, const std::string& torrent)
     m_hostName = getHostNameFromAnnounce(m_announce, m_announcePos); 
     m_trackPort = atoi(getPortFromAnnounce(m_announce, m_announcePos).c_str());
     //m_strId = reinterpret_cast<const char*>(m_peerid);
-    m_strId = "SIMPLEBT.TEST.800813";
+    m_strId = "SIMPLEBT.TEST.PEERID";
+    //m_peerid = reinterpret_cast<uint8_t*>(m_strId.c_str());
     m_path = getPathFromAnnounce(m_announce, m_announcePos);
     //m_Port = atoi(port.c_str());
     //m_strCport = getPortFromAnnounce(m_url);
